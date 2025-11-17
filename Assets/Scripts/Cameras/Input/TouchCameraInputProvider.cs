@@ -1,34 +1,33 @@
 ﻿using Input;
+using Input.TouchRegistry;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
-using EnhancedTouch = UnityEngine.InputSystem.EnhancedTouch;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
 namespace Cameras.Input
 {
     public class TouchCameraInputProvider : ICameraInputProvider
     {
+        private readonly TouchRegistry _touchRegistry;
         private readonly float _zoomCoefficient = 1f / Screen.height;
         private float _previousPinchDistance;
-        private readonly InputActions.CameraActions _actions;
 
         public bool IsRotationAllowed { get; private set; }
         public Vector2 RotationDelta { get; private set; }
         public float ZoomDelta { get; private set; }
 
         [Inject]
-        private TouchCameraInputProvider(InputHandler inputHandler)
+        private TouchCameraInputProvider(TouchRegistry touchRegistry)
         {
-            EnhancedTouch.EnhancedTouchSupport.Enable();
-            _actions = inputHandler.CameraActions;
+            _touchRegistry = touchRegistry;
         }
 
         public void UpdateInput()
         {
-            var touches = EnhancedTouch.Touch.activeTouches;
+            var touches = _touchRegistry.GetUnlockedTouches();
             var count = touches.Count;
-
+            
             RotationDelta = Vector2.zero;
             ZoomDelta = 0f;
 

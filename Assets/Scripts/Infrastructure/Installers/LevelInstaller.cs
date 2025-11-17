@@ -60,13 +60,6 @@ namespace Infrastructure.Installers
 #else
             Container.Bind<ICameraInputProvider>().To<MouseCameraInputProvider>().AsSingle();
 #endif
-// #if UNITY_EDITOR || UNITY_STANDALONE
-//             Container.Bind<ICameraMovement>().To<MouseCameraMovement>().AsSingle();
-// #elif UNITY_ANDROID || UNITY_IOS
-//             Container.Bind<ICameraMovement>().To<TouchCameraMovement>().AsSingle();
-// #else
-//             Container.Bind<ICameraMovement>().To<MouseCameraMovement>().AsSingle();
-// #endif
         }
         
         private void BindOrbitCameraMovement()
@@ -81,7 +74,7 @@ namespace Infrastructure.Installers
 
         private void BindDetailViewMoverInput()
         {
-            Container.Bind<IDetailViewMoverInput>().To<DetailViewMoverInput>().AsSingle();
+            Container.Bind<IDetailViewMoverInputProvider>().To<MouseDetailViewMoverInputProvider>().AsSingle();
         }
         
         private void BindDetailViewMover()

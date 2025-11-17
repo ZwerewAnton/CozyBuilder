@@ -2,12 +2,12 @@
 {
     public class DragOutInfo
     {
-        public DetailItemModel DetailItemModel;
+        public string DetailId;
         public int PointerId;
 
-        public DragOutInfo(DetailItemModel detailItemModel, int pointerId)
+        public DragOutInfo(string detailId, int pointerId)
         {
-            DetailItemModel = detailItemModel;
+            DetailId = detailId;
             PointerId = pointerId;
         }
     }

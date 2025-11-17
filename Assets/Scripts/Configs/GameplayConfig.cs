@@ -9,6 +9,6 @@ namespace Configs
         [Header("Detail View Moving")]
         public float magnetDistance = 0.5f;
         public float ghostDistance = 20f;
-        public Vector3 screenOffset = new (0, 100, 0);
+        public Vector2 screenOffset = new (0, 100);
     }
 }

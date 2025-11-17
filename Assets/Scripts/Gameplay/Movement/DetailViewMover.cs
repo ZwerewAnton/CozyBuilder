@@ -12,7 +12,7 @@ namespace Gameplay.Movement
         [SerializeField] private MovingDetailView movingDetailViewPrefab;
         [SerializeField] private GhostDetailView ghostDetailViewPrefab;
 
-        private IDetailViewMoverInput _moverInput;
+        private IDetailViewMoverInputProvider _moverInputProvider;
         private float _magnetDistance;
         private float _ghostDistance;
         
@@ -30,17 +30,17 @@ namespace Gameplay.Movement
         public event Action<PlacementResult> PlacementEnded;
 
         [Inject]
-        private void Construct(ApplicationConfigs config, IDetailViewMoverInput moverInput)
+        private void Construct(ApplicationConfigs config, IDetailViewMoverInputProvider moverInputProvider)
         {
             _magnetDistance = config.gameplay.magnetDistance;
             _ghostDistance = config.gameplay.ghostDistance;
-            _moverInput = moverInput;
+            _moverInputProvider = moverInputProvider;
         }
         
         private void Awake()
         {
             InstantiateDetailViews();
-            _moverInput.InputCanceled += OnInputCanceled;
+            _moverInputProvider.InputCanceled += OnInputCanceled;
         }
 
         private void Update()
@@ -48,21 +48,21 @@ namespace Gameplay.Movement
             if (!_isMoving)
                 return;
             
-            UpdateMove(_moverInput.GetDesiredPosition());
+            UpdateMove(_moverInputProvider.GetDesiredPosition());
         }
 
         private void OnDestroy()
         {
-            _moverInput.InputCanceled -= OnInputCanceled;
+            _moverInputProvider.InputCanceled -= OnInputCanceled;
         }
 
         public void StartMove(Mesh mesh, Material material, List<PointTransform> connectionPoints)
         {
-            _moverInput.UpdateDepth(Vector3.zero);
+            _moverInputProvider.UpdateDepth(Vector3.zero);
             _isMoving = true;
             _isConnected = false;
             
-            if (connectionPoints.Count == 0 || !_moverInput.IsInputActive())
+            if (connectionPoints.Count == 0 || !_moverInputProvider.IsInputActive())
             {
                 StopMove();
             }
@@ -119,7 +119,7 @@ namespace Gameplay.Movement
             }
 
             var distanceToBest = Vector3.Distance(desiredPosition, closestPoint.Position);
-            _moverInput.UpdateDepth(closestPoint.Position);
+            _moverInputProvider.UpdateDepth(closestPoint.Position);
 
             if (distanceToBest <= _magnetDistance)
             {

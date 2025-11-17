@@ -3,11 +3,12 @@ using UnityEngine;
 
 namespace Gameplay.Movement
 {
-    public interface IDetailViewMoverInput
+    public interface IDetailViewMoverInputProvider
     {
         event Action InputCanceled;
+        Vector3 GetDesiredPosition();
         bool IsInputActive();
         void UpdateDepth(Vector3 worldDepthPosition);
-        Vector3 GetDesiredPosition();
+        void BindPointer(int pointerId);
     }
 }

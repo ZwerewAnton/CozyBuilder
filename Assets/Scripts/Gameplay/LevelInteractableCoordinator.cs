@@ -5,6 +5,7 @@ using _1_LEVEL_REWORK.New.Instances;
 using Gameplay.Dto;
 using Gameplay.Movement;
 using Gameplay.Spawn;
+using Input.TouchRegistry;
 using UI.Game.DetailsScroll;
 using UI.Mediators;
 using Zenject;
@@ -17,13 +18,17 @@ namespace Gameplay
         private readonly DetailPrefabSpawner _spawner;
         private readonly LevelMediator _levelMediator;
         private readonly DetailViewMover _detailViewMover;
-        private string _movingDetailId;
+        private readonly IDetailViewMoverInputProvider _moverInputProvider;
+        private readonly ITouchPointerLock _pointerLock;
+        private DragOutInfo _movingDetailInfo;
         
         [Inject]
         private LevelInteractableCoordinator(
             LevelService levelService,
             DetailPrefabSpawner spawner,
             LevelMediator levelMediator,
+            IDetailViewMoverInputProvider moverInputProvider,
+            ITouchPointerLock pointerLock,
             DetailViewMover detailViewMover)
         {
             _levelService = levelService;
@@ -31,6 +36,8 @@ namespace Gameplay
             _spawner = spawner;
             _levelMediator = levelMediator;
             _detailViewMover = detailViewMover;
+            _moverInputProvider = moverInputProvider;
+            _pointerLock = pointerLock;
             _detailViewMover.PlacementEnded += OnDetailPlacementEnded;
         }
 
@@ -45,26 +52,29 @@ namespace Gameplay
         {
             var detailModels = CreateDetailModelList(details);
             _levelMediator.InitializeDetailsScroll(detailModels);
-            _levelMediator.DetailItemDragOutStarted += OnDetailItemDragOutStarted;
+            _levelMediator.DetailItemDragOutStarted += OnDetailDragOutStarted;
         }
         
         private void OnDetailPlacementEnded(PlacementResult placementResult)
         {
-            if (_movingDetailId == null)
+            if (_movingDetailInfo == null)
                 return;
+
+            var detailId = _movingDetailInfo.DetailId;
             
-            _levelMediator.MarkItemDragOutState(_movingDetailId, false);
+            _levelMediator.MarkItemDragOutState(detailId, false);
             
             if (!placementResult.Success) 
                 return;
             
-            var installResult = _levelService.TryInstallDetail(_movingDetailId, placementResult.PointIndex);
+            var installResult = _levelService.TryInstallDetail(detailId, placementResult.PointIndex);
             if (!installResult) 
                 return;
             
             var details = _levelService.GetDetailsInfo();
             _levelMediator.UpdateScrollController(CreateDetailModelList(details));
-            SpawnDetailPrefab(details[_movingDetailId], placementResult.PointIndex);
+            SpawnDetailPrefab(details[detailId], placementResult.PointIndex);
+            _pointerLock.UnlockTouch(_movingDetailInfo.PointerId);
         }
 
         private List<DetailItemModel> CreateDetailModelList(Dictionary<string,DetailInstanceDto> details)
@@ -87,11 +97,13 @@ namespace Gameplay
             return detailModels;
         }
         
-        private void OnDetailItemDragOutStarted(DragOutInfo detailItemModel)
+        private void OnDetailDragOutStarted(DragOutInfo dragInfo)
         {
-            _movingDetailId = detailItemModel.DetailItemModel.ID;
-            _levelMediator.MarkItemDragOutState(_movingDetailId, true);
-            var detail = _levelService.GetDetailsInfo()[_movingDetailId];
+            _movingDetailInfo = dragInfo;
+            _levelMediator.MarkItemDragOutState(_movingDetailInfo.DetailId, true);
+            _moverInputProvider.BindPointer(_movingDetailInfo.PointerId);
+            _pointerLock.LockTouch(_movingDetailInfo.PointerId);
+            var detail = _levelService.GetDetailsInfo()[_movingDetailInfo.DetailId];
             StartDetailViewMove(detail);
         }
         
@@ -129,7 +141,7 @@ namespace Gameplay
         public void Dispose()
         {
             _levelService.LevelInitialized -= OnLevelServiceInitialize;
-            _levelMediator.DetailItemDragOutStarted -= OnDetailItemDragOutStarted;
+            _levelMediator.DetailItemDragOutStarted -= OnDetailDragOutStarted;
             _detailViewMover.PlacementEnded -= OnDetailPlacementEnded;
         }
     }

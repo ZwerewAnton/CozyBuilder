@@ -4,23 +4,25 @@ using Configs;
 using Input;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Zenject;
 
 namespace Gameplay.Movement
 {
-    public class DetailViewMoverInput : IDetailViewMoverInput, IDisposable
+    public class MouseDetailViewMoverInputProvider : IDetailViewMoverInputProvider, IDisposable
     {
         public event Action InputCanceled;
         
         private float _depth;
         private readonly InputHandler _inputHandler;
-        private readonly Camera _camera;
-        private readonly Vector3 _screenOffset;
+        private readonly CameraHandler _cameraHandler;
+        private readonly Vector2 _screenOffset;
 
-        public DetailViewMoverInput(InputHandler inputHandler, CameraHandler cameraHandler, ApplicationConfigs configs)
+        [Inject]
+        private MouseDetailViewMoverInputProvider(InputHandler inputHandler, CameraHandler cameraHandler, ApplicationConfigs configs)
         {
             _inputHandler = inputHandler;
             _inputHandler.DetailActions.Tap.canceled += OnTapCanceled;
-            _camera = cameraHandler.Camera;
+            _cameraHandler = cameraHandler;
             _screenOffset = configs.gameplay.screenOffset;
         }
 
@@ -31,7 +33,7 @@ namespace Gameplay.Movement
 
         public void UpdateDepth(Vector3 worldDepthPosition)
         {
-            _depth = _camera.WorldToScreenPoint(worldDepthPosition).z;
+            _depth = _cameraHandler.WorldToScreenPoint(worldDepthPosition).z;
         }
 
         public Vector3 GetDesiredPosition()
@@ -44,6 +46,8 @@ namespace Gameplay.Movement
             _inputHandler.DetailActions.Tap.canceled -= OnTapCanceled;
         }
 
+        public void BindPointer(int pointerId) {}
+
         private void OnTapCanceled(InputAction.CallbackContext callbackContext)
         {
             InputCanceled?.Invoke();
@@ -51,10 +55,8 @@ namespace Gameplay.Movement
         
         private Vector3 GetCursorWorldPoint()
         {
-            Vector3 input = _inputHandler.DetailActions.Cursor.ReadValue<Vector2>();
-            var cursor = input + _screenOffset;
-            cursor.z = _depth;
-            return _camera.ScreenToWorldPoint(cursor);
+            var input = _inputHandler.DetailActions.Cursor.ReadValue<Vector2>();
+            return _cameraHandler.ScreenToWorldPoint(input + _screenOffset, _depth);
         }
     }
 }

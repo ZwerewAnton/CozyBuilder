@@ -109,7 +109,7 @@ namespace UI.Game.DetailsScroll
 
             _isDragOutStarted = true;
             
-            DragOutStarted?.Invoke(new DragOutInfo(Models[_draggedItemIndex], eventData.pointerId));
+            DragOutStarted?.Invoke(new DragOutInfo(Models[_draggedItemIndex].ID, eventData.pointerId));
             
             ExecuteEvents.Execute(scrollRect.gameObject, eventData, ExecuteEvents.endDragHandler);
         }
