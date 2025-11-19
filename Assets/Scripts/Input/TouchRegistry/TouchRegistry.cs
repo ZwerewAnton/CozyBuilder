@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using UI.Raycast;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.EnhancedTouch;
+using Zenject;
 using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 
 namespace Input.TouchRegistry
@@ -11,14 +11,18 @@ namespace Input.TouchRegistry
     public class TouchRegistry : IDisposable, ITouchPointerLock
     {
         public event Action<int> TouchCanceled;
+
+        private readonly UIRaycasterHelper _raycasterHelper;
         private readonly Dictionary<int, bool> _touchBeganOverUI = new();
         private readonly HashSet<int> _lockedTouches = new();
 
-        private TouchRegistry()
+        [Inject]
+        public TouchRegistry(UIRaycasterHelper raycasterHelper)
         {
+            _raycasterHelper = raycasterHelper;
             EnhancedTouchSupport.Enable();
-            Touch.onFingerDown += AddTouchEntry;
-            Touch.onFingerUp += RemoveTouchEntry;
+            Touch.onFingerDown += OnFingerDown;
+            Touch.onFingerUp += OnFingerUp;
         }
 
         public bool IsTouchPressed(int touchId)
@@ -37,13 +41,15 @@ namespace Input.TouchRegistry
             return index >= 0 ? touches[index].screenPosition : Vector2.zero;
         }
         
-        public List<Touch> GetUnlockedTouches()
+        public List<Touch> GetAvailableTouches()
         {
             var result = new List<Touch>(Touch.activeTouches.Count);
 
             foreach (var touch in Touch.activeTouches)
             {
-                if (!_lockedTouches.Contains(touch.touchId))
+                var isLocked = _lockedTouches.Contains(touch.touchId);
+                _touchBeganOverUI.TryGetValue(touch.touchId, out var isBeganOverUI);
+                if (!isLocked && !isBeganOverUI)
                     result.Add(touch);
             }
 
@@ -85,7 +91,8 @@ namespace Input.TouchRegistry
         private void AddTouchEntry(Finger finger)
         {
             var touchId = finger.currentTouch.touchId;
-            var state = EventSystem.current.IsPointerOverGameObject(touchId);
+            var touchPosition = finger.currentTouch.screenPosition;
+            var state = _raycasterHelper.IsOverUI(touchPosition);
             _touchBeganOverUI[touchId] = state;
         }
 

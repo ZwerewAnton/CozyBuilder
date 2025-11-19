@@ -1,11 +1,15 @@
-﻿using _1_LEVEL_REWORK.New.Instances;
+﻿using System;
+using _1_LEVEL_REWORK.New.Instances;
 using Cameras;
 using Cameras.Input;
 using Cameras.Movement;
 using Gameplay;
 using Gameplay.Movement;
+using Gameplay.Movement.Input;
+using Input.TouchRegistry;
 using UI;
 using UI.Mediators;
+using UI.Raycast;
 using UnityEngine;
 using Zenject;
 
@@ -19,14 +23,18 @@ namespace Infrastructure.Installers
         [SerializeField] private CameraHandler cameraHandler;
         [SerializeField] private LevelSaverMono levelSaverMono;
         [SerializeField] private LevelMenu levelMenu;
+        [SerializeField] private CanvasRaycasterHandler canvasRaycasterHandler;
         
         public override void InstallBindings()
         {
+            BindCanvasRaycasterHandler();
+            BindUIRaycasterHelper();
             BindCameraHandler();
             BindCameraInputProvider();
             BindOrbitCameraMovement();
             BindDetailPrefabSpawner();
-            BindDetailViewMoverInput();
+            BindTouchRegistry();
+            BindDetailViewMoverInputProvider();
             BindDetailViewMover();
             BindLevelState();
             BindLevelService();
@@ -34,6 +42,16 @@ namespace Infrastructure.Installers
             BindLevelInteractableCoordinator();
             BindLevelSaverMono();
             BindLevelMenu();
+        }
+
+        private void BindCanvasRaycasterHandler()
+        {
+            Container.Bind<CanvasRaycasterHandler>().FromInstance(canvasRaycasterHandler).AsSingle().NonLazy();
+        }
+
+        private void BindUIRaycasterHelper()
+        {
+            Container.Bind<UIRaycasterHelper>().AsSingle().NonLazy();
         }
 
         private void BindLevelMenu()
@@ -61,6 +79,52 @@ namespace Infrastructure.Installers
             Container.Bind<ICameraInputProvider>().To<MouseCameraInputProvider>().AsSingle();
 #endif
         }
+
+        private void BindDetailViewMoverInputProvider()
+        {
+#if UNITY_EDITOR || UNITY_STANDALONE
+            Container
+                .Bind(typeof(IDetailViewMoverInputProvider), typeof(IDisposable))
+                .To<MouseDetailViewMoverInputProvider>()
+                .AsSingle()
+                .NonLazy();
+#elif UNITY_ANDROID || UNITY_IOS
+            Container
+                .Bind(typeof(IDetailViewMoverInputProvider), typeof(IDisposable))
+                .To<TouchDetailViewMoverInputProvider>()
+                .AsSingle()
+                .NonLazy();
+#else
+            Container
+                .Bind(typeof(IDetailViewMoverInputProvider), typeof(IDisposable))
+                .To<MouseDetailViewMoverInputProvider>()
+                .AsSingle()
+                .NonLazy();
+#endif
+        }
+
+        private void BindTouchRegistry()
+        {
+#if UNITY_EDITOR || UNITY_STANDALONE
+            Container
+                .Bind(typeof(ITouchPointerLock))
+                .To<DummyTouchPointerLock>()
+                .AsSingle()
+                .NonLazy();
+#elif UNITY_ANDROID || UNITY_IOS
+            Container
+                .Bind(typeof(TouchRegistry), typeof(ITouchPointerLock), typeof(IDisposable))
+                .To<TouchRegistry>()
+                .AsSingle()
+                .NonLazy();
+#else
+            Container
+                .Bind(typeof(ITouchPointerLock))
+                .To<DummyTouchPointerLock>()
+                .AsSingle()
+                .NonLazy();
+#endif
+        }
         
         private void BindOrbitCameraMovement()
         {
@@ -70,11 +134,6 @@ namespace Infrastructure.Installers
         private void BindDetailPrefabSpawner()
         {
             Container.Bind<DetailPrefabSpawner>().FromInstance(detailPrefabSpawner).AsSingle().NonLazy();
-        }
-
-        private void BindDetailViewMoverInput()
-        {
-            Container.Bind<IDetailViewMoverInputProvider>().To<MouseDetailViewMoverInputProvider>().AsSingle();
         }
         
         private void BindDetailViewMover()

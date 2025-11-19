@@ -4,6 +4,7 @@ using System.Linq;
 using _1_LEVEL_REWORK.New.Instances;
 using Gameplay.Dto;
 using Gameplay.Movement;
+using Gameplay.Movement.Input;
 using Gameplay.Spawn;
 using Input.TouchRegistry;
 using UI.Game.DetailsScroll;

@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-namespace Gameplay.Movement
+namespace Gameplay.Movement.Input
 {
     public class MouseDetailViewMoverInputProvider : IDetailViewMoverInputProvider, IDisposable
     {

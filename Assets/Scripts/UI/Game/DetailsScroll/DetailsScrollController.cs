@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UI.Scroll;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.UI;
 
 namespace UI.Game.DetailsScroll
 {
@@ -108,8 +109,10 @@ namespace UI.Game.DetailsScroll
                 return;
 
             _isDragOutStarted = true;
+
+            var pointerId = GetPointerId(eventData);
             
-            DragOutStarted?.Invoke(new DragOutInfo(Models[_draggedItemIndex].ID, eventData.pointerId));
+            DragOutStarted?.Invoke(new DragOutInfo(Models[_draggedItemIndex].ID, pointerId));
             
             ExecuteEvents.Execute(scrollRect.gameObject, eventData, ExecuteEvents.endDragHandler);
         }
@@ -123,6 +126,11 @@ namespace UI.Game.DetailsScroll
                     return item;
             }
             return null;
+        }
+        
+        private int GetPointerId(PointerEventData eventData)
+        {
+            return (eventData as ExtendedPointerEventData)?.touchId ?? eventData.pointerId;
         }
     }
 }

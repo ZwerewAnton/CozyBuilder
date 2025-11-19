@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Gameplay.Movement
+namespace Gameplay.Movement.Input
 {
     public interface IDetailViewMoverInputProvider
     {

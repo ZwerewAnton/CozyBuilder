@@ -1,5 +1,4 @@
-﻿using Input;
-using Input.TouchRegistry;
+﻿using Input.TouchRegistry;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
@@ -25,7 +24,7 @@ namespace Cameras.Input
 
         public void UpdateInput()
         {
-            var touches = _touchRegistry.GetUnlockedTouches();
+            var touches = _touchRegistry.GetAvailableTouches();
             var count = touches.Count;
             
             RotationDelta = Vector2.zero;

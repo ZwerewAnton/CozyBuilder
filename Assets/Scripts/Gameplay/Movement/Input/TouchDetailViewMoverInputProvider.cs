@@ -1,12 +1,11 @@
 ﻿using System;
 using Cameras;
 using Configs;
-using Input;
 using Input.TouchRegistry;
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay.Movement
+namespace Gameplay.Movement.Input
 {
     public class TouchDetailViewMoverInputProvider : IDetailViewMoverInputProvider, IDisposable
     {

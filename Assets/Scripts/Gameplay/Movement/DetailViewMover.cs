@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using _1_LEVEL_REWORK.New.Instances;
 using Configs;
+using Gameplay.Movement.Input;
 using UnityEngine;
 using Zenject;
 
@@ -65,6 +66,7 @@ namespace Gameplay.Movement
             if (connectionPoints.Count == 0 || !_moverInputProvider.IsInputActive())
             {
                 StopMove();
+                return;
             }
             
             _connectionPoints = connectionPoints;

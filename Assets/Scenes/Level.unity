@@ -426,6 +426,7 @@ MonoBehaviour:
   cameraHandler: {fileID: 963194234}
   levelSaverMono: {fileID: 154972806}
   levelMenu: {fileID: 671748990}
+  canvasRaycasterHandler: {fileID: 671748991}
 --- !u!114 &160822819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -833,6 +834,7 @@ GameObject:
   - component: {fileID: 671748984}
   - component: {fileID: 671748988}
   - component: {fileID: 671748990}
+  - component: {fileID: 671748991}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -953,6 +955,19 @@ MonoBehaviour:
   homeButton: {fileID: 11044220}
   scrollRect: {fileID: 0}
   audioSource: {fileID: 0}
+--- !u!114 &671748991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 671748983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d32c2a1c73cf4dda82daf545023895a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raycaster: {fileID: 671748984}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
