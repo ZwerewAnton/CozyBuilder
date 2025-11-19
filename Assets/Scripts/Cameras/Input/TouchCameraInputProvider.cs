@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
+using Touch = UnityEngine.InputSystem.EnhancedTouch.Touch;
 using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
 namespace Cameras.Input
@@ -26,25 +27,25 @@ namespace Cameras.Input
         {
             var touches = _touchRegistry.GetAvailableTouches();
             var count = touches.Count;
-            
+
             RotationDelta = Vector2.zero;
             ZoomDelta = 0f;
 
             if (count == 1)
             {
                 var t = touches[0];
-                if (t.phase == TouchPhase.Began)
+                switch (t.phase)
                 {
-                    IsRotationAllowed = !EventSystem.current.IsPointerOverGameObject(t.touchId);
-                }
-
-                if (IsRotationAllowed && t.phase == TouchPhase.Moved)
-                {
-                    RotationDelta = t.delta;
-                }
-                else if (t.phase is TouchPhase.Ended or TouchPhase.Canceled)
-                {
-                    IsRotationAllowed = false;
+                    case TouchPhase.Began:
+                        IsRotationAllowed = true;
+                        break;
+                    case TouchPhase.Moved:
+                        RotationDelta = t.delta;
+                        IsRotationAllowed = true;
+                        break;
+                    case TouchPhase.Ended or TouchPhase.Canceled:
+                        IsRotationAllowed = false;
+                        break;
                 }
             }
             else
@@ -57,14 +58,31 @@ namespace Cameras.Input
                 var t0 = touches[0];
                 var t1 = touches[1];
 
-                var currentDist = Vector2.Distance(t0.screenPosition, t1.screenPosition);
-                if (t0.phase != TouchPhase.Began && t1.phase != TouchPhase.Began)
+                if (IsPinchAllowed(t0, t1))
                 {
+                    var currentDist = Vector2.Distance(t0.screenPosition, t1.screenPosition);
                     ZoomDelta = (currentDist - _previousPinchDistance) * _zoomCoefficient;
+                    _previousPinchDistance = currentDist;
                 }
-
-                _previousPinchDistance = currentDist;
+                else
+                {
+                    _previousPinchDistance = Vector2.Distance(t0.screenPosition, t1.screenPosition);
+                }
             }
+        }
+
+        private static bool IsPinchAllowed(Touch t0, Touch t1)
+        {
+            if (t0.phase == TouchPhase.Ended || t1.phase == TouchPhase.Ended)
+                return false;
+
+            if (t0.phase == TouchPhase.Canceled || t1.phase == TouchPhase.Canceled)
+                return false;
+
+            if (t0.phase == TouchPhase.Began || t1.phase == TouchPhase.Began)
+                return false;
+
+            return true;
         }
     }
 }
