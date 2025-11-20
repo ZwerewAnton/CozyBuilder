@@ -21,6 +21,7 @@ namespace _1_LEVEL_REWORK.New.Instances
             groundInstance.Points.Add(ground.points.Count < 1
                 ? new PointInstance(new PointData(), true)
                 : new PointInstance(ground.points[0], true));
+            groundInstance.RemainingCount = 0;
             _detailInstances[ground.Id] = groundInstance;
             
             foreach (var detailData in details)

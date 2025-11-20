@@ -158,8 +158,9 @@ namespace Gameplay
             var isCompleted = true;
             foreach (var (_, detailInstance) in details)
             {
-                if (detailInstance.RemainingCount == 0) 
+                if (detailInstance.IsGround || detailInstance.RemainingCount == 0)
                     continue;
+                
                 isCompleted = false;
                 break;
             }
