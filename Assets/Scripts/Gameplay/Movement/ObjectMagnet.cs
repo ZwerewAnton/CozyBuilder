@@ -123,7 +123,7 @@ namespace Gameplay.Movement
                 return true;
         
             particlePlayer.Play();
-            levelMenu.PlayEndClip();
+            //levelMenu.PlayEndClip();
             levelMenu.ShowEndScreen();
             return true;
         }

@@ -96,7 +96,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 152c9ba22eb00014199aea2feb1756d3,
+    type: 2}
   m_LightingSettings: {fileID: 4890085278179872738, guid: 9cad869c9fd9c4642b63b8c328e94b35,
     type: 2}
 --- !u!196 &4
@@ -427,6 +428,7 @@ MonoBehaviour:
   levelSaverMono: {fileID: 154972806}
   levelMenu: {fileID: 671748990}
   canvasRaycasterHandler: {fileID: 671748991}
+  particlePlayer: {fileID: 1436498535}
 --- !u!114 &160822819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -951,10 +953,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3af2cca2ba5fe1543bebfcd288292c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  endClip: {fileID: 8300000, guid: 27074a1c54ad85448a02f560ae98bb0c, type: 3}
-  homeButton: {fileID: 11044220}
-  scrollRect: {fileID: 0}
-  audioSource: {fileID: 0}
 --- !u!114 &671748991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -998,7 +996,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 0.7924528, g: 0.7332039, b: 0.5644357, a: 1}
-  m_Intensity: 0.8
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1007,7 +1005,7 @@ Light:
     m_Type: 2
     m_Resolution: 0
     m_CustomResolution: -1
-    m_Strength: 0.261
+    m_Strength: 0.5
     m_Bias: 1.56
     m_NormalBias: 0
     m_NearPlane: 0.1
@@ -1056,7 +1054,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.06445661, y: 0.6804303, z: -0.6666012, w: 0.2974943}
+  m_LocalRotation: {x: -0.026082307, y: -0.57834315, z: 0.74297, w: -0.33590853}
   m_LocalPosition: {x: -23.5, y: 6.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1253,7 +1251,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: 0.000061035156}
+  m_AnchoredPosition: {x: -0.000061035156, y: 0}
   m_SizeDelta: {x: 0, y: 400}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &963194225
@@ -1296,7 +1294,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.09433961, g: 0.09433961, b: 0.09433961, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1375,7 +1373,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -2591,11 +2589,11 @@ SceneRoots:
   m_Roots:
   - {fileID: 160822820}
   - {fileID: 705507995}
+  - {fileID: 1296014964}
   - {fileID: 963194228}
   - {fileID: 1693774465}
   - {fileID: 671748987}
   - {fileID: 1436498534}
-  - {fileID: 1296014964}
   - {fileID: 1894950628}
   - {fileID: 176115965}
   - {fileID: 1731988947}

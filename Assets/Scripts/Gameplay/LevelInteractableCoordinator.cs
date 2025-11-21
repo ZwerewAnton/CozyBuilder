@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using _1_LEVEL_REWORK.New.Instances;
+using Common;
 using Gameplay.Dto;
 using Gameplay.Movement;
 using Gameplay.Movement.Input;
@@ -21,6 +22,7 @@ namespace Gameplay
         private readonly DetailViewMover _detailViewMover;
         private readonly IDetailViewMoverInputProvider _moverInputProvider;
         private readonly ITouchPointerLock _pointerLock;
+        private readonly GameState _gameState;
         private DragOutInfo _movingDetailInfo;
         
         [Inject]
@@ -30,7 +32,8 @@ namespace Gameplay
             LevelMediator levelMediator,
             IDetailViewMoverInputProvider moverInputProvider,
             ITouchPointerLock pointerLock,
-            DetailViewMover detailViewMover)
+            DetailViewMover detailViewMover,
+            GameState gameState)
         {
             _levelService = levelService;
             _levelService.LevelInitialized += OnLevelServiceInitialize;
@@ -40,6 +43,7 @@ namespace Gameplay
             _moverInputProvider = moverInputProvider;
             _pointerLock = pointerLock;
             _detailViewMover.PlacementEnded += OnDetailPlacementEnded;
+            _gameState = gameState;
         }
 
         private void OnLevelServiceInitialize()
@@ -47,6 +51,7 @@ namespace Gameplay
             var details = _levelService.GetDetailsInfo();
             SetDetailsScrollItems(details);
             SpawnStartDetailPrefabs(details);
+            _gameState.IsLevelCompletedOnStart = _levelService.GetLevelProgress() == 100;
         }
         
         private void SetDetailsScrollItems(Dictionary<string,DetailInstanceDto> details)

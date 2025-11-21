@@ -14,6 +14,7 @@ namespace Music
         [SerializeField] private AudioClip playClip;
         [SerializeField] private AudioClip menuButtonClip;
         [SerializeField] private AudioClip settingButtonClip;
+        [SerializeField] private AudioClip completeLevelClip;
         
         private SettingsService _settingsService;
         private ApplicationConfigs _configs;
@@ -60,6 +61,11 @@ namespace Music
         public void PlaySettingButtonClip()
         {
             _audioSource.PlayOneShot(settingButtonClip);
+        }
+        
+        public void PlayCompleteLevelClip()
+        {
+            _audioSource.PlayOneShot(completeLevelClip);
         }
 
         private void ApplySoundState(bool isOn)

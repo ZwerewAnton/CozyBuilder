@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Gameplay;
 using UI.Common;
 using UI.Game.DetailsScroll;
 using UnityEngine;
@@ -14,21 +15,27 @@ namespace UI.Mediators
         [SerializeField] private ActionButton homeButton;
 
         private LevelMenu _levelMenu;
+        private LevelService _levelService;
 
         [Inject]
-        private void Construct(LevelMenu levelMenu)
+        private void Construct(LevelMenu levelMenu, LevelService levelService)
         {
             _levelMenu = levelMenu;
+            _levelService = levelService;
         }
 
         private void OnEnable()
         {
             backButton.Clicked += OnBackButton;
+            homeButton.Clicked += OnHomeButton;
+            _levelService.LevelCompleted += OnLevelCompleted;
         }
 
         private void OnDisable()
         {
             backButton.Clicked -= OnBackButton;
+            homeButton.Clicked -= OnHomeButton;
+            _levelService.LevelCompleted -= OnLevelCompleted;
         }
 
         public event Action<DragOutInfo> DetailItemDragOutStarted
@@ -52,9 +59,34 @@ namespace UI.Mediators
             detailsScrollController.UpdateModels(models);
         }
 
+        public void ShowHomeButton()
+        {
+            homeButton.gameObject.SetActive(true);
+        }
+
+        public void HideDetailsScroll()
+        {
+            detailsScrollController.gameObject.SetActive(false);
+        }
+
+        private void OnHomeButton()
+        {
+            BackToMainMenu();
+        }
+
         private void OnBackButton()
         {
+            BackToMainMenu();
+        }
+
+        private void BackToMainMenu()
+        {
             _levelMenu.BackToMainMenu();
+        }
+
+        private void OnLevelCompleted()
+        {
+            _levelMenu.ShowEndScreen();
         }
     }
 }

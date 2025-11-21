@@ -11,6 +11,7 @@ using UI;
 using UI.Mediators;
 using UI.Raycast;
 using UnityEngine;
+using VFX;
 using Zenject;
 
 namespace Infrastructure.Installers
@@ -24,6 +25,7 @@ namespace Infrastructure.Installers
         [SerializeField] private LevelSaverMono levelSaverMono;
         [SerializeField] private LevelMenu levelMenu;
         [SerializeField] private CanvasRaycasterHandler canvasRaycasterHandler;
+        [SerializeField] private ParticlePlayer particlePlayer;
         
         public override void InstallBindings()
         {
@@ -42,6 +44,12 @@ namespace Infrastructure.Installers
             BindLevelInteractableCoordinator();
             BindLevelSaverMono();
             BindLevelMenu();
+            BindParticlePlayer();
+        }
+
+        private void BindParticlePlayer()
+        {
+            Container.Bind<ParticlePlayer>().FromInstance(particlePlayer).AsSingle().NonLazy();
         }
 
         private void BindCanvasRaycasterHandler()
