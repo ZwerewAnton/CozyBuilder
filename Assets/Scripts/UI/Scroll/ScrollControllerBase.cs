@@ -16,6 +16,7 @@ namespace UI.Scroll
         [Header("Items")]
         [Range(0f, 500f)] [SerializeField] protected float itemSpacing = 50f;
         [Range(0f, 500f)] [SerializeField] protected float borderSpacing = 50f;
+        [Range(0f, 500f)] [SerializeField] protected int additionalPoolItemsCount = 2;
 
         protected readonly List<TModel> Models = new();
         protected readonly List<TItem> ActiveItems = new();
@@ -83,7 +84,7 @@ namespace UI.Scroll
 
             SetContentSize();
             var cellSize = ItemSize + itemSpacing;
-            VisibleItemCount = Mathf.CeilToInt(GetViewportSize() / cellSize) + 4;
+            VisibleItemCount = Mathf.CeilToInt(GetViewportSize() / cellSize) + additionalPoolItemsCount;
 
             CreatePool();
             UpdateVisibleItems();
@@ -148,11 +149,9 @@ namespace UI.Scroll
         {
             if (!Initialized)
                 return;
-
-            var viewportSize = GetViewportSize();
+            
+            var offset = GetItemsOffset();
             var cellSize = ItemSize + itemSpacing;
-
-            var offset = GetScrollOffset() - viewportSize / 2f;
             var firstVisibleIndex = Mathf.FloorToInt(offset / cellSize);
             firstVisibleIndex = Mathf.Max(0, firstVisibleIndex);
 
@@ -206,6 +205,12 @@ namespace UI.Scroll
             return scrollRect.horizontal
                 ? -content.anchoredPosition.x
                 : content.anchoredPosition.y;
+        }
+
+        protected virtual float GetItemsOffset()
+        {
+            var cellSize = ItemSize + itemSpacing;
+            return GetScrollOffset() - cellSize;
         }
 
         protected void MarkToUpdate()

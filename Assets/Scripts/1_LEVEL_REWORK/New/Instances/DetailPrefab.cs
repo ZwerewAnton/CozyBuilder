@@ -4,6 +4,7 @@ namespace _1_LEVEL_REWORK.New.Instances
 {
     public class DetailPrefab : MonoBehaviour
     {
+        [SerializeField] private bool resetTransform = true;
         private MeshRenderer _meshRenderer;
         private MeshFilter _meshFilter;
 
@@ -11,7 +12,8 @@ namespace _1_LEVEL_REWORK.New.Instances
         {
             _meshRenderer = GetComponentInChildren<MeshRenderer>();
             _meshFilter = GetComponentInChildren<MeshFilter>();
-            _meshRenderer.transform.localPosition = Vector3.zero;
+            if (resetTransform)
+                _meshRenderer.transform.localPosition = Vector3.zero;
         }
 
         public Material GetMaterial()

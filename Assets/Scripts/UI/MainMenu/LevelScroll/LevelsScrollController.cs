@@ -107,6 +107,11 @@ namespace UI.MainMenu.LevelScroll
             return GetViewportSize() / 2f;
         }
 
+        protected override float GetItemsOffset()
+        {
+            return GetScrollOffset() - GetViewportSize() / 2f;
+        }
+
         #endregion
         
         #region Snap and Animation
