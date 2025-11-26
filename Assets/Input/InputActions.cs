@@ -118,6 +118,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Height"",
+                    ""type"": ""Button"",
+                    ""id"": ""3a6cb92a-80e6-42c2-9b7e-9d8ecc74f562"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -162,6 +171,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Press"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a08d7eaf-949d-415e-a7f4-e4db1214c5c7"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Height"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -245,6 +265,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Camera_Look = m_Camera.FindAction("Look", throwIfNotFound: true);
         m_Camera_Zoom = m_Camera.FindAction("Zoom", throwIfNotFound: true);
         m_Camera_Press = m_Camera.FindAction("Press", throwIfNotFound: true);
+        m_Camera_Height = m_Camera.FindAction("Height", throwIfNotFound: true);
         // Detail
         m_Detail = asset.FindActionMap("Detail", throwIfNotFound: true);
         m_Detail_Tap = m_Detail.FindAction("Tap", throwIfNotFound: true);
@@ -333,6 +354,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Camera_Look;
     private readonly InputAction m_Camera_Zoom;
     private readonly InputAction m_Camera_Press;
+    private readonly InputAction m_Camera_Height;
     /// <summary>
     /// Provides access to input actions defined in input action map "Camera".
     /// </summary>
@@ -356,6 +378,10 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Camera/Press".
         /// </summary>
         public InputAction @Press => m_Wrapper.m_Camera_Press;
+        /// <summary>
+        /// Provides access to the underlying input action "Camera/Height".
+        /// </summary>
+        public InputAction @Height => m_Wrapper.m_Camera_Height;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -391,6 +417,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Press.started += instance.OnPress;
             @Press.performed += instance.OnPress;
             @Press.canceled += instance.OnPress;
+            @Height.started += instance.OnHeight;
+            @Height.performed += instance.OnHeight;
+            @Height.canceled += instance.OnHeight;
         }
 
         /// <summary>
@@ -411,6 +440,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Press.started -= instance.OnPress;
             @Press.performed -= instance.OnPress;
             @Press.canceled -= instance.OnPress;
+            @Height.started -= instance.OnHeight;
+            @Height.performed -= instance.OnHeight;
+            @Height.canceled -= instance.OnHeight;
         }
 
         /// <summary>
@@ -579,6 +611,13 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnPress(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Height" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnHeight(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Detail" which allows adding and removing callbacks.

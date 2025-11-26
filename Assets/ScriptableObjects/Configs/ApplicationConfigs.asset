@@ -31,7 +31,7 @@ MonoBehaviour:
   gameplay:
     magnetDistance: 1
     ghostDistance: 20
-    screenOffset: {x: 0, y: 100, z: 0}
+    screenOffset: {x: 0, y: 100}
   audioOffValue: -80
   audioOnValue: -20
   musicFadeTime: 1

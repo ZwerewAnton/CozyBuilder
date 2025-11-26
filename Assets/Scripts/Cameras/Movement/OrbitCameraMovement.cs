@@ -15,6 +15,11 @@ namespace Cameras.Movement
         private Vector2 _smoothedDelta;
         private float _desiredDistance;
         private float _currentDistance;
+        
+        private float _currentHeightOffset;
+        private const float MinHeight = -5f;
+        private const float MaxHeight = 5f;
+        private const float HeightSmooth = 5f;
 
         [Inject]
         private OrbitCameraMovement(ApplicationConfigs configs, ICameraInputProvider inputProvider)
@@ -36,6 +41,13 @@ namespace Cameras.Movement
             _eulerAngles.x -= _smoothedDelta.y * _configs.ySpeed * Time.deltaTime;
             _eulerAngles.x = MathUtils.ClampAngle(_eulerAngles.x, _configs.yMinLimit, _configs.yMaxLimit);
 
+            var heightDelta = _input.HeightDelta;
+            if (Mathf.Abs(heightDelta) > 0.0001f)
+            {
+                _currentHeightOffset += heightDelta;
+                _currentHeightOffset = Mathf.Clamp(_currentHeightOffset, MinHeight, MaxHeight);
+            }
+            
             var zoomDelta = _input.ZoomDelta;
             if (Mathf.Abs(zoomDelta) > 0.0001f)
             {
@@ -49,7 +61,11 @@ namespace Cameras.Movement
 
             var rotation = Quaternion.Euler(_eulerAngles.x, _eulerAngles.y, 0);
             var negativeDistance = new Vector3(0, 0, -_currentDistance);
-            var position = rotation * negativeDistance + _configs.targetOffset;
+            
+            var offset = _configs.targetOffset;
+            offset.y += _currentHeightOffset;
+            
+            var position = rotation * negativeDistance + offset;
 
             return new CameraMovementResult(position, rotation);
         }

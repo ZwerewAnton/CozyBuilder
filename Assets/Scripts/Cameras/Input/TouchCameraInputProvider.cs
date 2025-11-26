@@ -16,6 +16,8 @@ namespace Cameras.Input
         public bool IsRotationAllowed { get; private set; }
         public Vector2 RotationDelta { get; private set; }
         public float ZoomDelta { get; private set; }
+        public bool IsHeightChangeAllowed { get; }
+        public float HeightDelta { get; }
 
         [Inject]
         private TouchCameraInputProvider(TouchRegistry touchRegistry)
