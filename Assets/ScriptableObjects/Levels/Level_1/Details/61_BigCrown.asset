@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d30b706aa5440fa70492a36dd33b1b, type: 3}
+  m_Name: 61_BigCrown
+  m_EditorClassIdentifier: 
+  id: 75179b7a-6dc3-454d-abb8-058f88fbbc76
+  count: 3
+  prefab: {fileID: 4012451952739334133, guid: adad9e555b6ffb54eb6cf9a0bffd6842, type: 3}
+  mesh: {fileID: -2432090755550338912, guid: 20c846d2ff153754cbf00a1f4c5306fe, type: 3}
+  material: {fileID: 2100000, guid: 3f989a983cacef1449493e0eb3a1f9dc, type: 2}
+  icon: {fileID: -5064447416850386270, guid: 53ad9d1f68831d04fb4acb11c147e2c1, type: 3}
+  points:
+  - position: {x: 16.300001, y: 21.550003, z: 4.500004}
+    rotation: {x: -0, y: 270, z: 0}
+    constraints:
+    - parentDetail: {fileID: 11400000, guid: 2dc974186d15161439868a04777d414a, type: 2}
+      parentPointIndexes: 00000000
+  - position: {x: 4.19, y: 18.85, z: 12.29}
+    rotation: {x: 0, y: 270, z: 0}
+    constraints:
+    - parentDetail: {fileID: 11400000, guid: 2dc974186d15161439868a04777d414a, type: 2}
+      parentPointIndexes: 00000000
+  - position: {x: -5.899998, y: 16.15, z: 10.1}
+    rotation: {x: 0, y: 0, z: 0}
+    constraints:
+    - parentDetail: {fileID: 11400000, guid: 2dc974186d15161439868a04777d414a, type: 2}
+      parentPointIndexes: 00000000

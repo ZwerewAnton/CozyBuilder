@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d30b706aa5440fa70492a36dd33b1b, type: 3}
+  m_Name: 54_Anvil
+  m_EditorClassIdentifier: 
+  id: 24608b29-6364-4f16-a5f4-6ca5aa6f5d54
+  count: 1
+  prefab: {fileID: 6934830589601437691, guid: 7caf536a0fd512b44a3383414b06489a, type: 3}
+  mesh: {fileID: -2432090755550338912, guid: 558b49afb52f1db4ab4d1cab7890db88, type: 3}
+  material: {fileID: 2100000, guid: 3f989a983cacef1449493e0eb3a1f9dc, type: 2}
+  icon: {fileID: 9221047484841255655, guid: 41b878a58666420448ac569cf72ef65d, type: 3}
+  points:
+  - position: {x: 7.1500006, y: 3.150001, z: 2.25}
+    rotation: {x: -0, y: -0, z: -0}
+    constraints:
+    - parentDetail: {fileID: 11400000, guid: e3c576d499484fd4d823e30cc99e0b61, type: 2}
+      parentPointIndexes: 00000000

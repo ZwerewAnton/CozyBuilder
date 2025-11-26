@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d30b706aa5440fa70492a36dd33b1b, type: 3}
+  m_Name: 36_FrontBalcony
+  m_EditorClassIdentifier: 
+  id: e80f87b7-0d37-4e76-a35b-f116cdedc508
+  count: 1
+  prefab: {fileID: -8676997525644870559, guid: 3b6895e22b2d07044b386a327e14396b, type: 3}
+  mesh: {fileID: -2432090755550338912, guid: 172703ade5880c040861b34edd0e45c1, type: 3}
+  material: {fileID: 2100000, guid: 3f989a983cacef1449493e0eb3a1f9dc, type: 2}
+  icon: {fileID: 1553771492516164121, guid: 1899f285c65e9d7468ec262347e043f3, type: 3}
+  points:
+  - position: {x: 1.7, y: 10.1, z: -5.5}
+    rotation: {x: -0, y: -0, z: -0}
+    constraints:
+    - parentDetail: {fileID: 11400000, guid: 2cd3b93a453a5a446bf00f92f53db79a, type: 2}
+      parentPointIndexes: 00000000

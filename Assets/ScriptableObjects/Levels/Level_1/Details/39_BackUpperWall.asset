@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d30b706aa5440fa70492a36dd33b1b, type: 3}
+  m_Name: 39_BackUpperWall
+  m_EditorClassIdentifier: 
+  id: ff09a345-8de0-4188-902c-ba36f9695ade
+  count: 1
+  prefab: {fileID: 8260744429656132831, guid: 60823d5aef49c684e99884b7de0276fc, type: 3}
+  mesh: {fileID: -2432090755550338912, guid: 80005f4bf30f756498039b3843a1f4e7, type: 3}
+  material: {fileID: 2100000, guid: 3f989a983cacef1449493e0eb3a1f9dc, type: 2}
+  icon: {fileID: 6807470813352385790, guid: 7336d1e2c768ce64baefcc515b22792e, type: 3}
+  points:
+  - position: {x: 0.7, y: 20.25, z: 4.35}
+    rotation: {x: -0, y: -0, z: -0}
+    constraints:
+    - parentDetail: {fileID: 11400000, guid: f61d8f65c3453cb4abf6ab4bc5352b9a, type: 2}
+      parentPointIndexes: 00000000

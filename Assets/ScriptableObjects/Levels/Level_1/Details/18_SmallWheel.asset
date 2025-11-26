@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d30b706aa5440fa70492a36dd33b1b, type: 3}
+  m_Name: 18_SmallWheel
+  m_EditorClassIdentifier: 
+  id: 7a566eea-7427-40f6-a5e5-87d70bd36870
+  count: 2
+  prefab: {fileID: 975997052417966274, guid: 70eb8ec306dfe91438a210491e4e87a0, type: 3}
+  mesh: {fileID: -2432090755550338912, guid: f0d0533720d5f6d42b678fd4912dc450, type: 3}
+  material: {fileID: 2100000, guid: 3f989a983cacef1449493e0eb3a1f9dc, type: 2}
+  icon: {fileID: -3241756447074272819, guid: cc6a7a29b35330e4088e51a0f47e346c, type: 3}
+  points:
+  - position: {x: -7.5, y: 5.4, z: 0.5}
+    rotation: {x: 0, y: 0, z: 0}
+    constraints:
+    - parentDetail: {fileID: 11400000, guid: 7e215b7eeca49c4449e75bd4b73b1776, type: 2}
+      parentPointIndexes: 00000000
+  - position: {x: -5, y: 5.4, z: 0.5}
+    rotation: {x: 0, y: 0, z: 0}
+    constraints:
+    - parentDetail: {fileID: 11400000, guid: 7e215b7eeca49c4449e75bd4b73b1776, type: 2}
+      parentPointIndexes: 00000000

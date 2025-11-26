@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using _1_LEVEL_REWORK.New.Instances;
 using Common;
 using Gameplay.Dto;
 using Gameplay.Movement;
@@ -115,7 +114,14 @@ namespace Gameplay
         
         private void StartDetailViewMove(DetailInstanceDto detail)
         {
-            var pointList = detail.Points.Select(pointInstance => new PointTransform(pointInstance.Position, pointInstance.Rotation)).ToList();
+            var pointList = new List<PointTransform>();
+            for (var i = 0; i < detail.Points.Count; i++)
+            {
+                var pointInstanceDto = detail.Points[i];
+                if (pointInstanceDto.IsAvailable && !pointInstanceDto.IsInstalled)
+                    pointList.Add(new PointTransform(pointInstanceDto.Position, pointInstanceDto.Rotation, i));
+            }
+
             _detailViewMover.StartMove(detail.Mesh, detail.Material, pointList);
         }
         

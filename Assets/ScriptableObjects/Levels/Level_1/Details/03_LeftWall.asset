@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d30b706aa5440fa70492a36dd33b1b, type: 3}
+  m_Name: 03_LeftWall
+  m_EditorClassIdentifier: 
+  id: 6b632313-5da3-45cb-bfc4-54222ed45240
+  count: 1
+  prefab: {fileID: 5167887276187673543, guid: 292915d837db80a46b821a5c289a2449, type: 3}
+  mesh: {fileID: -2432090755550338912, guid: dae319f7e4a057f41b4f1bf71fa4b5c6, type: 3}
+  material: {fileID: 2100000, guid: 3f989a983cacef1449493e0eb3a1f9dc, type: 2}
+  icon: {fileID: 3384881355329753939, guid: 73ea8edad4993174e889ff423f891108, type: 3}
+  points:
+  - position: {x: -2.5, y: 5.65, z: -0.15}
+    rotation: {x: 0, y: 0, z: 0}
+    constraints:
+    - parentDetail: {fileID: 11400000, guid: 6661aa48d4b22644db03b3e7a00468e4, type: 2}
+      parentPointIndexes: 00000000

@@ -126,7 +126,7 @@ namespace Gameplay.Movement
             if (distanceToBest <= _magnetDistance)
             {
                 _isConnected = true;
-                _bestPointIndex = closestPointIndex;
+                _bestPointIndex = _connectionPoints[closestPointIndex].PointIndex;
                 _movingDetail.SetPositionAndRotation(closestPoint.Position, closestPoint.Rotation);
                 _ghostDetail.SetMaterialColor(FarColor);
             }

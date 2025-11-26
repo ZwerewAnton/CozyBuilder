@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d30b706aa5440fa70492a36dd33b1b, type: 3}
+  m_Name: 47_Peak
+  m_EditorClassIdentifier: 
+  id: 432ab74e-9bd3-4a92-a98f-ac912481197f
+  count: 1
+  prefab: {fileID: 7632438563286103654, guid: a1d039eaa63094f46bd8fed039bd4a2f, type: 3}
+  mesh: {fileID: -2432090755550338912, guid: da30d8b02b3b1d54d9ad63e3e69b2f5d, type: 3}
+  material: {fileID: 2100000, guid: 3f989a983cacef1449493e0eb3a1f9dc, type: 2}
+  icon: {fileID: -5094141094344969391, guid: d43046b852eeac041bbf2915e08a2368, type: 3}
+  points:
+  - position: {x: 0.7, y: 25.699999, z: -0.52}
+    rotation: {x: -0, y: -0, z: -0}
+    constraints:
+    - parentDetail: {fileID: 11400000, guid: 47551175ba179704f8a6e53adaa0de6e, type: 2}
+      parentPointIndexes: 00000000
+    - parentDetail: {fileID: 11400000, guid: ca0a1f4a831a1674dad368a4f9c9a274, type: 2}
+      parentPointIndexes: 00000000

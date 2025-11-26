@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d30b706aa5440fa70492a36dd33b1b, type: 3}
+  m_Name: 41_SmallRoof
+  m_EditorClassIdentifier: 
+  id: d6abdcae-7bf1-4ffa-a6e2-aeab12851d36
+  count: 1
+  prefab: {fileID: -4305545503583366719, guid: 59d4cca5de8c1ce47aa6341359633c51, type: 3}
+  mesh: {fileID: -2432090755550338912, guid: 07fd029e53f00c04a8fbfe695e0e8439, type: 3}
+  material: {fileID: 2100000, guid: 3f989a983cacef1449493e0eb3a1f9dc, type: 2}
+  icon: {fileID: -6095874505990387403, guid: 894d6ae84c257f5439c70bbc83c5ae81, type: 3}
+  points:
+  - position: {x: 7.5999985, y: 13.750002, z: -0.2999997}
+    rotation: {x: -0, y: -0, z: -0}
+    constraints:
+    - parentDetail: {fileID: 11400000, guid: bec4685a728a7664fa292ae9f3f49248, type: 2}
+      parentPointIndexes: 00000000

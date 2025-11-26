@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d30b706aa5440fa70492a36dd33b1b, type: 3}
+  m_Name: 14_Floor
+  m_EditorClassIdentifier: 
+  id: 945d0cf6-511a-4798-9737-a991e81417df
+  count: 1
+  prefab: {fileID: -5813167899148759588, guid: eac350f235681b44bb9ab1144e455b76, type: 3}
+  mesh: {fileID: -2432090755550338912, guid: aefa84741d759d847b300d7026cee44e, type: 3}
+  material: {fileID: 2100000, guid: 3f989a983cacef1449493e0eb3a1f9dc, type: 2}
+  icon: {fileID: -382517824189222455, guid: bdfa3d668caf4154b8dedbcf2a4660dc, type: 3}
+  points:
+  - position: {x: 3.65, y: 2.2, z: -0.7}
+    rotation: {x: 0, y: 0, z: 0}
+    constraints:
+    - parentDetail: {fileID: 11400000, guid: cc80be90afd1fa3428d017879dabb670, type: 2}
+      parentPointIndexes: 00000000010000000200000003000000
+    - parentDetail: {fileID: 11400000, guid: f1a82827c559c1144b39f59e5b410dff, type: 2}
+      parentPointIndexes: 00000000
+    - parentDetail: {fileID: 11400000, guid: 9093988c1e90c294097b4a91c8199692, type: 2}
+      parentPointIndexes: 00000000

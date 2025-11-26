@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d30b706aa5440fa70492a36dd33b1b, type: 3}
+  m_Name: 52_Fence
+  m_EditorClassIdentifier: 
+  id: 4e72dfa2-43b3-4e01-80d1-0f8b96b406fa
+  count: 1
+  prefab: {fileID: 821016338206456503, guid: 36c121e172884bb43b681dde8937c07b, type: 3}
+  mesh: {fileID: -2432090755550338912, guid: e7bd653a6bc75b94088ea853d293430b, type: 3}
+  material: {fileID: 2100000, guid: 3f989a983cacef1449493e0eb3a1f9dc, type: 2}
+  icon: {fileID: -3703776521661926752, guid: 9fdc3c5388bc3b24dab178caacddb5f0, type: 3}
+  points:
+  - position: {x: -3.2, y: 3.25, z: 7}
+    rotation: {x: -0, y: -0, z: -0}
+    constraints:
+    - parentDetail: {fileID: 11400000, guid: e3c576d499484fd4d823e30cc99e0b61, type: 2}
+      parentPointIndexes: 00000000

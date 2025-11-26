@@ -26,7 +26,7 @@ namespace Level
         private void Start()
         {
 #if UNITY_EDITOR
-            if (editorLevelName != "")
+            if (_gameState.SelectedLevelName == null && editorLevelName != "")
             {
                 _gameState.SelectedLevelName = editorLevelName;
             }

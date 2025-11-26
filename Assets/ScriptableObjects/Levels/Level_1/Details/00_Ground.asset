@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d30b706aa5440fa70492a36dd33b1b, type: 3}
+  m_Name: 00_Ground
+  m_EditorClassIdentifier: 
+  id: 34de70d9-c793-40c6-ad59-17c2e4b5fb0b
+  count: 1
+  prefab: {fileID: 2267600898019666561, guid: b5e9ae79b4a6b3940b8455d20d659901, type: 3}
+  mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  material: {fileID: 2100000, guid: 392f28898c1e01c40921ce64265fba0b, type: 2}
+  icon: {fileID: 0}
+  points:
+  - position: {x: 0, y: -1.2, z: 0}
+    rotation: {x: 0, y: 0, z: 0}
+    constraints: []

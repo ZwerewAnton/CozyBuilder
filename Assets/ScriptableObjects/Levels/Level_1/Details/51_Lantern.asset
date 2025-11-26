@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d30b706aa5440fa70492a36dd33b1b, type: 3}
+  m_Name: 51_Lantern
+  m_EditorClassIdentifier: 
+  id: fd224d36-eb93-4c03-966b-f3ef754fe52d
+  count: 1
+  prefab: {fileID: 4325364936806208121, guid: 084e2541a60399142923a7dc2d67bfcf, type: 3}
+  mesh: {fileID: -2432090755550338912, guid: fb9e512f7f1d4414e96ec64a7960ffb6, type: 3}
+  material: {fileID: 2100000, guid: 3f989a983cacef1449493e0eb3a1f9dc, type: 2}
+  icon: {fileID: 4569292458650541359, guid: cea68de94efc52a42b9bd1a0dc2fa5b9, type: 3}
+  points:
+  - position: {x: 0.8, y: 7.65, z: 4.6}
+    rotation: {x: -0, y: -0, z: -0}
+    constraints:
+    - parentDetail: {fileID: 11400000, guid: cce3988da407e2a45b2b0a94509bfc10, type: 2}
+      parentPointIndexes: 00000000

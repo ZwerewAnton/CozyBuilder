@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d30b706aa5440fa70492a36dd33b1b, type: 3}
+  m_Name: 26_FloorBackWall
+  m_EditorClassIdentifier: 
+  id: c927d090-f2a4-443a-a3c1-ae8c2a7e2b6a
+  count: 1
+  prefab: {fileID: -962036127159531940, guid: 84ed2d1cc6b23fc429caca36ccedce61, type: 3}
+  mesh: {fileID: -2432090755550338912, guid: 6a670515c746c80499bf6e91725e6020, type: 3}
+  material: {fileID: 2100000, guid: 3f989a983cacef1449493e0eb3a1f9dc, type: 2}
+  icon: {fileID: -6674803013605906110, guid: ae5c2368bbd0ebb43b84b8a46072e375, type: 3}
+  points:
+  - position: {x: 0.7, y: 12.5, z: 4.35}
+    rotation: {x: -0, y: -0, z: -0}
+    constraints:
+    - parentDetail: {fileID: 11400000, guid: 395b9f916fc651940a3fb09f7679d0f9, type: 2}
+      parentPointIndexes: 00000000

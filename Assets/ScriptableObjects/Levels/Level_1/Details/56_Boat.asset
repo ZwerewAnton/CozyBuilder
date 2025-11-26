@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d30b706aa5440fa70492a36dd33b1b, type: 3}
+  m_Name: 56_Boat
+  m_EditorClassIdentifier: 
+  id: 82a9e66d-09df-4f74-a7d9-e60cc405a75f
+  count: 1
+  prefab: {fileID: 3493518714670640712, guid: cfeef8321ebf99b4abfc740424c577ce, type: 3}
+  mesh: {fileID: -2432090755550338912, guid: 7d1398f1209d15b4a833d441384c3e80, type: 3}
+  material: {fileID: 2100000, guid: 3f989a983cacef1449493e0eb3a1f9dc, type: 2}
+  icon: {fileID: 4987041611722280220, guid: 4c1939e8057fe194ab2e2721655aef59, type: 3}
+  points:
+  - position: {x: -6.35, y: 1.92, z: -9.92}
+    rotation: {x: -0, y: 270, z: 0}
+    constraints:
+    - parentDetail: {fileID: 11400000, guid: 091507c21bfa9a04d9d451827a40ccb9, type: 2}
+      parentPointIndexes: 00000000

@@ -83,7 +83,7 @@ namespace UI.Scroll
 
             SetContentSize();
             var cellSize = ItemSize + itemSpacing;
-            VisibleItemCount = Mathf.CeilToInt(GetViewportSize() / cellSize) + 2;
+            VisibleItemCount = Mathf.CeilToInt(GetViewportSize() / cellSize) + 4;
 
             CreatePool();
             UpdateVisibleItems();
