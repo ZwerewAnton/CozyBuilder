@@ -25,9 +25,12 @@ MonoBehaviour:
     yMinLimit: 5
     yMaxLimit: 80
     targetOffset: {x: 0, y: 5, z: 0}
+    minHeight: -5
+    maxHeight: 5
     zoomSpeed: 1
     mouseSmooth: 10
-    zoomDampening: 5
+    heightSmooth: 10
+    zoomSmooth: 5
   gameplay:
     magnetDistance: 1
     ghostDistance: 20

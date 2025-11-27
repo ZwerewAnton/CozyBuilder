@@ -93,7 +93,7 @@ namespace Cameras
                 }
             }
 
-            _currentDistance = Mathf.Lerp(_currentDistance, _desiredDistance, Time.deltaTime * _configs.zoomDampening);
+            _currentDistance = Mathf.Lerp(_currentDistance, _desiredDistance, Time.deltaTime * _configs.zoomSmooth);
 
             var rotation = Quaternion.Euler(_eulerAngles.x, _eulerAngles.y, 0);
             var negativeDistance = new Vector3(0, 0, -_currentDistance);

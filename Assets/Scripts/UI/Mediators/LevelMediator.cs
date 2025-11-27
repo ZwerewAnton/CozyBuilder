@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using Cameras.Movement;
 using Gameplay;
 using UI.Common;
 using UI.Game.DetailsScroll;
+using UI.MainMenu;
 using UnityEngine;
 using Zenject;
 
@@ -13,21 +15,30 @@ namespace UI.Mediators
         [SerializeField] private DetailsScrollController detailsScrollController;
         [SerializeField] private ActionButton backButton;
         [SerializeField] private ActionButton homeButton;
+        [SerializeField] private ResetCameraButton cameraResetButton;
 
         private LevelMenu _levelMenu;
         private LevelService _levelService;
+        private OrbitCameraMovement _orbitCameraMovement;
 
         [Inject]
-        private void Construct(LevelMenu levelMenu, LevelService levelService)
+        private void Construct(
+            LevelMenu levelMenu, 
+            LevelService levelService, 
+            OrbitCameraMovement orbitCameraMovement
+        )
         {
             _levelMenu = levelMenu;
             _levelService = levelService;
+            _orbitCameraMovement = orbitCameraMovement;
         }
 
         private void OnEnable()
         {
             backButton.Clicked += OnBackButton;
             homeButton.Clicked += OnHomeButton;
+            cameraResetButton.Clicked += OnResetCameraButton;
+            _orbitCameraMovement.CameraMoved += OnCameraMoved;
             _levelService.LevelCompleted += OnLevelCompleted;
         }
 
@@ -35,6 +46,8 @@ namespace UI.Mediators
         {
             backButton.Clicked -= OnBackButton;
             homeButton.Clicked -= OnHomeButton;
+            cameraResetButton.Clicked -= OnResetCameraButton;
+            _orbitCameraMovement.CameraMoved -= OnCameraMoved;
             _levelService.LevelCompleted -= OnLevelCompleted;
         }
 
@@ -77,6 +90,19 @@ namespace UI.Mediators
         private void OnBackButton()
         {
             BackToMainMenu();
+        }
+
+        private void OnResetCameraButton()
+        {
+            _orbitCameraMovement.ResetCamera();
+        }
+
+        private void OnCameraMoved()
+        {
+            cameraResetButton.SetButtonVisibility(
+                _orbitCameraMovement.DesiredHeightOffset,
+                _orbitCameraMovement.DesiredZoomOffset
+            );
         }
 
         private void BackToMainMenu()

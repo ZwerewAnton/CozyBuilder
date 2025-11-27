@@ -20,12 +20,15 @@ namespace Configs
 
         [Header("Offset Settings")]
         public Vector3 targetOffset = Vector3.zero;
+        public float minHeight = -5f;
+        public float maxHeight = 5f;
         
         [Header("Zoom Settings")]
         public float zoomSpeed = 1f;
         
         [Header("Smooth Settings")]
         public float mouseSmooth = 10f;
-        public float zoomDampening = 5f;
+        public float heightSmooth = 5f;
+        public float zoomSmooth = 5f;
     }
 }

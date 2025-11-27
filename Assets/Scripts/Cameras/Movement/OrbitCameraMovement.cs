@@ -1,4 +1,5 @@
-﻿using Cameras.Input;
+﻿using System;
+using Cameras.Input;
 using Configs;
 using UnityEngine;
 using Utils;
@@ -8,18 +9,19 @@ namespace Cameras.Movement
 {
     public class OrbitCameraMovement
     {
+        public event Action CameraMoved;
         private readonly CameraConfigs _configs;
         private readonly ICameraInputProvider _input;
 
         private Vector2 _eulerAngles;
         private Vector2 _smoothedDelta;
-        private float _desiredDistance;
         private float _currentDistance;
-        
+        private float _currentZoomOffset;
         private float _currentHeightOffset;
-        private const float MinHeight = -5f;
-        private const float MaxHeight = 5f;
-        private const float HeightSmooth = 5f;
+        private Vector3 _previousCalculatePosition;
+        
+        public float DesiredZoomOffset { get; private set; }
+        public float DesiredHeightOffset { get; private set; }
 
         [Inject]
         private OrbitCameraMovement(ApplicationConfigs configs, ICameraInputProvider inputProvider)
@@ -34,9 +36,7 @@ namespace Cameras.Movement
             _input.UpdateInput();
 
             var delta = _input.IsRotationAllowed ? _input.RotationDelta : Vector2.zero;
-
             _smoothedDelta = Vector2.Lerp(_smoothedDelta, delta, Time.deltaTime * _configs.mouseSmooth);
-
             _eulerAngles.y += _smoothedDelta.x * _configs.xSpeed * Time.deltaTime;
             _eulerAngles.x -= _smoothedDelta.y * _configs.ySpeed * Time.deltaTime;
             _eulerAngles.x = MathUtils.ClampAngle(_eulerAngles.x, _configs.yMinLimit, _configs.yMaxLimit);
@@ -44,36 +44,61 @@ namespace Cameras.Movement
             var heightDelta = _input.HeightDelta;
             if (Mathf.Abs(heightDelta) > 0.0001f)
             {
-                _currentHeightOffset += heightDelta;
-                _currentHeightOffset = Mathf.Clamp(_currentHeightOffset, MinHeight, MaxHeight);
+                DesiredHeightOffset += heightDelta;
+                DesiredHeightOffset = Mathf.Clamp(DesiredHeightOffset, _configs.minHeight, _configs.maxHeight);
             }
+
+            _currentHeightOffset = Mathf.Lerp(
+                _currentHeightOffset,
+                DesiredHeightOffset,
+                Time.deltaTime * _configs.heightSmooth
+            );
+            var offset = _configs.targetOffset;
+            offset.y += _currentHeightOffset;
             
             var zoomDelta = _input.ZoomDelta;
             if (Mathf.Abs(zoomDelta) > 0.0001f)
             {
                 var maxDistance = _configs.maxDistance;
                 var minDistance = _configs.minDistance;
-                _desiredDistance -= zoomDelta * (maxDistance - minDistance) * _configs.zoomSpeed;
-                _desiredDistance = Mathf.Clamp(_desiredDistance, minDistance, maxDistance);
+
+                DesiredZoomOffset -= zoomDelta * (maxDistance - minDistance) * _configs.zoomSpeed;
+                DesiredZoomOffset = Mathf.Clamp(
+                    DesiredZoomOffset,
+                    minDistance - _configs.distance,
+                    maxDistance - _configs.distance
+                );
             }
 
-            _currentDistance = Mathf.Lerp(_currentDistance, _desiredDistance, Time.deltaTime * _configs.zoomDampening);
+            _currentZoomOffset = Mathf.Lerp(
+                _currentZoomOffset, DesiredZoomOffset, 
+                Time.deltaTime * _configs.zoomSmooth
+            );
+            _currentDistance = _configs.distance + _currentZoomOffset;
 
             var rotation = Quaternion.Euler(_eulerAngles.x, _eulerAngles.y, 0);
             var negativeDistance = new Vector3(0, 0, -_currentDistance);
-            
-            var offset = _configs.targetOffset;
-            offset.y += _currentHeightOffset;
-            
             var position = rotation * negativeDistance + offset;
-
+            
+            if (Vector3.Distance(position, _previousCalculatePosition) > Mathf.Epsilon)
+                CameraMoved?.Invoke();
+            _previousCalculatePosition = position;
+            
             return new CameraMovementResult(position, rotation);
+        }
+
+        public void ResetCamera()
+        {
+            DesiredZoomOffset = 0f;
+            DesiredHeightOffset = 0f;
         }
 
         private void InitializeParameters()
         {
             _eulerAngles = _configs.startRotation.eulerAngles;
-            _desiredDistance = _currentDistance = _configs.distance;
+            _currentDistance = _configs.distance;
+            _currentZoomOffset = DesiredZoomOffset = 0f;
+            _currentHeightOffset = DesiredHeightOffset = 0f;
         }
     }
 }
