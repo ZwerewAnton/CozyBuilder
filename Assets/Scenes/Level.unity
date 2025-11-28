@@ -2377,7 +2377,7 @@ MonoBehaviour:
   detailsScrollController: {fileID: 1363331480}
   backButton: {fileID: 1784373556}
   homeButton: {fileID: 11044223}
-  cameraResetButton: {fileID: 0}
+  cameraResetButton: {fileID: 77094078}
 --- !u!1 &1784373550
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,8 +29,8 @@ MonoBehaviour:
     maxHeight: 5
     zoomSpeed: 1
     mouseSmooth: 10
-    heightSmooth: 10
-    zoomSmooth: 5
+    heightSmooth: 15
+    zoomSmooth: 10
   gameplay:
     magnetDistance: 1
     ghostDistance: 20

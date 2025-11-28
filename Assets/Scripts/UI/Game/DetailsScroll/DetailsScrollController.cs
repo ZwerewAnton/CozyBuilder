@@ -35,10 +35,8 @@ namespace UI.Game.DetailsScroll
                 return;
             
             if (eventData.pointerId >= 0)
-            {
                 if (eventData.button != PointerEventData.InputButton.Left)
                     return;
-            }
             
             base.OnBeginDrag(eventData);
 
@@ -71,13 +69,9 @@ namespace UI.Game.DetailsScroll
             var delta = eventData.position - _startDragPos;
 
             if (Mathf.Abs(delta.x) > _scaledDragThreshold && Mathf.Abs(delta.x) > Mathf.Abs(delta.y))
-            {
                 StartDragOut(eventData);
-            }
             else
-            {
                 base.OnDrag(eventData);
-            }
         }
 
         public override void OnEndDrag(PointerEventData eventData)
@@ -115,6 +109,7 @@ namespace UI.Game.DetailsScroll
             DragOutStarted?.Invoke(new DragOutInfo(Models[_draggedItemIndex].ID, pointerId));
             
             ExecuteEvents.Execute(scrollRect.gameObject, eventData, ExecuteEvents.endDragHandler);
+            scrollRect.velocity = Vector2.zero;
         }
 
         private DetailItemView GetItemUnderPointer(PointerEventData eventData)
