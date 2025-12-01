@@ -10,8 +10,9 @@ namespace Infrastructure.SceneManagement
     public class SceneSwitcher : IDisposable
     {
         private CancellationTokenSource _cts;
-        private ILoadingScreen _loadingScreen;
+        private ILoadingView _loadingView;
         private SceneLoader _sceneLoader;
+        private SceneLocator _sceneLocator;
         private bool _isTransitioning;
         
         public event Action<float> SceneLoadingUpdated
@@ -21,10 +22,11 @@ namespace Infrastructure.SceneManagement
         }
         
         [Inject]
-        private void Construct(ILoadingScreen loadingScreen, SceneLoader sceneLoader)
+        private void Construct(ILoadingView loadingScreen, SceneLoader sceneLoader, SceneLocator sceneLocator)
         {
-            _loadingScreen = loadingScreen;
+            _loadingView = loadingScreen;
             _sceneLoader = sceneLoader;
+            _sceneLocator = sceneLocator;
         }
 
         public async Task LoadSceneAsync(SceneType sceneType)
@@ -37,13 +39,14 @@ namespace Infrastructure.SceneManagement
 
             try
             {
-                await _loadingScreen.ShowAsync();
+                await _loadingView.ShowAsync();
                 await _sceneLoader.LoadSceneAsync(sceneType, _cts.Token);
-                await _loadingScreen.HideAsync();
+                await _loadingView.HideAsync();
             }
             finally
             {
                 _isTransitioning = false;
+                _sceneLocator.UpdateCurrentScene();
             }
         }
 

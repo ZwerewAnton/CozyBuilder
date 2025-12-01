@@ -1,44 +1,46 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Infrastructure.SceneManagement;
-using UnityEngine;
+using UI.Loading;
 using Zenject;
 
 namespace UI.Mediators
 {
-    public class LoadingScreenMediator : MonoBehaviour, ILoadingScreen
+    public class LoadingScreenMediator : ILoadingView, IInitializable, IDisposable
     {
-        [SerializeField] private LoadingScreen loadingScreen;
+        private LoadingScreenProvider _loadingScreenProvider;
         private SceneSwitcher _sceneSwitcher;
         
         [Inject]
-        private void Construct(SceneSwitcher sceneSwitcher)
+        private void Construct(SceneSwitcher sceneSwitcher, LoadingScreenProvider loadingScreenProvider)
         {
             _sceneSwitcher = sceneSwitcher;
-        }
-        
-        private void Start()
-        {
-            _sceneSwitcher.SceneLoadingUpdated += loadingScreen.SetProgress;
+            _loadingScreenProvider = loadingScreenProvider;
         }
 
-        private void OnDestroy()
+        public void Initialize()
         {
-            _sceneSwitcher.SceneLoadingUpdated -= loadingScreen.SetProgress;
+            _sceneSwitcher.SceneLoadingUpdated += _loadingScreenProvider.GetDefault().SetProgress;
+        }
+
+        public void Dispose()
+        {
+            _sceneSwitcher.SceneLoadingUpdated -= _loadingScreenProvider.GetDefault().SetProgress;
         }
         
         public void ShowLoadingScreenImmediately()
         {
-            loadingScreen.ShowLoadingScreenImmediately();
+            _loadingScreenProvider.Get().ShowLoadingScreenImmediately();
         }
 
         public async Task ShowAsync()
         {
-            await loadingScreen.ShowLoadingScreenAsync();
+            await _loadingScreenProvider.Get().ShowLoadingScreenAsync();
         }
 
         public async Task HideAsync()
         {
-            await loadingScreen.HideLoadingScreenAsync();
+            await _loadingScreenProvider.Get().HideLoadingScreenAsync();
         }
     }
 }

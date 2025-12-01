@@ -6,6 +6,7 @@ using Level;
 using Music;
 using SaveSystem;
 using Settings;
+using UI.Loading;
 using UI.Mediators;
 using UnityEngine;
 using Zenject;
@@ -17,11 +18,12 @@ namespace Infrastructure.Installers
         [SerializeField] private ApplicationConfigs applicationConfigs;
         [SerializeField] private MusicPlayer musicPlayer;
         [SerializeField] private SfxPlayer sfxPlayer;
-        [SerializeField] private LoadingScreenMediator loadingScreenMediator;
+        [SerializeField] private LoadingScreenProvider loadingScreenProvider;
         [SerializeField] private LevelsRepository levelsRepository;
         
         public override void InstallBindings()
         {
+            BindSceneLocator();
             BindApplicationConfigs();
             BindSceneLoader();
             BindSceneSwitcher();
@@ -29,10 +31,21 @@ namespace Infrastructure.Installers
             BindSettingsService();
             BindMusicPlayer();
             BindSfxPlayer();
-            BindLoadingScreenMediator();
             BindGameState();
             BindInputHandler();
             BindLevelsRepository();
+            BindLoadingScreenMediator();
+            BindLoadingScreenProvider();
+        }
+
+        private void BindSceneLocator()
+        {
+            Container.Bind<SceneLocator>().AsSingle().NonLazy();
+        }
+
+        private void BindLoadingScreenProvider()
+        {
+            Container.Bind<LoadingScreenProvider>().FromComponentInNewPrefab(loadingScreenProvider).AsSingle().NonLazy();
         }
 
         private void BindApplicationConfigs()
@@ -72,7 +85,7 @@ namespace Infrastructure.Installers
 
         private void BindLoadingScreenMediator()
         {
-            Container.BindInterfacesAndSelfTo<LoadingScreenMediator>().FromComponentInNewPrefab(loadingScreenMediator).AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<LoadingScreenMediator>().AsSingle().NonLazy();
         }
 
         private void BindGameState()

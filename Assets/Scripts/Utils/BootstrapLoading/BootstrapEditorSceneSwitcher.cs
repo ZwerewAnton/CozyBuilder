@@ -4,7 +4,6 @@ using Infrastructure;
 using Infrastructure.SceneManagement;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace Utils.BootstrapLoading

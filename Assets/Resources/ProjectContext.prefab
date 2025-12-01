@@ -81,6 +81,8 @@ MonoBehaviour:
     type: 3}
   sfxPlayer: {fileID: 547014609096341139, guid: 315a696df74ae564e8c403605fb4e0ef,
     type: 3}
-  loadingScreenMediator: {fileID: 92557078025848341, guid: 07bd0b8edf5647640a72288a733d62d6,
+  loadingScreenProvider: {fileID: 89268644091906830, guid: 07bd0b8edf5647640a72288a733d62d6,
     type: 3}
   levelsRepository: {fileID: 11400000, guid: a3b0e3ee1d811bf47adc3cd60e5646fa, type: 2}
+  defaultLoadingScreen: {fileID: 0}
+  bootstrapLoadingScreen: {fileID: 0}

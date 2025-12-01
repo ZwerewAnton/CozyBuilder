@@ -2,6 +2,7 @@
 {
     public enum SceneType
     {
+        Boot,
         MainMenu,
         Level
     }

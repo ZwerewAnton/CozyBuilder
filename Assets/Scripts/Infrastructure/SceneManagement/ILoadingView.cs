@@ -2,7 +2,7 @@
 
 namespace Infrastructure.SceneManagement
 {
-    public interface ILoadingScreen
+    public interface ILoadingView
     {
         Task ShowAsync();
         Task HideAsync();

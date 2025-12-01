@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections;
 using System.Threading.Tasks;
 using Configs;
 using DG.Tweening;
 using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
-namespace UI
+namespace UI.Loading
 {
-    public class LoadingScreen : MonoBehaviour
+    public abstract class LoadingScreenBase : MonoBehaviour
     {
-        [SerializeField] private GameObject loadingScreen;
-        [SerializeField] private Slider progressBar;
-        [SerializeField] private CanvasGroup canvasGroup;
-
+        [SerializeField] protected CanvasGroup canvasGroup;
+    
         private ApplicationConfigs _configs;
         private bool _isOn;
 
@@ -23,54 +19,57 @@ namespace UI
         {
             _configs = configs;
         }
-        
-        private void Awake()
+
+        protected void Awake()
+        {
+            Initialize();
+        }
+
+        protected virtual void Initialize()
         {
             SetProgress(0f);
         }
-        
-        public void SetProgress(float value)
-        {
-            progressBar.value = value;
-        }
-        
+
+        public virtual void SetProgress(float value) { }
+
         public void ShowLoadingScreenImmediately()
         {
-            if (_isOn)
+            if (_isOn) 
                 return;
-            
+
             gameObject.SetActive(true);
             SetProgress(0f);
             canvasGroup.alpha = 1f;
             _isOn = true;
         }
-        
-        public async Task ShowLoadingScreenAsync()
+
+        public virtual async Task ShowLoadingScreenAsync()
         {
-            if (_isOn)
+            if (_isOn) 
                 return;
-            
+
             gameObject.SetActive(true);
             SetProgress(0f);
             await FadeLoadingScreen(0f, 1f, () => _isOn = true)
                 .AsyncWaitForCompletion();
         }
-        
-        public async Task HideLoadingScreenAsync()
+
+        public virtual async Task HideLoadingScreenAsync()
         {
-            await FadeLoadingScreen(1f, 0f, () =>
-                {
-                    gameObject.SetActive(false);
-                    _isOn = false;
-                })
+            await FadeLoadingScreen(1f, 0f, HideLoadingScreen)
                 .AsyncWaitForCompletion();
         }
-        
-        private Tween FadeLoadingScreen(float startValue, float targetValue, Action completed = null)
+
+        protected virtual void HideLoadingScreen()
+        {
+            gameObject.SetActive(false);
+            _isOn = false;
+        }
+
+        protected virtual Tween FadeLoadingScreen(float startValue, float targetValue, Action completed = null)
         {
             canvasGroup.alpha = startValue;
             var duration = _configs.loadingScreenFadeTime;
-            
             return canvasGroup.DOFade(targetValue, duration)
                 .SetEase(Ease.Linear)
                 .OnComplete(() => completed?.Invoke());
