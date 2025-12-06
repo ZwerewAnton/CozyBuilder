@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Cameras.Movement;
 using Gameplay;
+using Music;
 using UI.Common;
 using UI.Game.DetailsScroll;
 using UI.MainMenu;
@@ -17,6 +18,7 @@ namespace UI.Mediators
         [SerializeField] private ActionButton homeButton;
         [SerializeField] private ResetCameraButton cameraResetButton;
 
+        private SfxPlayer _sfxPlayer;
         private LevelMenu _levelMenu;
         private LevelService _levelService;
         private OrbitCameraMovement _orbitCameraMovement;
@@ -25,9 +27,10 @@ namespace UI.Mediators
         private void Construct(
             LevelMenu levelMenu, 
             LevelService levelService, 
-            OrbitCameraMovement orbitCameraMovement
-        )
+            OrbitCameraMovement orbitCameraMovement,
+            SfxPlayer sfxPlayer)
         {
+            _sfxPlayer = sfxPlayer;
             _levelMenu = levelMenu;
             _levelService = levelService;
             _orbitCameraMovement = orbitCameraMovement;
@@ -82,19 +85,27 @@ namespace UI.Mediators
             detailsScrollController.gameObject.SetActive(false);
         }
 
+        public void ResetCamera()
+        {
+            _orbitCameraMovement.ResetCamera();
+        }
+
         private void OnHomeButton()
         {
+            _sfxPlayer.PlayDefaultButtonClip();
             BackToMainMenu();
         }
 
         private void OnBackButton()
         {
+            _sfxPlayer.PlayDefaultButtonClip();
             BackToMainMenu();
         }
 
         private void OnResetCameraButton()
         {
-            _orbitCameraMovement.ResetCamera();
+            _sfxPlayer.PlayDefaultButtonClip();
+            ResetCamera();
         }
 
         private void OnCameraMoved()

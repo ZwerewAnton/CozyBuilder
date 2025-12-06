@@ -41,6 +41,7 @@ namespace UI
         {
             _levelMediator.ShowHomeButton();
             _levelMediator.HideDetailsScroll();
+            _levelMediator.ResetCamera();
 
             if (_gameState.IsLevelCompletedOnStart) 
                 return;

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Gameplay.Instances;
 
 namespace _1_LEVEL_REWORK.New.Instances
 {

@@ -39,7 +39,7 @@ namespace Tests.PlayMode
         
         
         [UnityTest]
-        public IEnumerator WhenStopMove_AndDetailPositionIsOnPoint_ThenInvokePositivePlacementEnded1()
+        public IEnumerator WhenStopMove_AndDetailPositionIsOnPoint_ThenInvokePositivePlacementEnded()
         {
             // Arrange.
             var result = new PlacementResult
@@ -66,7 +66,7 @@ namespace Tests.PlayMode
         }
         
         [UnityTest]
-        public IEnumerator WhenStopMove_AndDetailPositionIsNotOnPoint_ThenInvokeNegativePlacementEnded1()
+        public IEnumerator WhenStopMove_AndDetailPositionIsNotOnPoint_ThenInvokeNegativePlacementEnded()
         {
             // Arrange.
             var result = new PlacementResult

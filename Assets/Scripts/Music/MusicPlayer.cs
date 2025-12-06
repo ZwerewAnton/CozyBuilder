@@ -46,6 +46,7 @@ namespace Music
         private void Start()
         {
             Volume = _settingsService.IsMusicOn ? _configs.audioOnValue : _configs.audioOffValue;
+            _audioSource.loop = true;
             _audioSource.clip = menuMusicClip;
         }
 

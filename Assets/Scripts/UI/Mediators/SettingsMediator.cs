@@ -78,8 +78,8 @@ namespace UI.Mediators
         private void ToggleMusic() => _settingsService.ToggleMusic();
         private void ToggleSound() => _settingsService.ToggleSound();
 
-        private void PlaySettingButtonClip() => _sfxPlayer.PlaySettingButtonClip();
+        private void PlaySettingButtonClip() => _sfxPlayer.PlayDefaultButtonClip();
         
-        private void PlayMenuButtonClip() => _sfxPlayer.PlayMenuButtonClip();
+        private void PlayMenuButtonClip() => _sfxPlayer.PlayDropdownMenuButtonClip();
     }
 }

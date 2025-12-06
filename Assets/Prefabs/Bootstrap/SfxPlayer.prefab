@@ -145,6 +145,8 @@ MonoBehaviour:
   audioMixer: {fileID: 24100000, guid: badcbf26990866e4591fe00e68c6b148, type: 2}
   tapToPlayClip: {fileID: 8300000, guid: 9d8f8017b07638c4b9a8d9cc447669d7, type: 3}
   playClip: {fileID: 8300000, guid: 97f2d77ce45bcab47b00830e01de6b58, type: 3}
-  menuButtonClip: {fileID: 8300000, guid: 69ed5ba96fa59664da967a0e4731e1de, type: 3}
-  settingButtonClip: {fileID: 8300000, guid: c08bf0f6811fb6847b58852708fc2121, type: 3}
+  dropdownMenuButtonClip: {fileID: 8300000, guid: 69ed5ba96fa59664da967a0e4731e1de,
+    type: 3}
+  defaultButtonClip: {fileID: 8300000, guid: c08bf0f6811fb6847b58852708fc2121, type: 3}
+  installDetailClip: {fileID: 8300000, guid: 389cc0f16c204a848b57905ed905a973, type: 3}
   completeLevelClip: {fileID: 8300000, guid: 20e50128412301546863c43fe4f7e527, type: 3}

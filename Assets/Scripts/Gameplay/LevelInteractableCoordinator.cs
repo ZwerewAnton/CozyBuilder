@@ -7,6 +7,7 @@ using Gameplay.Movement;
 using Gameplay.Movement.Input;
 using Gameplay.Spawn;
 using Input.TouchRegistry;
+using Music;
 using UI.Game.DetailsScroll;
 using UI.Mediators;
 using Zenject;
@@ -22,6 +23,7 @@ namespace Gameplay
         private readonly IDetailViewMoverInputProvider _moverInputProvider;
         private readonly ITouchPointerLock _pointerLock;
         private readonly GameState _gameState;
+        private readonly SfxPlayer _sfxPlayer;
         private DragOutInfo _movingDetailInfo;
         
         [Inject]
@@ -32,7 +34,8 @@ namespace Gameplay
             IDetailViewMoverInputProvider moverInputProvider,
             ITouchPointerLock pointerLock,
             DetailViewMover detailViewMover,
-            GameState gameState)
+            GameState gameState,
+            SfxPlayer sfxPlayer)
         {
             _levelService = levelService;
             _levelService.LevelInitialized += OnLevelServiceInitialize;
@@ -43,6 +46,7 @@ namespace Gameplay
             _pointerLock = pointerLock;
             _detailViewMover.PlacementEnded += OnDetailPlacementEnded;
             _gameState = gameState;
+            _sfxPlayer = sfxPlayer;
         }
 
         private void OnLevelServiceInitialize()
@@ -80,6 +84,7 @@ namespace Gameplay
             _levelMediator.UpdateScrollController(CreateDetailModelList(details));
             SpawnDetailPrefab(details[detailId], placementResult.PointIndex);
             _pointerLock.UnlockTouch(_movingDetailInfo.PointerId);
+            _sfxPlayer.PlayInstallDetailClip();
         }
 
         private List<DetailItemModel> CreateDetailModelList(Dictionary<string,DetailInstanceDto> details)
@@ -95,7 +100,7 @@ namespace Gameplay
                     ID = id,
                     Icon = detail.Icon,
                     Count = detail.CurrentCount,
-                    IsInactive = !detail.Points.Any(point => point.IsAvailable)
+                    IsInactive = !detail.Points.Any(point => point.IsAvailable && !point.IsInstalled)
                 });
             }
 

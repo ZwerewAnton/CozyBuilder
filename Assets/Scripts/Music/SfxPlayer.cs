@@ -2,6 +2,7 @@
 using Settings;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Music
@@ -12,8 +13,9 @@ namespace Music
         [SerializeField] private AudioMixer audioMixer;
         [SerializeField] private AudioClip tapToPlayClip;
         [SerializeField] private AudioClip playClip;
-        [SerializeField] private AudioClip menuButtonClip;
-        [SerializeField] private AudioClip settingButtonClip;
+        [SerializeField] private AudioClip dropdownMenuButtonClip;
+        [SerializeField] private AudioClip defaultButtonClip;
+        [SerializeField] private AudioClip installDetailClip;
         [SerializeField] private AudioClip completeLevelClip;
         
         private SettingsService _settingsService;
@@ -53,19 +55,24 @@ namespace Music
             _audioSource.PlayOneShot(playClip);
         }
         
-        public void PlayMenuButtonClip()
+        public void PlayDropdownMenuButtonClip()
         {
-            _audioSource.PlayOneShot(menuButtonClip);
+            _audioSource.PlayOneShot(dropdownMenuButtonClip);
         }
         
-        public void PlaySettingButtonClip()
+        public void PlayDefaultButtonClip()
         {
-            _audioSource.PlayOneShot(settingButtonClip);
+            _audioSource.PlayOneShot(defaultButtonClip);
         }
         
         public void PlayCompleteLevelClip()
         {
             _audioSource.PlayOneShot(completeLevelClip);
+        }
+
+        public void PlayInstallDetailClip()
+        {
+            _audioSource.PlayOneShot(installDetailClip);
         }
 
         private void ApplySoundState(bool isOn)

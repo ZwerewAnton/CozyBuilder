@@ -18,7 +18,7 @@ namespace UI.Mediators
         [SerializeField] private LevelsScrollController scrollController;
         [SerializeField] private ActionButton playButton;
         [SerializeField] private ActionButton deleteButton;
-        [SerializeField] private CancelAcceptDialog deleteDialog;
+        [SerializeField] private CancelAcceptCloseDialog deleteDialog;
         [SerializeField] private SettingsMediator settingsMediator;
 
         private SfxPlayer _sfxPlayer;
@@ -87,12 +87,14 @@ namespace UI.Mediators
         {
             if (result == DialogResult.Accept)
                 mainMenu.DeleteSaveData();
+            _sfxPlayer.PlayDefaultButtonClip();
         }
 
         private void ShowDeleteDialog()
         {
             settingsMediator.ToggleMenu();
             deleteDialog.Show();
+            _sfxPlayer.PlayDropdownMenuButtonClip();
         }
     }
 }

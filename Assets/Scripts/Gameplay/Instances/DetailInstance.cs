@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using _1_LEVEL_REWORK.New.Data;
+using Gameplay.Instances;
 using UnityEngine;
 
 namespace _1_LEVEL_REWORK.New.Instances

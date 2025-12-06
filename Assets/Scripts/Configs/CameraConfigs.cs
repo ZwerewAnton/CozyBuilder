@@ -21,7 +21,7 @@ namespace Configs
         [Header("Offset Settings")]
         public Vector3 targetOffset = Vector3.zero;
         public float minHeight = -5f;
-        public float maxHeight = 5f;
+        public float maxHeight = 10f;
         
         [Header("Zoom Settings")]
         public float zoomSpeed = 1f;

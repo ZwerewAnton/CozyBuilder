@@ -1,7 +1,7 @@
 ﻿using _1_LEVEL_REWORK.New.Data;
 using UnityEngine;
 
-namespace _1_LEVEL_REWORK.New.Instances
+namespace Gameplay.Instances
 {
     public class PointInstance
     {
