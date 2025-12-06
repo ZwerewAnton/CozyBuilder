@@ -11,41 +11,10 @@ namespace _1_LEVEL_REWORK.New.Instances
         private readonly DependencyGraph _dependencyGraph = new();
         
         public IReadOnlyDictionary<string, DetailInstance> Details => _detailInstances;
-        public DependencyGraph DependencyGraph => _dependencyGraph;
 
-        public void CreateDetailsInstances(DetailData ground, List<DetailData> details, List<DetailSaveData> detailsSaveData)
+        public void CreateLevelState(DetailData ground, List<DetailData> details, List<DetailSaveData> detailsSaveData)
         {
-            var saveDataDict = detailsSaveData.ToDictionary(data => data.id, data => data);
-
-            var groundInstance = new DetailInstance(ground, true);
-            groundInstance.Points.Add(ground.points.Count < 1
-                ? new PointInstance(new PointData(), true)
-                : new PointInstance(ground.points[0], true));
-            groundInstance.RemainingCount = 0;
-            _detailInstances[ground.Id] = groundInstance;
-            
-            foreach (var detailData in details)
-            {
-                var instance = new DetailInstance(detailData);
-                _detailInstances[detailData.Id] = instance;
-
-                if (saveDataDict.TryGetValue(detailData.Id, out var saveData))
-                {
-                    instance.RemainingCount = saveData.currentCount;
-                }
-
-                for (var i = 0; i < detailData.points.Count; i++)
-                {
-                    var isInstalled = false;
-                    if (saveData != null && i < saveData.points.Count)
-                    {
-                        isInstalled = saveData.points[i].isInstalled;
-                    }
-                    var pointData = detailData.points[i];
-                    instance.Points.Add(new PointInstance(pointData, isInstalled));
-                }
-            }
-
+            CreateDetailsInstances(ground, details, detailsSaveData);
             CreateDependencyGraph(details);
         }
 
@@ -82,6 +51,40 @@ namespace _1_LEVEL_REWORK.New.Instances
             return _dependencyGraph.IsReady(point);
         }
 
+        private void CreateDetailsInstances(DetailData ground, List<DetailData> details, List<DetailSaveData> detailsSaveData)
+        {
+            var saveDataDict = detailsSaveData.ToDictionary(data => data.id, data => data);
+
+            var groundInstance = new DetailInstance(ground, true);
+            groundInstance.Points.Add(ground.points.Count < 1
+                ? new PointInstance(new PointData(), true)
+                : new PointInstance(ground.points[0], true));
+            groundInstance.RemainingCount = 0;
+            _detailInstances[ground.Id] = groundInstance;
+            
+            foreach (var detailData in details)
+            {
+                var instance = new DetailInstance(detailData);
+                _detailInstances[detailData.Id] = instance;
+
+                if (saveDataDict.TryGetValue(detailData.Id, out var saveData))
+                {
+                    instance.RemainingCount = saveData.currentCount;
+                }
+
+                for (var i = 0; i < detailData.points.Count; i++)
+                {
+                    var isInstalled = false;
+                    if (saveData != null && i < saveData.points.Count)
+                    {
+                        isInstalled = saveData.points[i].isInstalled;
+                    }
+                    var pointData = detailData.points[i];
+                    instance.Points.Add(new PointInstance(pointData, isInstalled));
+                }
+            }
+        }
+        
         private void CreateDependencyGraph(List<DetailData> details)
         {
             foreach (var detailData in details)

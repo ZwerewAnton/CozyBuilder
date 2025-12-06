@@ -19,16 +19,16 @@ namespace UI.MainMenu
         private MainMenuMediator _mainMenuMediator;
         private GameState _gameState;
         private MusicPlayer _musicPlayer;
-        private LevelsRepository _repository;
-        private SaveLoadService _saveLoadService;
+        private ILevelsRepository _repository;
+        private ISaveLoadService _saveLoadService;
 
         [Inject]
         private void Construct(
             MainMenuMediator mainMenuMediator, 
             GameState gameState,
             MusicPlayer musicPlayer,
-            LevelsRepository repository,
-            SaveLoadService saveLoadService,
+            ILevelsRepository repository,
+            ISaveLoadService saveLoadService,
             SceneSwitcher sceneSwitcher)
         {
             _mainMenuMediator = mainMenuMediator;

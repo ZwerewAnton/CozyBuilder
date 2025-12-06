@@ -11,11 +11,11 @@ namespace Gameplay
 {
     public class LevelSaverMono : MonoBehaviour
     {
-        private SaveLoadService _saveLoadService;
+        private ISaveLoadService _saveLoadService;
         private LevelService _levelService;
 
         [Inject]
-        private void Construct(SaveLoadService saveLoadService, LevelService levelService)
+        private void Construct(ISaveLoadService saveLoadService, LevelService levelService)
         {
             _saveLoadService = saveLoadService;
             _levelService = levelService;

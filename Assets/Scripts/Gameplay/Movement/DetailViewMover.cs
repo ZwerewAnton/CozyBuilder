@@ -31,7 +31,9 @@ namespace Gameplay.Movement
         public event Action<PlacementResult> PlacementEnded;
 
         [Inject]
-        private void Construct(ApplicationConfigs config, IDetailViewMoverInputProvider moverInputProvider)
+        private void Construct(
+            ApplicationConfigs config, 
+            IDetailViewMoverInputProvider moverInputProvider)
         {
             _magnetDistance = config.gameplay.magnetDistance;
             _ghostDistance = config.gameplay.ghostDistance;

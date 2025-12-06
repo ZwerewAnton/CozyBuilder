@@ -5,16 +5,11 @@ using UnityEngine;
 namespace Level
 {
     [CreateAssetMenu(menuName = "Level/LevelsRepository")]
-    public class LevelsRepository : ScriptableObject
+    public class LevelsRepository : ScriptableObject, ILevelsRepository
     {
         [SerializeField] private List<LevelData> levels;
 
         public List<LevelData> Levels => levels;
-
-        public LevelData GetLevel(int index)
-        {
-            return levels[index];
-        }
         
         public bool TryGetLevel(string levelName, out LevelData level)
         {

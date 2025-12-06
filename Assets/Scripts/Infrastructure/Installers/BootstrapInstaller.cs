@@ -65,7 +65,7 @@ namespace Infrastructure.Installers
 
         private void BindSaveLoadService()
         {
-            Container.Bind<SaveLoadService>().AsSingle().NonLazy();
+            Container.Bind<ISaveLoadService>().To<SaveLoadService>().AsSingle().NonLazy();
         }
 
         private void BindSettingsService()
@@ -100,7 +100,7 @@ namespace Infrastructure.Installers
         
         private void BindLevelsRepository()
         {
-            Container.Bind<LevelsRepository>().FromInstance(levelsRepository).AsSingle().NonLazy();
+            Container.Bind<ILevelsRepository>().FromInstance(levelsRepository).AsSingle().NonLazy();
         }
     }
 }

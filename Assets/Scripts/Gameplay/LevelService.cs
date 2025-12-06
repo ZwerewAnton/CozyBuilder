@@ -20,20 +20,20 @@ namespace Gameplay
         public event Action LevelUpdated;
         public event Action LevelCompleted;
         
+        private readonly ISaveLoadService _saveLoadService;
+        private readonly ILevelsRepository _repository;
         private readonly LevelState _levelState;
-        private readonly SaveLoadService _saveLoadService;
         private readonly GameState _gameState;
-        private readonly LevelsRepository _repository;
         private LevelData _levelData;
         private CancellationTokenSource _cts;
         private Dictionary<string, DetailInstanceDto> _dtos = new();
         
         [Inject]
         private LevelService(
+            ILevelsRepository repository,
+            ISaveLoadService saveLoadService,
             GameState gameState,
-            LevelsRepository repository,
-            LevelState levelState,
-            SaveLoadService saveLoadService)
+            LevelState levelState)
         {
             _levelState = levelState;
             _saveLoadService = saveLoadService;
@@ -103,7 +103,7 @@ namespace Gameplay
 
         private void InitializeLevelState(LevelSaveData saveData)
         {
-            _levelState.CreateDetailsInstances(_levelData.Ground, _levelData.Details, saveData.details);
+            _levelState.CreateLevelState(_levelData.Ground, _levelData.Details, saveData.details);
         }
 
         private void FillDetailsDtoList()

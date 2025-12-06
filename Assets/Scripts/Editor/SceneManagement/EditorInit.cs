@@ -5,6 +5,7 @@ using Utils.BootstrapLoading;
 
 namespace Editor.SceneManagement
 {
+#if !UNITY_INCLUDE_TESTS
     [InitializeOnLoad]
     public class EditorInit
     {
@@ -35,4 +36,5 @@ namespace Editor.SceneManagement
             }
         }
     }
+#endif
 }

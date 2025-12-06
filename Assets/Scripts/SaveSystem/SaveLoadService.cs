@@ -12,7 +12,7 @@ using Utils.Paths;
 
 namespace SaveSystem
 {
-    public class SaveLoadService
+    public class SaveLoadService : ISaveLoadService
     {
         private ProgressSaveData _progressData = new();
 

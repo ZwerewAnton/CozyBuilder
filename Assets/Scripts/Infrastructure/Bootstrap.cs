@@ -12,7 +12,7 @@ namespace Infrastructure
 {
     public class Bootstrap : MonoBehaviour
     {
-        private SaveLoadService _saveSystemService;
+        private ISaveLoadService _saveSystemService;
         private LoadingScreenMediator _loadingScreenMediator;
         private SceneSwitcher _sceneSwitcher;
         private CancellationTokenSource _cts;
@@ -20,7 +20,7 @@ namespace Infrastructure
         
         [Inject]
         private void Construct(
-            SaveLoadService saveSystemService, 
+            ISaveLoadService saveSystemService, 
             ApplicationConfigs configs, 
             LoadingScreenMediator loadingScreenMediator,
             SceneSwitcher sceneSwitcher)
