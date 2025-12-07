@@ -25,12 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3143800312817404526}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.2, y: -3.25, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6730382212344932365}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &9061248602353066015
 MeshFilter:
@@ -51,6 +52,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -90,9 +92,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6730382212344932365}
-  - component: {fileID: 7645214826413089458}
+  - component: {fileID: 821016338206456503}
   m_Layer: 0
-  m_Name: 52_fence
+  m_Name: 52_Fence
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,15 +107,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6209564872512713399}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.2, y: 3.25, z: 7}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6131416440061843797}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7645214826413089458
+--- !u!114 &821016338206456503
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,25 +125,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6209564872512713399}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdabf2c9950e2414ca76ece2b6dd22b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 459f4c0f0c7f4f8ba22bcfbc2a0b7690, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showPointList: 01
-  showParentsList: 01
-  count: 1
-  _prefab: {fileID: 6209564872512713399}
-  icon: {fileID: -3703776521661926752, guid: 9fdc3c5388bc3b24dab178caacddb5f0, type: 3}
-  isRoot: 0
-  points:
-  - showParentDetailList: 01
-    point:
-      Position: {x: -3.2, y: 3.25, z: 7}
-      Rotation: {x: -0, y: -0, z: -0}
-    parentList:
-    - showParentPointList: 01
-      checkToogleList: 01
-      parentDetail: {fileID: 8349918186436645255, guid: b7295585704e5e04e917c2083c9d8412,
-        type: 3}
-      parentPointList:
-      - Position: {x: 3.65, y: 2.2, z: -0.7}
-        Rotation: {x: -0, y: -0, z: -0}

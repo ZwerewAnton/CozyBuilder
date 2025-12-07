@@ -25,12 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2081280159697616791}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.9, y: -11.2, z: 4.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 7648284297799605748}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5369189490787358182
 MeshFilter:
@@ -51,6 +52,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -90,9 +92,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7648284297799605748}
-  - component: {fileID: 6039708755154213508}
+  - component: {fileID: -2030357744180026119}
   m_Layer: 0
-  m_Name: 29_floorFrontDoor
+  m_Name: 29_FloorFrontDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,15 +107,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7021105941361411918}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.9, y: 11.2, z: -4.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7085321345281961132}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6039708755154213508
+--- !u!114 &-2030357744180026119
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,27 +125,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 7021105941361411918}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdabf2c9950e2414ca76ece2b6dd22b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 459f4c0f0c7f4f8ba22bcfbc2a0b7690, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showPointList: 01
-  showParentsList: 01
-  count: 1
-  _prefab: {fileID: 7021105941361411918}
-  icon: {fileID: -2012445712105577159, guid: 516af99be309cdc4a823ec051ad00926, type: 3}
-  isRoot: 0
-  points:
-  - showParentDetailList: 01
-    point:
-      Position: {x: 2.9, y: 11.2, z: -4.5}
-      Rotation: {x: -0, y: -0, z: -0}
-    parentList:
-    - showParentPointList: 00
-      checkToogleList: 01
-      parentDetail: {fileID: 5815623355487776640, guid: 41d6c01baaa1cac4cbdc12af4b4a845d,
-        type: 3}
-      parentPointList:
-      - Position: {x: 0.7, y: 12.4, z: -4.65}
-        Rotation: {x: -0, y: -0, z: -0}
-      - Position: {x: 2.85, y: 11.3, z: -4.7}
-        Rotation: {x: -0, y: -0, z: -0}

@@ -25,12 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 775243259979123084}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.8, y: -9.15, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8936316969490148335}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6675240100075299837
 MeshFilter:
@@ -51,6 +52,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -90,9 +92,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8936316969490148335}
-  - component: {fileID: 7455540029104106448}
+  - component: {fileID: 3461265995050761526}
   m_Layer: 0
-  m_Name: "22_floor\u0421eiling"
+  m_Name: "22_Floor\u0421eiling"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,15 +107,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8597367580454367573}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.8, y: 9.15, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8391359344512096951}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7455540029104106448
+--- !u!114 &3461265995050761526
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,46 +125,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 8597367580454367573}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdabf2c9950e2414ca76ece2b6dd22b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 459f4c0f0c7f4f8ba22bcfbc2a0b7690, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showPointList: 01
-  showParentsList: 01
-  count: 1
-  _prefab: {fileID: 8597367580454367573}
-  icon: {fileID: -7238296009895319381, guid: 84f848f1fc341bf4890d4921c6d4b33f, type: 3}
-  isRoot: 0
-  points:
-  - showParentDetailList: 00000000
-    point:
-      Position: {x: 0.8, y: 9.15, z: -0.1}
-      Rotation: {x: -0, y: -0, z: -0}
-    parentList:
-    - showParentPointList: 01
-      checkToogleList: 01
-      parentDetail: {fileID: 8076848352520528009, guid: cef5f2616deeb6245a6f2fd9aabe8a75,
-        type: 3}
-      parentPointList:
-      - Position: {x: 0.85, y: 5.65, z: -3.35}
-        Rotation: {x: -0, y: -0, z: -0}
-    - showParentPointList: 01
-      checkToogleList: 01
-      parentDetail: {fileID: -7579358993945108425, guid: 20e6afa1f1f037c46b9437c9675fa69a,
-        type: 3}
-      parentPointList:
-      - Position: {x: -2.5, y: 5.65, z: -0.15}
-        Rotation: {x: -0, y: -0, z: -0}
-    - showParentPointList: 01
-      checkToogleList: 01
-      parentDetail: {fileID: -3010759309813145039, guid: 9e666343443ec4f4ba551ea33f21aebc,
-        type: 3}
-      parentPointList:
-      - Position: {x: 4.1, y: 5.65, z: -0.15}
-        Rotation: {x: -0, y: -0, z: -0}
-    - showParentPointList: 01
-      checkToogleList: 01
-      parentDetail: {fileID: -180423541767073102, guid: 27a3121933fe1cb41b8b5ebf9b9f413a,
-        type: 3}
-      parentPointList:
-      - Position: {x: 0.8, y: 5.65, z: 3.4}
-        Rotation: {x: -0, y: -0, z: -0}

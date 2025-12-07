@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1925474286670649485}
-  - component: {fileID: 7278194264269993626}
+  - component: {fileID: -1314585910964537644}
   m_Layer: 0
-  m_Name: 19_crossbar
+  m_Name: 19_Crossbar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,15 +24,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1293509481318531639}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.45, y: 5.35, z: -2.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1353503878492596693}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7278194264269993626
+--- !u!114 &-1314585910964537644
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,112 +42,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1293509481318531639}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdabf2c9950e2414ca76ece2b6dd22b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 459f4c0f0c7f4f8ba22bcfbc2a0b7690, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showPointList: 0000000001010101
-  showParentsList: 0101010101010101
-  count: 8
-  _prefab: {fileID: 1293509481318531639}
-  icon: {fileID: -1979016534494773723, guid: b749c96f93859a54a81eccf4cd8eea59, type: 3}
-  isRoot: 0
-  points:
-  - showParentDetailList: 01
-    point:
-      Position: {x: -7.45, y: 5.35, z: -2.3}
-      Rotation: {x: -0, y: -0, z: -0}
-    parentList:
-    - showParentPointList: 0100
-      checkToogleList: 0100
-      parentDetail: {fileID: 3072343886079151480, guid: 9ea1f226a0e118b4ea984b7a04467f61,
-        type: 3}
-      parentPointList:
-      - Position: {x: -7.5, y: 5.4, z: 0.5}
-        Rotation: {x: -0, y: -0, z: -0}
-  - showParentDetailList: 01
-    point:
-      Position: {x: -7.45, y: 8.25, z: 0.5}
-      Rotation: {x: 90, y: -0, z: -0}
-    parentList:
-    - showParentPointList: 0101
-      checkToogleList: 0100
-      parentDetail: {fileID: 3072343886079151480, guid: 9ea1f226a0e118b4ea984b7a04467f61,
-        type: 3}
-      parentPointList:
-      - Position: {x: -7.5, y: 5.4, z: 0.5}
-        Rotation: {x: -0, y: -0, z: -0}
-  - showParentDetailList: 01
-    point:
-      Position: {x: -7.45, y: 5.35, z: 3.3}
-      Rotation: {x: 180, y: -0, z: -0}
-    parentList:
-    - showParentPointList: 0100
-      checkToogleList: 0100
-      parentDetail: {fileID: 3072343886079151480, guid: 9ea1f226a0e118b4ea984b7a04467f61,
-        type: 3}
-      parentPointList:
-      - Position: {x: -7.5, y: 5.4, z: 0.5}
-        Rotation: {x: -0, y: -0, z: -0}
-  - showParentDetailList: 01
-    point:
-      Position: {x: -7.45, y: 2.55, z: 0.5}
-      Rotation: {x: 270, y: -0, z: -0}
-    parentList:
-    - showParentPointList: 0100
-      checkToogleList: 0100
-      parentDetail: {fileID: 3072343886079151480, guid: 9ea1f226a0e118b4ea984b7a04467f61,
-        type: 3}
-      parentPointList:
-      - Position: {x: -7.5, y: 5.4, z: 0.5}
-        Rotation: {x: -0, y: -0, z: -0}
-  - showParentDetailList: 01
-    point:
-      Position: {x: -5.15, y: 5.4, z: -2.3}
-      Rotation: {x: 0, y: 180, z: 0}
-    parentList:
-    - showParentPointList: 0101
-      checkToogleList: 0001
-      parentDetail: {fileID: 3072343886079151480, guid: 9ea1f226a0e118b4ea984b7a04467f61,
-        type: 3}
-      parentPointList:
-      - Position: {x: -5, y: 5.4, z: 0.5}
-        Rotation: {x: -0, y: -0, z: -0}
-  - showParentDetailList: 01
-    point:
-      Position: {x: -5.15, y: 8.25, z: 0.5}
-      Rotation: {x: 90, y: 180, z: 0}
-    parentList:
-    - showParentPointList: 0101
-      checkToogleList: 0001
-      parentDetail: {fileID: 3072343886079151480, guid: 9ea1f226a0e118b4ea984b7a04467f61,
-        type: 3}
-      parentPointList:
-      - Position: {x: -5, y: 5.4, z: 0.5}
-        Rotation: {x: -0, y: -0, z: -0}
-  - showParentDetailList: 01
-    point:
-      Position: {x: -5.15, y: 5.35, z: 3.3}
-      Rotation: {x: 180, y: 180, z: 0}
-    parentList:
-    - showParentPointList: 0101
-      checkToogleList: 0001
-      parentDetail: {fileID: 3072343886079151480, guid: 9ea1f226a0e118b4ea984b7a04467f61,
-        type: 3}
-      parentPointList:
-      - Position: {x: -5, y: 5.4, z: 0.5}
-        Rotation: {x: -0, y: -0, z: -0}
-  - showParentDetailList: 01
-    point:
-      Position: {x: -5.15, y: 2.55, z: 0.5}
-      Rotation: {x: 270, y: 180, z: 0}
-    parentList:
-    - showParentPointList: 0101
-      checkToogleList: 0001
-      parentDetail: {fileID: 3072343886079151480, guid: 9ea1f226a0e118b4ea984b7a04467f61,
-        type: 3}
-      parentPointList:
-      - Position: {x: -5, y: 5.4, z: 0.5}
-        Rotation: {x: -0, y: -0, z: -0}
 --- !u!1 &7817883800673991406
 GameObject:
   m_ObjectHideFlags: 0
@@ -172,12 +70,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7817883800673991406}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 7.45, y: -5.35, z: 2.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1925474286670649485}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4188263847578570911
 MeshFilter:
@@ -198,6 +97,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1

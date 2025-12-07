@@ -15,8 +15,8 @@ MonoBehaviour:
   id: 54e9e846-c9d6-4a26-887a-a679bc813172
   count: 1
   prefab: {fileID: -2665339034364381634, guid: 2fa9d6f60d6b7e242b39ce7717ead4bf, type: 3}
-  mesh: {fileID: 0}
-  material: {fileID: 0}
+  mesh: {fileID: -2432090755550338912, guid: a29902acdc26c6a4aa981e9099d09fef, type: 3}
+  material: {fileID: 2100000, guid: fd853b32fab9f9d41a1c96049925358e, type: 2}
   icon: {fileID: 1606021983992139322, guid: b6dc4fe1f1860cc4c9e32748b564fed8, type: 3}
   points:
   - position: {x: -3.5, y: 10.5, z: -2}

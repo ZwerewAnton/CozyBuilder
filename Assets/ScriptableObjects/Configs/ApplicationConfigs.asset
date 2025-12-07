@@ -26,7 +26,7 @@ MonoBehaviour:
     yMaxLimit: 80
     targetOffset: {x: 0, y: 5, z: 0}
     minHeight: -5
-    maxHeight: 10
+    maxHeight: 15
     zoomSpeed: 1
     mouseSmooth: 10
     heightSmooth: 15

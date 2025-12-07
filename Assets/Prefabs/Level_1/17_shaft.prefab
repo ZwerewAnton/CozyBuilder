@@ -25,12 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4122133301660780268}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 6.7, y: -5.4, z: -0.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5760905643630240911}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &8022531925265656989
 MeshFilter:
@@ -51,6 +52,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -90,9 +92,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5760905643630240911}
-  - component: {fileID: 3589374700149960009}
+  - component: {fileID: 256680508721896097}
   m_Layer: 0
-  m_Name: 17_shaft
+  m_Name: 17_Shaft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,15 +107,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4951999734583655989}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -6.7, y: 5.4, z: 0.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5152941627099223511}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3589374700149960009
+--- !u!114 &256680508721896097
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,78 +125,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 4951999734583655989}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdabf2c9950e2414ca76ece2b6dd22b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 459f4c0f0c7f4f8ba22bcfbc2a0b7690, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showPointList: 01
-  showParentsList: 01
-  count: 1
-  _prefab: {fileID: 4951999734583655989}
-  icon: {fileID: 4970350164578359935, guid: 855e09b3396e53f4cb3c7788edb19f76, type: 3}
-  isRoot: 0
-  points:
-  - showParentDetailList: 0101
-    point:
-      Position: {x: -6.7, y: 5.4, z: 0.45}
-      Rotation: {x: -0, y: -0, z: -0}
-    parentList:
-    - checkToogleList: 01
-      showParentPointList: 01
-      parentDetail: {fileID: 1438883964882160279, guid: b55245fb808dda24d98b168499b429e5,
-        type: 3}
-      parentPointList:
-      - Position: {x: -9.95, y: 3.35, z: 0.35}
-        Rotation: {x: -0, y: -0, z: -0}
-      - Position: {x: -9.95, y: 3.35, z: 0.35}
-        Rotation: {x: -0, y: -0, z: -0}
-      parentPPCList:
-      - showParentDetailList: 01
-        point:
-          Position: {x: -9.95, y: 3.35, z: 0.35}
-          Rotation: {x: -0, y: -0, z: -0}
-        parentList:
-        - checkToogleList: 01
-          showParentPointList: 01
-          parentDetail: {fileID: -8814403927345269871, guid: 9c257b3cc9aad8941bac37c189f9d19c,
-            type: 3}
-          parentPointList:
-          - Position: {x: 0, y: 0, z: 0}
-            Rotation: {x: 0, y: 0, z: 0}
-          - Position: {x: 0, y: 0, z: 0}
-            Rotation: {x: 0, y: 0, z: 0}
-          parentPPCList:
-          - showParentDetailList: 
-            point:
-              Position: {x: 0, y: 0, z: 0}
-              Rotation: {x: 0, y: 0, z: 0}
-            parentList: []
-    - checkToogleList: 01
-      showParentPointList: 01
-      parentDetail: {fileID: 7758408161884143510, guid: 1b914daa1cf23824e8778a57f3a64708,
-        type: 3}
-      parentPointList:
-      - Position: {x: -3.35, y: 3.35, z: 0.4}
-        Rotation: {x: -0, y: -0, z: -0}
-      - Position: {x: -3.35, y: 3.35, z: 0.4}
-        Rotation: {x: -0, y: -0, z: -0}
-      parentPPCList:
-      - showParentDetailList: 01
-        point:
-          Position: {x: -3.35, y: 3.35, z: 0.4}
-          Rotation: {x: -0, y: -0, z: -0}
-        parentList:
-        - checkToogleList: 01
-          showParentPointList: 01
-          parentDetail: {fileID: -8814403927345269871, guid: 9c257b3cc9aad8941bac37c189f9d19c,
-            type: 3}
-          parentPointList:
-          - Position: {x: 0, y: 0, z: 0}
-            Rotation: {x: 0, y: 0, z: 0}
-          - Position: {x: 0, y: 0, z: 0}
-            Rotation: {x: 0, y: 0, z: 0}
-          parentPPCList:
-          - showParentDetailList: 
-            point:
-              Position: {x: 0, y: 0, z: 0}
-              Rotation: {x: 0, y: 0, z: 0}
-            parentList: []

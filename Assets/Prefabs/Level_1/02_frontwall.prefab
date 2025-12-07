@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2277484912460828953}
-  - component: {fileID: 8076848352520528009}
+  - component: {fileID: -1388903679892649060}
   m_Layer: 0
-  m_Name: 02_frontwall
+  m_Name: 02_FrontWall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,15 +24,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1499857944277830563}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1723599120524320833}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8076848352520528009
+--- !u!114 &-1388903679892649060
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,51 +42,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1499857944277830563}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdabf2c9950e2414ca76ece2b6dd22b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 459f4c0f0c7f4f8ba22bcfbc2a0b7690, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showPointList: 01
-  showParentsList: 01
-  count: 1
-  _prefab: {fileID: 1499857944277830563}
-  icon: {fileID: -5452287152701893335, guid: 8c875c4a5bbce7d438c1d0cab7eff8db, type: 3}
-  isRoot: 0
-  points:
-  - showParentDetailList: 01
-    point:
-      Position: {x: 0.85, y: 5.65, z: -3.35}
-      Rotation: {x: -0, y: -0, z: -0}
-    parentList:
-    - checkToogleList: 01
-      showParentPointList: 01
-      parentDetail: {fileID: -2747106471576355175, guid: 972fd0714ce8d97438d11c6fc3aa7b2c,
-        type: 3}
-      parentPointList:
-      - Position: {x: 0.8, y: 2.2, z: 0.05}
-        Rotation: {x: -0, y: 0, z: 0}
-      - Position: {x: 0.8, y: 2.2, z: 0.05}
-        Rotation: {x: -0, y: 0, z: 0}
-      parentPPCList:
-      - showParentDetailList: 01
-        point:
-          Position: {x: 0.8, y: 2.2, z: 0.05}
-          Rotation: {x: -0, y: 0, z: 0}
-        parentList:
-        - checkToogleList: 01
-          showParentPointList: 01
-          parentDetail: {fileID: -8814403927345269871, guid: 9c257b3cc9aad8941bac37c189f9d19c,
-            type: 3}
-          parentPointList:
-          - Position: {x: 0, y: 0, z: 0}
-            Rotation: {x: 0, y: 0, z: 0}
-          - Position: {x: 0, y: 0, z: 0}
-            Rotation: {x: 0, y: 0, z: 0}
-          parentPPCList:
-          - showParentDetailList: 
-            point:
-              Position: {x: 0, y: 0, z: 0}
-              Rotation: {x: 0, y: 0, z: 0}
-            parentList: []
+  resetTransform: 1
 --- !u!1 &7592324854835655546
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,12 +71,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7592324854835655546}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2277484912460828953}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4556617085809400075
 MeshFilter:
@@ -137,6 +98,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1

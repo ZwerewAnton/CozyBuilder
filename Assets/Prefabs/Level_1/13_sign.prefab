@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1496704963610753977}
-  - component: {fileID: 930908559649534017}
+  - component: {fileID: -6466471844354161591}
   m_Layer: 0
-  m_Name: 13_sign
+  m_Name: 13_Sign
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,15 +24,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2273910513952186627}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.2, y: 6, z: -3.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2068675115903093473}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &930908559649534017
+--- !u!114 &-6466471844354161591
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,68 +42,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2273910513952186627}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdabf2c9950e2414ca76ece2b6dd22b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 459f4c0f0c7f4f8ba22bcfbc2a0b7690, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showPointList: 01
-  showParentsList: 01
-  count: 1
-  _prefab: {fileID: 2273910513952186627}
-  icon: {fileID: -8244322806629902724, guid: b2c245c0adc0f6f4b8b79a3d1e5999a7, type: 3}
-  isRoot: 0
-  points:
-  - showParentDetailList: 01
-    point:
-      Position: {x: 5.2, y: 6, z: -3.6}
-      Rotation: {x: -0, y: 0, z: 0}
-    parentList:
-    - checkToogleList: 01
-      showParentPointList: 01
-      parentDetail: {fileID: -3010759309813145039, guid: 9e666343443ec4f4ba551ea33f21aebc,
-        type: 3}
-      parentPointList:
-      - Position: {x: 4.1, y: 5.65, z: -0.15}
-        Rotation: {x: -0, y: -0, z: -0}
-      - Position: {x: 4.1, y: 5.65, z: -0.15}
-        Rotation: {x: -0, y: -0, z: -0}
-      parentPPCList:
-      - showParentDetailList: 01
-        point:
-          Position: {x: 4.1, y: 5.65, z: -0.15}
-          Rotation: {x: -0, y: -0, z: -0}
-        parentList:
-        - checkToogleList: 0100
-          showParentPointList: 01
-          parentDetail: {fileID: -2747106471576355175, guid: 972fd0714ce8d97438d11c6fc3aa7b2c,
-            type: 3}
-          parentPointList:
-          - Position: {x: 0, y: 0, z: 0}
-            Rotation: {x: 0, y: 0, z: 0}
-          - Position: {x: 0.8, y: 2.2, z: 0.05}
-            Rotation: {x: -0, y: 0, z: 0}
-          - Position: {x: 0.8, y: 2.2, z: 0.05}
-            Rotation: {x: -0, y: 0, z: 0}
-          parentPPCList:
-          - showParentDetailList: 01
-            point:
-              Position: {x: 0.8, y: 2.2, z: 0.05}
-              Rotation: {x: -0, y: 0, z: 0}
-            parentList:
-            - checkToogleList: 01
-              showParentPointList: 01
-              parentDetail: {fileID: -8814403927345269871, guid: 9c257b3cc9aad8941bac37c189f9d19c,
-                type: 3}
-              parentPointList:
-              - Position: {x: 0, y: 0, z: 0}
-                Rotation: {x: 0, y: 0, z: 0}
-              - Position: {x: 0, y: 0, z: 0}
-                Rotation: {x: 0, y: 0, z: 0}
-              parentPPCList:
-              - showParentDetailList: 
-                point:
-                  Position: {x: 0, y: 0, z: 0}
-                  Rotation: {x: 0, y: 0, z: 0}
-                parentList: []
 --- !u!1 &7062566091167767002
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,12 +70,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7062566091167767002}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -5.2, y: -6, z: 3.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1496704963610753977}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3774656759520179115
 MeshFilter:
@@ -154,6 +97,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1

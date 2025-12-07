@@ -92,9 +92,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5560586421677895489}
-  - component: {fileID: -1989234916788205081}
+  - component: {fileID: 3202192591183752776}
   m_Layer: 0
-  m_Name: 07_leftdoor
+  m_Name: 07_LeftDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,7 +116,7 @@ Transform:
   - {fileID: 4997623194282466841}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-1989234916788205081
+--- !u!114 &3202192591183752776
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -125,39 +125,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 5071329498151581179}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdabf2c9950e2414ca76ece2b6dd22b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 459f4c0f0c7f4f8ba22bcfbc2a0b7690, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showPointList: 01
-  showParentsList: 01
-  count: 1
-  prefab: {fileID: 5071329498151581179}
-  icon: {fileID: 5992729649293208379, guid: c92cf6f4f30b69241ad559919d498807, type: 3}
-  isRoot: 0
-  points:
-  - showParentDetailList: 01
-    point:
-      Position: {x: -0.3, y: 4.65, z: -3.45}
-      Rotation: {x: -0, y: -0, z: -0}
-    parentList:
-    - showParentPointList: 01
-      checkToogleList: 01
-      parentDetail: {fileID: -8516924141718755286, guid: e00fca25d7746254e8be2b55b4818e56, type: 3}
-      parentPointList:
-      - Position: {x: 0.85, y: 4.9, z: -3.55}
-        Rotation: {x: -0, y: -0, z: -0}
-      - Position: {x: 0.85, y: 4.9, z: -3.55}
-        Rotation: {x: -0, y: -0, z: -0}
-  - showParentDetailList: 01
-    point:
-      position: {x: -0.3, y: 4.65, z: -3.45}
-      rotation: {x: -0, y: -0, z: -0}
-    parentList:
-    - showParentPointList: 01
-      checkToggleList: 01
-      parentDetail: {fileID: -8516924141718755286, guid: e00fca25d7746254e8be2b55b4818e56, type: 3}
-      parentPointList:
-      - position: {x: 0.85, y: 4.9, z: -3.55}
-        rotation: {x: -0, y: -0, z: -0}
-      - position: {x: 0.85, y: 4.9, z: -3.55}
-        rotation: {x: -0, y: -0, z: -0}

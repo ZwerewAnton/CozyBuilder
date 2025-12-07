@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3220082151824838709}
-  - component: {fileID: 739791191987594922}
+  - component: {fileID: -9091794976397952711}
   m_Layer: 0
-  m_Name: 35_leftProp
+  m_Name: 35_LeftProp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -24,15 +24,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2881132801458440847}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 5.9, y: 8.950001, z: -0.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2648173320391188845}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &739791191987594922
+--- !u!114 &-9091794976397952711
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,35 +42,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2881132801458440847}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdabf2c9950e2414ca76ece2b6dd22b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 459f4c0f0c7f4f8ba22bcfbc2a0b7690, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showPointList: 01
-  showParentsList: 01
-  count: 1
-  _prefab: {fileID: 2881132801458440847}
-  icon: {fileID: -5837984106528017961, guid: 2bacc0d4b3152914b87a32fc20c3cbba, type: 3}
-  isRoot: 0
-  points:
-  - showParentDetailList: 0000
-    point:
-      Position: {x: 5.9, y: 8.950001, z: -0.55}
-      Rotation: {x: -0, y: -0, z: -0}
-    parentList:
-    - showParentPointList: 01
-      checkToogleList: 01
-      parentDetail: {fileID: -7579358993945108425, guid: 20e6afa1f1f037c46b9437c9675fa69a,
-        type: 3}
-      parentPointList:
-      - Position: {x: -2.5, y: 5.65, z: -0.15}
-        Rotation: {x: -0, y: -0, z: -0}
-    - showParentPointList: 01
-      checkToogleList: 01
-      parentDetail: {fileID: 7930795041874250706, guid: 88c8d2ae8452b9248953bdb438f8a5e5,
-        type: 3}
-      parentPointList:
-      - Position: {x: 5.35, y: 5.4500003, z: -1.15}
-        Rotation: {x: -0, y: 0, z: 0}
 --- !u!1 &6518429279805207126
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,12 +70,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6518429279805207126}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -5.9, y: -8.950001, z: 0.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3220082151824838709}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &871196693586466855
 MeshFilter:
@@ -121,6 +97,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
