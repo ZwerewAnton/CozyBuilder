@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d30b706aa5440fa70492a36dd33b1b, type: 3}
+  m_Name: 44_Chimney
+  m_EditorClassIdentifier: 
+  id: 900c082e-e4a6-4396-b769-e2ca6a405941
+  count: 1
+  prefab: {fileID: -2234292674396731588, guid: 908d597386e6f04419913bf7bd8b37b8, type: 3}
+  mesh: {fileID: -2432090755550338912, guid: 3fd9fc9651c4b7b46ac302b8dc34c161, type: 3}
+  material: {fileID: 2100000, guid: 3f989a983cacef1449493e0eb3a1f9dc, type: 2}
+  icon: {fileID: 7258122175473184923, guid: debb7df572f9725439bd310e1a1ecf82, type: 3}
+  points:
+  - position: {x: 3.349999, y: 18.25, z: 1.1499996}
+    rotation: {x: -0, y: -0, z: -0}
+    constraints:
+    - parentDetail: {fileID: 11400000, guid: 47551175ba179704f8a6e53adaa0de6e, type: 2}
+      parentPointIndexes: 00000000

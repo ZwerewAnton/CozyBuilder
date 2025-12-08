@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a9980903b4f4325afde6707bb14620a, type: 3}
+  m_Name: ApplicationConfigs
+  m_EditorClassIdentifier: 
+  targetFrameRate: 120
+  minTimeToShowLoadingScreen: 1
+  loadingScreenFadeTime: 0.5
+  camera:
+    startRotation: {x: 0.25881904, y: 0, z: 0, w: 0.9659258}
+    distance: 30
+    minDistance: 20
+    maxDistance: 40
+    xSpeed: 15
+    ySpeed: 15
+    yMinLimit: 5
+    yMaxLimit: 80
+    targetOffset: {x: 0, y: 5, z: 0}
+    minHeight: -5
+    maxHeight: 15
+    zoomSpeed: 1
+    mouseSmooth: 10
+    heightSmooth: 15
+    zoomSmooth: 10
+  gameplay:
+    magnetDistance: 1
+    ghostDistance: 20
+    screenOffset: {x: 0, y: 200}
+  audioOffValue: -80
+  audioOnValue: -20
+  musicFadeTime: 1

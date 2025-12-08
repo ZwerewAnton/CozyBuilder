@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d30b706aa5440fa70492a36dd33b1b, type: 3}
+  m_Name: 43_RightRoof
+  m_EditorClassIdentifier: 
+  id: 8b29c279-5cac-4168-81ba-63484af5e3d7
+  count: 1
+  prefab: {fileID: 4536446580519600729, guid: c57f4e471e8e9f94e9aa5a66c95b0f75, type: 3}
+  mesh: {fileID: -2432090755550338912, guid: e1878fa3893a7524a94cebc29164c11e, type: 3}
+  material: {fileID: 2100000, guid: 3f989a983cacef1449493e0eb3a1f9dc, type: 2}
+  icon: {fileID: -4861281900490591160, guid: 346d5eadc34c3f9469ef9b661c4574ac, type: 3}
+  points:
+  - position: {x: -2.3500013, y: 19.55, z: -0.3499998}
+    rotation: {x: -0, y: -0, z: -0}
+    constraints:
+    - parentDetail: {fileID: 11400000, guid: 368b34bd0896ccd47b5eb5b787711396, type: 2}
+      parentPointIndexes: 00000000
+    - parentDetail: {fileID: 11400000, guid: 5a6be2bb99e5f654786788b1950c0f5e, type: 2}
+      parentPointIndexes: 00000000

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d30b706aa5440fa70492a36dd33b1b, type: 3}
+  m_Name: 59_Tree
+  m_EditorClassIdentifier: 
+  id: 8ebe8817-b03e-4c3a-abc3-c774f090b46a
+  count: 1
+  prefab: {fileID: 4470938774892083875, guid: 7032eef14cf2ae34e8d78934b5adc90c, type: 3}
+  mesh: {fileID: -2432090755550338912, guid: 42eb7c2c623c2154581b3b6518b33e63, type: 3}
+  material: {fileID: 2100000, guid: 3f989a983cacef1449493e0eb3a1f9dc, type: 2}
+  icon: {fileID: -2650780795864521039, guid: d2fb602ccfaf652498342b4ccd3143c9, type: 3}
+  points:
+  - position: {x: 5.3500023, y: 13.700003, z: 6.6000037}
+    rotation: {x: -0, y: -0, z: -0}
+    constraints:
+    - parentDetail: {fileID: 11400000, guid: f74ec3758a2bf6b43b7659edc9c9b08b, type: 2}
+      parentPointIndexes: 00000000

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90d30b706aa5440fa70492a36dd33b1b, type: 3}
+  m_Name: 48_Threshold
+  m_EditorClassIdentifier: 
+  id: af2829b0-ba39-4428-a8b4-f0cf2c732a18
+  count: 1
+  prefab: {fileID: -6796191556340506357, guid: 8e1a28a79d082c640b7990807a751c7e, type: 3}
+  mesh: {fileID: -2432090755550338912, guid: 568db67fd2e5f17429653c73ae37a4e0, type: 3}
+  material: {fileID: 2100000, guid: 3f989a983cacef1449493e0eb3a1f9dc, type: 2}
+  icon: {fileID: 3616333869881961931, guid: cdeeb89bd0581ee46b528e0601a760ec, type: 3}
+  points:
+  - position: {x: 0.8, y: 2.6, z: 4.2}
+    rotation: {x: -0, y: -0, z: -0}
+    constraints:
+    - parentDetail: {fileID: 11400000, guid: cce3988da407e2a45b2b0a94509bfc10, type: 2}
+      parentPointIndexes: 00000000

@@ -25,12 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3730807871014960319}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.33200002, y: -1.0500002, z: 0.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4972086899654057692}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7324961719094073038
 MeshFilter:
@@ -51,6 +52,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -90,7 +92,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4972086899654057692}
-  - component: {fileID: 1677905561441804644}
+  - component: {fileID: -2665339034364381634}
   m_Layer: 0
   m_Name: 06_Roof
   m_TagString: Untagged
@@ -105,15 +107,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5641803197051864166}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.33200002, y: 1.0500002, z: -0.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5580050663335653252}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1677905561441804644
+--- !u!114 &-2665339034364381634
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,46 +125,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 5641803197051864166}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdabf2c9950e2414ca76ece2b6dd22b9, type: 3}
+  m_Script: {fileID: 11500000, guid: 459f4c0f0c7f4f8ba22bcfbc2a0b7690, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  showPointList: 01
-  showParentsList: 01
-  count: 1
-  _prefab: {fileID: 5641803197051864166}
-  icon: {fileID: 1606021983992139322, guid: b6dc4fe1f1860cc4c9e32748b564fed8, type: 3}
-  isRoot: 0
-  points:
-  - showParentDetailList: 01010101
-    point:
-      Position: {x: -3.5, y: 10.5, z: -2}
-      Rotation: {x: -0, y: -0, z: -0}
-    parentList:
-    - showParentPointList: 01
-      checkToogleList: 01
-      parentDetail: {fileID: 8003499076633223563, guid: 4fb70068157335b4daaaa62d8e8cf7f6,
-        type: 3}
-      parentPointList:
-      - Position: {x: -0.33200002, y: 0.6, z: -0.74999994}
-        Rotation: {x: -0, y: -0, z: -0}
-    - showParentPointList: 01
-      checkToogleList: 01
-      parentDetail: {fileID: 1896029527388542732, guid: bf84447c10f16d348bddc8e09407f299,
-        type: 3}
-      parentPointList:
-      - Position: {x: -0.85, y: 0.40000004, z: -0.24999991}
-        Rotation: {x: -0, y: -0, z: -0}
-    - showParentPointList: 01
-      checkToogleList: 01
-      parentDetail: {fileID: 4931531997622994720, guid: a699c4ceaad258d499be65687a12909e,
-        type: 3}
-      parentPointList:
-      - Position: {x: 0.117999986, y: 0.4000001, z: -0.24999991}
-        Rotation: {x: -0, y: -0, z: -0}
-    - showParentPointList: 01
-      checkToogleList: 01
-      parentDetail: {fileID: 1881244795041242439, guid: 4ba544c3a15720b4897d65202064ec23,
-        type: 3}
-      parentPointList:
-      - Position: {x: -0.33200002, y: 0.60000014, z: 0.2000001}
-        Rotation: {x: -0, y: -0, z: -0}
