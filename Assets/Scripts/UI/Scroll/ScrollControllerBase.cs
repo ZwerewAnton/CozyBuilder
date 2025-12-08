@@ -37,11 +37,7 @@ namespace UI.Scroll
 
         protected void Update()
         {
-            if (!_markToUpdate) 
-                return;
-            
-            UpdateVisibleItems();
-            _markToUpdate = false;
+            UpdateScroll();
         }
 
         protected virtual void OnDisable()
@@ -138,6 +134,15 @@ namespace UI.Scroll
             Models.AddRange(models);
             
             MarkToUpdate();
+        }
+
+        protected virtual void UpdateScroll()
+        {
+            if (!_markToUpdate) 
+                return;
+            
+            UpdateVisibleItems();
+            _markToUpdate = false;
         }
         
         protected virtual void OnScrollChanged(Vector2 _)

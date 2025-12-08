@@ -86,6 +86,12 @@ namespace UI.Game.DetailsScroll
             _isDragOutStarted = false;
         }
 
+        protected override void UpdateScroll()
+        {
+            base.UpdateVisibleItems();
+            SetContentSize();
+        }
+
         public void MarkItemDragOutState(string detailId, bool isDragOut)
         {
             var model = Models.Find(itemModel => itemModel.ID == detailId);
