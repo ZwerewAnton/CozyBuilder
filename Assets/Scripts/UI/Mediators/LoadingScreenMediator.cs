@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Infrastructure.SceneManagement;
 using UI.Loading;
 using Zenject;
@@ -33,12 +33,12 @@ namespace UI.Mediators
             _loadingScreenProvider.Get().ShowLoadingScreenImmediately();
         }
 
-        public async Task ShowAsync()
+        public async UniTask ShowAsync()
         {
             await _loadingScreenProvider.Get().ShowLoadingScreenAsync();
         }
 
-        public async Task HideAsync()
+        public async UniTask HideAsync()
         {
             await _loadingScreenProvider.Get().HideLoadingScreenAsync();
         }

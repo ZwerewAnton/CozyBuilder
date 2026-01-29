@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
 using _1_LEVEL_REWORK.New.Data;
 using _1_LEVEL_REWORK.New.Instances;
 using Common;
+using Cysharp.Threading.Tasks;
 using Gameplay.Dto;
 using Level;
 using SaveSystem;
@@ -41,7 +41,7 @@ namespace Gameplay
             _repository = repository;
         }
 
-        public async Task InitializeLevel()
+        public async UniTask InitializeLevel()
         {
             _cts = new CancellationTokenSource();
         

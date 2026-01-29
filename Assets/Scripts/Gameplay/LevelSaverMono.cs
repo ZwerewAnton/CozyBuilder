@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Gameplay.Dto;
 using SaveSystem;
 using SaveSystem.DataObjects.Level.New;
@@ -46,10 +47,10 @@ namespace Gameplay
             var details = _levelService.GetDetailsInfo();
             var data = CreateLevelSaveData(details);
             
-            _ = SaveLevelDataAsync(levelName, progress, data);
+            SaveLevelDataAsync(levelName, progress, data).Forget();
         }
 
-        private async Task SaveLevelDataAsync(string levelName, int progress, LevelSaveData data)
+        private async UniTask SaveLevelDataAsync(string levelName, int progress, LevelSaveData data)
         {
             try
             {
