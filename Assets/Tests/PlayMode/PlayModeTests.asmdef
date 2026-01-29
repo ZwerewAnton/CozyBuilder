@@ -6,7 +6,8 @@
         "UnityEditor.TestRunner",
         "CozyBuilder",
         "Zenject",
-        "Zenject-TestFramework"
+        "Zenject-TestFramework",
+        "DOTween.Modules"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
