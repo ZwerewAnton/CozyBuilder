@@ -1,6 +1,6 @@
 using System;
-using System.Threading.Tasks;
 using Common;
+using Cysharp.Threading.Tasks;
 using Gameplay;
 using Infrastructure.SceneManagement;
 using Music;
@@ -53,7 +53,7 @@ namespace UI
         public void BackToMainMenu()
         {
             _levelSaverMono.SaveProgress();
-            _ = LoadMainMenuScene();
+            LoadMainMenuScene().Forget();
         }
         
         private void PlayEndClip()
@@ -61,7 +61,7 @@ namespace UI
             _sfxPlayer.PlayCompleteLevelClip();
         }
         
-        private async Task LoadMainMenuScene()
+        private async UniTask LoadMainMenuScene()
         {
             try
             {

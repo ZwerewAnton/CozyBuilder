@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading;
-using System.Threading.Tasks;
 using Configs;
+using Cysharp.Threading.Tasks;
 using Infrastructure.SceneManagement;
 using SaveSystem;
 using UI.Mediators;
@@ -38,7 +38,7 @@ namespace Infrastructure
 
         private void Start()
         {
-            _ = InitializeServices();
+            InitializeServices().Forget();
         }
         
         private void OnDestroy()
@@ -47,7 +47,7 @@ namespace Infrastructure
             _cts?.Dispose();
         }
         
-        private async Task InitializeServices()
+        private async UniTask InitializeServices()
         {
             try
             {
@@ -55,16 +55,17 @@ namespace Infrastructure
                 await _saveSystemService.LoadProgressDataAsync(_cts.Token);
                 LoadingCompleted?.Invoke();
 #if !UNITY_EDITOR
-                await CompleteInitialization();
+                await CompleteInitializationAsync();
 #endif
             }
+            catch (OperationCanceledException) {}
             catch (Exception ex)
             {
                 Debug.LogError($"Initialization failed: {ex}");
             }
         }
 
-        private async Task CompleteInitialization()
+        private async UniTask CompleteInitializationAsync()
         {
             await _sceneSwitcher.LoadSceneAsync(SceneType.MainMenu);
         }

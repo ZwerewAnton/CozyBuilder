@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Infrastructure;
 using Infrastructure.SceneManagement;
 using UnityEditor;
@@ -43,11 +43,11 @@ namespace Utils.BootstrapLoading
                     return;
             }
             var sceneType = (SceneType)Enum.Parse(typeof(SceneType), startScene);
-            _ = LoadSceneAsync(sceneType);
+            LoadSceneAsync(sceneType).Forget();
 #endif
         }
         
-        private async Task LoadSceneAsync(SceneType sceneType)
+        private async UniTask LoadSceneAsync(SceneType sceneType)
         {
             try
             {

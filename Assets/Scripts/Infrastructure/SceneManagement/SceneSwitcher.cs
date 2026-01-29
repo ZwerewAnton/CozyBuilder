@@ -1,8 +1,6 @@
 using System;
 using System.Threading;
-using System.Threading.Tasks;
-using UI.Mediators;
-using UnityEngine;
+using Cysharp.Threading.Tasks;
 using Zenject;
 
 namespace Infrastructure.SceneManagement
@@ -29,12 +27,12 @@ namespace Infrastructure.SceneManagement
             _sceneLocator = sceneLocator;
         }
 
-        public async Task LoadSceneAsync(SceneType sceneType)
+        public async UniTask LoadSceneAsync(SceneType sceneType)
         {
             if (_isTransitioning) 
                 return;
-            _isTransitioning = true;
             
+            _isTransitioning = true;
             _cts = new CancellationTokenSource();
 
             try
@@ -43,6 +41,7 @@ namespace Infrastructure.SceneManagement
                 await _sceneLoader.LoadSceneAsync(sceneType, _cts.Token);
                 await _loadingView.HideAsync();
             }
+            catch (OperationCanceledException) {}
             finally
             {
                 _isTransitioning = false;

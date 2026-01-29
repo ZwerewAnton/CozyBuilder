@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Threading.Tasks;
+using System.Threading;
 using Configs;
+using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using UnityEngine;
 using Zenject;
@@ -20,9 +21,14 @@ namespace UI.Loading
             _configs = configs;
         }
 
-        protected void Awake()
+        protected virtual void Awake()
         {
             Initialize();
+        }
+
+        protected virtual void OnDestroy()
+        {
+            canvasGroup.DOKill();
         }
 
         protected virtual void Initialize()
@@ -37,27 +43,47 @@ namespace UI.Loading
             if (_isOn) 
                 return;
 
+            _isOn = true;
             gameObject.SetActive(true);
             SetProgress(0f);
             canvasGroup.alpha = 1f;
-            _isOn = true;
         }
 
-        public virtual async Task ShowLoadingScreenAsync()
+        public async UniTask ShowLoadingScreenAsync(CancellationToken token = default)
         {
             if (_isOn) 
                 return;
 
+            _isOn = true;
             gameObject.SetActive(true);
             SetProgress(0f);
-            await FadeLoadingScreen(0f, 1f, () => _isOn = true)
-                .AsyncWaitForCompletion();
+
+            var tween = FadeLoadingScreen(0f, 1f);
+
+            try
+            {
+                await tween.ToUniTask(TweenCancelBehaviour.CompleteAndCancelAwait, token);
+            }
+            catch (OperationCanceledException)
+            {
+                tween.Kill();
+                throw;
+            }
         }
 
-        public virtual async Task HideLoadingScreenAsync()
+        public async UniTask HideLoadingScreenAsync(CancellationToken token = default)
         {
-            await FadeLoadingScreen(1f, 0f, HideLoadingScreen)
-                .AsyncWaitForCompletion();
+            var tween = FadeLoadingScreen(1f, 0f, HideLoadingScreen);
+
+            try
+            {
+                await tween.ToUniTask(TweenCancelBehaviour.CompleteAndCancelAwait, token);
+            }
+            catch (OperationCanceledException)
+            {
+                tween.Kill();
+                throw;
+            }
         }
 
         protected virtual void HideLoadingScreen()

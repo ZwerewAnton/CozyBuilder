@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Common;
+using Cysharp.Threading.Tasks;
 using Infrastructure.SceneManagement;
 using Level;
 using Music;
@@ -55,7 +55,7 @@ namespace UI.MainMenu
         {
             var targetModel = _mainMenuMediator.GetScrollTargetItem();
             _gameState.SelectedLevelName = targetModel.levelName;
-            _ = LoadLevelScene();
+            LoadLevelScene().Forget();
         }
 
         public void DeleteSaveData()
@@ -64,7 +64,7 @@ namespace UI.MainMenu
             UpdateScrollControllerContent();
         }
 
-        private async Task LoadLevelScene()
+        private async UniTask LoadLevelScene()
         {
             try
             {

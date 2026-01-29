@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Threading.Tasks;
 using Common;
+using Cysharp.Threading.Tasks;
 using Gameplay;
 using Music;
 using UnityEngine;
@@ -31,11 +31,11 @@ namespace Level
                 _gameState.SelectedLevelName = editorLevelName;
             }
 #endif
-            _ = InitializeLevel();
+            InitializeLevel().Forget();
             _musicPlayer.Play(MusicType.Level);
         }
 
-        private async Task InitializeLevel()
+        private async UniTask InitializeLevel()
         {
             try
             {
