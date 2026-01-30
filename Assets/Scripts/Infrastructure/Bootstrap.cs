@@ -12,24 +12,10 @@ namespace Infrastructure
 {
     public class Bootstrap : MonoBehaviour
     {
-        private ISaveLoadService _saveSystemService;
-        private LoadingScreenMediator _loadingScreenMediator;
-        private SceneSwitcher _sceneSwitcher;
         private CancellationTokenSource _cts;
-        public event Action LoadingCompleted;
-        
-        [Inject]
-        private void Construct(
-            ISaveLoadService saveSystemService, 
-            ApplicationConfigs configs, 
-            LoadingScreenMediator loadingScreenMediator,
-            SceneSwitcher sceneSwitcher)
-        {
-            SetTargetFrameRate(configs.targetFrameRate);
-            _saveSystemService = saveSystemService;
-            _loadingScreenMediator = loadingScreenMediator;
-            _sceneSwitcher = sceneSwitcher;
-        }
+        private LoadingScreenMediator _loadingScreenMediator;
+        private ISaveLoadService _saveSystemService;
+        private SceneSwitcher _sceneSwitcher;
 
         private void Awake()
         {
@@ -40,13 +26,28 @@ namespace Infrastructure
         {
             InitializeServices().Forget();
         }
-        
+
         private void OnDestroy()
         {
             _cts?.Cancel();
             _cts?.Dispose();
         }
-        
+
+        public event Action LoadingCompleted;
+
+        [Inject]
+        private void Construct(
+            ISaveLoadService saveSystemService,
+            ApplicationConfigs configs,
+            LoadingScreenMediator loadingScreenMediator,
+            SceneSwitcher sceneSwitcher)
+        {
+            SetTargetFrameRate(configs.targetFrameRate);
+            _saveSystemService = saveSystemService;
+            _loadingScreenMediator = loadingScreenMediator;
+            _sceneSwitcher = sceneSwitcher;
+        }
+
         private async UniTask InitializeServices()
         {
             try
@@ -58,7 +59,9 @@ namespace Infrastructure
                 await CompleteInitializationAsync();
 #endif
             }
-            catch (OperationCanceledException) {}
+            catch (OperationCanceledException)
+            {
+            }
             catch (Exception ex)
             {
                 Debug.LogError($"Initialization failed: {ex}");

@@ -9,18 +9,17 @@ namespace Gameplay.Movement.Input
 {
     public class TouchDetailViewMoverInputProvider : IDetailViewMoverInputProvider, IDisposable
     {
-        public event Action InputCanceled;
-        
-        private float _depth;
         private readonly CameraHandler _cameraHandler;
-        private readonly TouchRegistry _touchRegistry;
         private readonly Vector2 _screenOffset;
+        private readonly TouchRegistry _touchRegistry;
         private int _currentMoverPointerId;
+
+        private float _depth;
 
         [Inject]
         private TouchDetailViewMoverInputProvider(
-            CameraHandler cameraHandler, 
-            TouchRegistry touchRegistry, 
+            CameraHandler cameraHandler,
+            TouchRegistry touchRegistry,
             ApplicationConfigs configs)
         {
             _cameraHandler = cameraHandler;
@@ -28,6 +27,8 @@ namespace Gameplay.Movement.Input
             _touchRegistry.TouchCanceled += OnTouchCanceled;
             _screenOffset = configs.gameplay.screenOffset;
         }
+
+        public event Action InputCanceled;
 
         public bool IsInputActive()
         {
@@ -59,7 +60,7 @@ namespace Gameplay.Movement.Input
             if (touchId == _currentMoverPointerId)
                 InputCanceled?.Invoke();
         }
-        
+
         private Vector3 GetCursorWorldPoint()
         {
             var input = _touchRegistry.GetTouchPosition(_currentMoverPointerId);

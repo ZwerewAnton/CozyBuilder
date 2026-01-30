@@ -8,7 +8,7 @@ namespace UI.Common
     {
         [SerializeField] private Sprite onImage;
         [SerializeField] private Sprite offImage;
-        
+
         private Image _buttonImage;
 
         public override void Initialize()

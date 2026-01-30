@@ -8,25 +8,24 @@ namespace Cameras.Input
 {
     public class TouchCameraInputProvider : ICameraInputProvider
     {
+        private const float PinchThreshold = 5f;
+        private const float HeightThreshold = 0.5f;
         private readonly TouchRegistry _touchRegistry;
         private readonly float _zoomCoefficient = 1f / Screen.height;
         private float _previousPinchDistance;
-
-        private const float PinchThreshold = 5f;
-        private const float HeightThreshold = 0.5f;
-
-        public bool IsRotationAllowed { get; private set; }
-        public Vector2 RotationDelta { get; private set; }
-        public float ZoomDelta { get; private set; }
-        
-        public bool IsHeightChangeAllowed { get; private set; }
-        public float HeightDelta { get; private set; }
 
         [Inject]
         private TouchCameraInputProvider(TouchRegistry touchRegistry)
         {
             _touchRegistry = touchRegistry;
         }
+
+        public bool IsRotationAllowed { get; private set; }
+        public Vector2 RotationDelta { get; private set; }
+        public float ZoomDelta { get; private set; }
+
+        public bool IsHeightChangeAllowed { get; private set; }
+        public float HeightDelta { get; private set; }
 
         public void UpdateInput()
         {

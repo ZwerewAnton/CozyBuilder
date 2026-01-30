@@ -64,11 +64,11 @@ namespace Tests.EditMode
             var levelState = new LevelState();
             var groundPoint = Generator.CreatePointData();
             var ground = Generator.CreateDetailData(points: ListOf(groundPoint));
-            
+
             var parentParentConstraint = Generator.CreateParentConstraint(ground, ListOf(0));
             var parentPoint = Generator.CreatePointData(ListOf(parentParentConstraint));
             var parentDetail = Generator.CreateDetailData(points: ListOf(parentPoint));
-            
+
             var parentConstraint = Generator.CreateParentConstraint(parentDetail, ListOf(0));
             var point = Generator.CreatePointData(ListOf(parentConstraint));
             var detail = Generator.CreateDetailData(points: ListOf(point));
@@ -88,13 +88,13 @@ namespace Tests.EditMode
             var levelState = new LevelState();
             var groundPoint = Generator.CreatePointData();
             var ground = Generator.CreateDetailData(points: ListOf(groundPoint));
-            
+
             var parentConstraint = Generator.CreateParentConstraint(ground, ListOf(0));
             var point = Generator.CreatePointData(ListOf(parentConstraint));
             var detail = Generator.CreateDetailData(points: ListOf(point));
 
             levelState.CreateLevelState(ground, ListOf(detail), new List<DetailSaveData>());
-            
+
             // Act.
             var result = levelState.TryInstallDetail(detail.Id, 0);
 
@@ -110,15 +110,15 @@ namespace Tests.EditMode
             var levelState = new LevelState();
             var groundPoint = Generator.CreatePointData();
             var ground = Generator.CreateDetailData(points: ListOf(groundPoint));
-            
+
             var parentParentConstraint = Generator.CreateParentConstraint(ground, ListOf(0));
             var parentPoint = Generator.CreatePointData(ListOf(parentParentConstraint));
             var parentDetail = Generator.CreateDetailData(points: ListOf(parentPoint));
-            
+
             var parentConstraint = Generator.CreateParentConstraint(parentDetail, ListOf(0));
             var point = Generator.CreatePointData(ListOf(parentConstraint));
             var detail = Generator.CreateDetailData(points: ListOf(point));
-            
+
             levelState.CreateLevelState(ground, ListOf(parentDetail, detail), new List<DetailSaveData>());
 
             // Act.

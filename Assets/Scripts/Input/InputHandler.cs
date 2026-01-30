@@ -4,18 +4,24 @@ namespace Input
 {
     public class InputHandler : IDisposable
     {
-        public InputActions.CameraActions CameraActions { get; private set; }
-        public InputActions.DetailActions DetailActions { get; private set; }
-        private InputActions InputActions { get; set; }
-
         public InputHandler()
         {
             InputActions = new InputActions();
             CameraActions = InputActions.Camera;
             DetailActions = InputActions.Detail;
             EnableActions();
-        }        
-        
+        }
+
+        public InputActions.CameraActions CameraActions { get; }
+        public InputActions.DetailActions DetailActions { get; private set; }
+        private InputActions InputActions { get; }
+
+        public void Dispose()
+        {
+            DisableActions();
+            InputActions?.Dispose();
+        }
+
         private void EnableCamera()
         {
             CameraActions.Enable();
@@ -25,7 +31,7 @@ namespace Input
         {
             CameraActions.Disable();
         }
-        
+
         private void EnableActions()
         {
             InputActions.Enable();
@@ -34,12 +40,6 @@ namespace Input
         private void DisableActions()
         {
             InputActions.Disable();
-        }
-
-        public void Dispose()
-        {
-            DisableActions();
-            InputActions?.Dispose();
         }
     }
 }

@@ -9,16 +9,16 @@ namespace Cameras
         private OrbitCameraMovement _cameraMovement;
         private Transform _cameraTransform;
 
+        private void LateUpdate()
+        {
+            UpdateCameraMovement();
+        }
+
         [Inject]
         private void Construct(OrbitCameraMovement cameraMovement, CameraHandler cameraHandler)
         {
             _cameraMovement = cameraMovement;
             _cameraTransform = cameraHandler.transform;
-        }
-
-        private void LateUpdate()
-        {
-            UpdateCameraMovement();
         }
 
         private void UpdateCameraMovement()

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using _1_LEVEL_REWORK.New.Instances;
 using Configs;
 using Gameplay.Movement.Input;
 using UnityEngine;
@@ -10,36 +9,23 @@ namespace Gameplay.Movement
 {
     public class DetailViewMover : MonoBehaviour
     {
-        [SerializeField] private MovingDetailView movingDetailViewPrefab;
-        [SerializeField] private GhostDetailView ghostDetailViewPrefab;
-
-        private IDetailViewMoverInputProvider _moverInputProvider;
-        private float _magnetDistance;
-        private float _ghostDistance;
-        
-        private MovingDetailView _movingDetail;
-        private GhostDetailView _ghostDetail;
-
-        private List<PointTransform> _connectionPoints;
-        private bool _isMoving;
-        private bool _isConnected;
-        private int _bestPointIndex;
-
         private static readonly Color NearColor = new(1, 1, 1, 0.5f);
         private static readonly Color FarColor = new(1, 1, 1, 0.0f);
+        [SerializeField] private MovingDetailView movingDetailViewPrefab;
+        [SerializeField] private GhostDetailView ghostDetailViewPrefab;
+        private int _bestPointIndex;
 
-        public event Action<PlacementResult> PlacementEnded;
+        private List<PointTransform> _connectionPoints;
+        private GhostDetailView _ghostDetail;
+        private float _ghostDistance;
+        private bool _isConnected;
+        private bool _isMoving;
+        private float _magnetDistance;
 
-        [Inject]
-        private void Construct(
-            ApplicationConfigs config, 
-            IDetailViewMoverInputProvider moverInputProvider)
-        {
-            _magnetDistance = config.gameplay.magnetDistance;
-            _ghostDistance = config.gameplay.ghostDistance;
-            _moverInputProvider = moverInputProvider;
-        }
-        
+        private IDetailViewMoverInputProvider _moverInputProvider;
+
+        private MovingDetailView _movingDetail;
+
         private void Awake()
         {
             InstantiateDetailViews();
@@ -50,7 +36,7 @@ namespace Gameplay.Movement
         {
             if (!_isMoving)
                 return;
-            
+
             UpdateMove(_moverInputProvider.GetDesiredPosition());
         }
 
@@ -59,18 +45,30 @@ namespace Gameplay.Movement
             _moverInputProvider.InputCanceled -= OnInputCanceled;
         }
 
+        public event Action<PlacementResult> PlacementEnded;
+
+        [Inject]
+        private void Construct(
+            ApplicationConfigs config,
+            IDetailViewMoverInputProvider moverInputProvider)
+        {
+            _magnetDistance = config.gameplay.magnetDistance;
+            _ghostDistance = config.gameplay.ghostDistance;
+            _moverInputProvider = moverInputProvider;
+        }
+
         public void StartMove(Mesh mesh, Material material, List<PointTransform> connectionPoints)
         {
             _moverInputProvider.UpdateDepth(Vector3.zero);
             _isMoving = true;
             _isConnected = false;
-            
+
             if (connectionPoints.Count == 0 || !_moverInputProvider.IsInputActive())
             {
                 StopMove();
                 return;
             }
-            
+
             _connectionPoints = connectionPoints;
             _movingDetail.Show(mesh, material);
             _ghostDetail.Show(mesh);
@@ -103,7 +101,7 @@ namespace Gameplay.Movement
             _ghostDetail = Instantiate(ghostDetailViewPrefab, Vector3.zero, Quaternion.identity, transform);
             _ghostDetail.Hide();
         }
-        
+
         private void UpdateMove(Vector3 desiredPosition)
         {
             var minDistance = float.MaxValue;

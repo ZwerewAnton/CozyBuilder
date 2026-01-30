@@ -2,5 +2,7 @@
 
 namespace UI.Common
 {
-    public class SimplePanel : BasePanel { }
+    public class SimplePanel : BasePanel
+    {
+    }
 }

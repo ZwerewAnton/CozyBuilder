@@ -16,15 +16,15 @@ namespace Tests.EditMode
 {
     public class LevelServiceTests : ZenjectUnitTestFixture
     {
-        private ISaveLoadService _saveLoadService;
         private ILevelsRepository _levelsRepository;
-        
+        private ISaveLoadService _saveLoadService;
+
         [SetUp]
         public void SetUp()
         {
             _saveLoadService = Substitute.For<ISaveLoadService>();
             _levelsRepository = Substitute.For<ILevelsRepository>();
-            
+
             Container.Bind<ISaveLoadService>().FromInstance(_saveLoadService);
             Container.Bind<ILevelsRepository>().FromInstance(_levelsRepository);
             Container.Bind<LevelState>().AsSingle().NonLazy();
@@ -41,7 +41,7 @@ namespace Tests.EditMode
             var point = Generator.CreatePointData();
             var detail = Generator.CreateDetailData(points: ListOf(point));
             var levelData = Generator.CreateLevelData(ground, ListOf(detail));
-            
+
             _levelsRepository.TryGetLevel(Arg.Any<string>(), out Arg.Any<LevelData>()).Returns(x =>
             {
                 x[1] = levelData;
@@ -75,9 +75,9 @@ namespace Tests.EditMode
             var levelData = Generator.CreateLevelData(ground, ListOf(detail));
 
             var pointSaveData = Generator.CreatePointSaveData(true);
-            var detailSaveData = Generator.CreateDetailSaveData(id: detail.Id, count: 0, ListOf(pointSaveData));
+            var detailSaveData = Generator.CreateDetailSaveData(detail.Id, 0, ListOf(pointSaveData));
             var levelSaveData = Generator.CreateLevelSaveData(ListOf(detailSaveData));
-            
+
             _levelsRepository.TryGetLevel(Arg.Any<string>(), out Arg.Any<LevelData>()).Returns(x =>
             {
                 x[1] = levelData;

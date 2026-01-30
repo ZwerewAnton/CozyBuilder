@@ -8,10 +8,9 @@ namespace Infrastructure.SceneManagement
 {
     public class SceneLoader
     {
-        public event Action<float> SceneLoadingUpdated;
-        
         private bool _isLoading;
-        
+        public event Action<float> SceneLoadingUpdated;
+
         public async UniTask LoadSceneAsync(SceneType sceneType, CancellationToken token = default)
         {
             if (_isLoading)
@@ -34,7 +33,7 @@ namespace Infrastructure.SceneManagement
                     var progress = Mathf.Clamp01(operation.progress / 0.9f);
                     SceneLoadingUpdated?.Invoke(progress);
                     await UniTask.Yield(token);
-                
+
                     if (token.IsCancellationRequested)
                     {
                         operation.allowSceneActivation = true;
@@ -42,6 +41,7 @@ namespace Infrastructure.SceneManagement
                         return;
                     }
                 }
+
                 SceneLoadingUpdated?.Invoke(1f);
 
                 operation.allowSceneActivation = true;

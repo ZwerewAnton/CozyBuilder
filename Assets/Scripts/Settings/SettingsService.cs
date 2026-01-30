@@ -8,17 +8,17 @@ namespace Settings
     {
         private bool _isMusicOn, _isSoundOn;
 
-        public bool IsMusicOn => _isMusicOn;
-        public bool IsSoundOn => _isSoundOn;
-        
-        public event Action<bool> MusicChanged;
-        public event Action<bool> SoundChanged;
-
         public SettingsService()
         {
             _isMusicOn = LoadVolumeState(PropertiesStorage.MusicPlayerPrefsKey);
             _isSoundOn = LoadVolumeState(PropertiesStorage.SoundPlayerPrefsKey);
         }
+
+        public bool IsMusicOn => _isMusicOn;
+        public bool IsSoundOn => _isSoundOn;
+
+        public event Action<bool> MusicChanged;
+        public event Action<bool> SoundChanged;
 
         public void ToggleMusic()
         {

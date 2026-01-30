@@ -16,16 +16,16 @@ namespace Gameplay
 {
     public class LevelInteractableCoordinator : IDisposable
     {
-        private readonly LevelService _levelService;
-        private readonly DetailPrefabSpawner _spawner;
-        private readonly LevelMediator _levelMediator;
         private readonly DetailViewMover _detailViewMover;
+        private readonly GameState _gameState;
+        private readonly LevelMediator _levelMediator;
+        private readonly LevelService _levelService;
         private readonly IDetailViewMoverInputProvider _moverInputProvider;
         private readonly ITouchPointerLock _pointerLock;
-        private readonly GameState _gameState;
         private readonly SfxPlayer _sfxPlayer;
+        private readonly DetailPrefabSpawner _spawner;
         private DragOutInfo _movingDetailInfo;
-        
+
         [Inject]
         private LevelInteractableCoordinator(
             LevelService levelService,
@@ -49,6 +49,13 @@ namespace Gameplay
             _sfxPlayer = sfxPlayer;
         }
 
+        public void Dispose()
+        {
+            _levelService.LevelInitialized -= OnLevelServiceInitialize;
+            _levelMediator.DetailItemDragOutStarted -= OnDetailDragOutStarted;
+            _detailViewMover.PlacementEnded -= OnDetailPlacementEnded;
+        }
+
         private void OnLevelServiceInitialize()
         {
             var details = _levelService.GetDetailsInfo();
@@ -56,30 +63,30 @@ namespace Gameplay
             SpawnStartDetailPrefabs(details);
             _gameState.IsLevelCompletedOnStart = _levelService.GetLevelProgress() == 100;
         }
-        
-        private void SetDetailsScrollItems(Dictionary<string,DetailInstanceDto> details)
+
+        private void SetDetailsScrollItems(Dictionary<string, DetailInstanceDto> details)
         {
             var detailModels = CreateDetailModelList(details);
             _levelMediator.InitializeDetailsScroll(detailModels);
             _levelMediator.DetailItemDragOutStarted += OnDetailDragOutStarted;
         }
-        
+
         private void OnDetailPlacementEnded(PlacementResult placementResult)
         {
             if (_movingDetailInfo == null)
                 return;
 
             var detailId = _movingDetailInfo.DetailId;
-            
+
             _levelMediator.MarkItemDragOutState(detailId, false);
-            
-            if (!placementResult.Success) 
+
+            if (!placementResult.Success)
                 return;
-            
+
             var installResult = _levelService.TryInstallDetail(detailId, placementResult.PointIndex);
-            if (!installResult) 
+            if (!installResult)
                 return;
-            
+
             var details = _levelService.GetDetailsInfo();
             _levelMediator.UpdateScrollController(CreateDetailModelList(details));
             SpawnDetailPrefab(details[detailId], placementResult.PointIndex);
@@ -87,14 +94,14 @@ namespace Gameplay
             _sfxPlayer.PlayInstallDetailClip();
         }
 
-        private List<DetailItemModel> CreateDetailModelList(Dictionary<string,DetailInstanceDto> details)
+        private List<DetailItemModel> CreateDetailModelList(Dictionary<string, DetailInstanceDto> details)
         {
             var detailModels = new List<DetailItemModel>();
             foreach (var (id, detail) in details)
             {
                 if (detail.CurrentCount == 0 || detail.IsGround)
                     continue;
-                
+
                 detailModels.Add(new DetailItemModel
                 {
                     ID = id,
@@ -106,7 +113,7 @@ namespace Gameplay
 
             return detailModels;
         }
-        
+
         private void OnDetailDragOutStarted(DragOutInfo dragInfo)
         {
             _movingDetailInfo = dragInfo;
@@ -116,7 +123,7 @@ namespace Gameplay
             var detail = _levelService.GetDetailsInfo()[_movingDetailInfo.DetailId];
             StartDetailViewMove(detail);
         }
-        
+
         private void StartDetailViewMove(DetailInstanceDto detail)
         {
             var pointList = new List<PointTransform>();
@@ -129,23 +136,19 @@ namespace Gameplay
 
             _detailViewMover.StartMove(detail.Mesh, detail.Material, pointList);
         }
-        
-        private void SpawnStartDetailPrefabs(Dictionary<string,DetailInstanceDto> details)
+
+        private void SpawnStartDetailPrefabs(Dictionary<string, DetailInstanceDto> details)
         {
             var spawnInfoList = new List<DetailPrefabSpawnInfo>();
             foreach (var (_, detail) in details)
+            foreach (var point in detail.Points)
             {
-                foreach (var point in detail.Points)
-                {
-                    if (!point.IsInstalled)
-                    {
-                        continue;
-                    }
-                    
-                    var spawnInfo = new DetailPrefabSpawnInfo(detail.Prefab, point.Position, point.Rotation);
-                    spawnInfoList.Add(spawnInfo);
-                }
+                if (!point.IsInstalled) continue;
+
+                var spawnInfo = new DetailPrefabSpawnInfo(detail.Prefab, point.Position, point.Rotation);
+                spawnInfoList.Add(spawnInfo);
             }
+
             _spawner.SpawnPrefabs(spawnInfoList);
         }
 
@@ -153,13 +156,6 @@ namespace Gameplay
         {
             var point = detail.Points[pointIndex];
             _spawner.SpawnPrefab(new DetailPrefabSpawnInfo(detail.Prefab, point.Position, point.Rotation));
-        }
-
-        public void Dispose()
-        {
-            _levelService.LevelInitialized -= OnLevelServiceInitialize;
-            _levelMediator.DetailItemDragOutStarted -= OnDetailDragOutStarted;
-            _detailViewMover.PlacementEnded -= OnDetailPlacementEnded;
         }
     }
 }

@@ -14,8 +14,9 @@ namespace Tests.EditMode
                 levelSaveData.details = detailSaveData;
             return levelSaveData;
         }
-        
-        public static DetailSaveData CreateDetailSaveData(string id = "1234", int count = 1, List<PointSaveData> points = null)
+
+        public static DetailSaveData CreateDetailSaveData(string id = "1234", int count = 1,
+            List<PointSaveData> points = null)
         {
             var detailSaveData = new DetailSaveData
             {
@@ -35,7 +36,7 @@ namespace Tests.EditMode
             };
             return pointSaveData;
         }
-        
+
         public static LevelData CreateLevelData(DetailData ground = null, List<DetailData> details = null)
         {
             var levelData = ScriptableObject.CreateInstance<LevelData>();
@@ -45,8 +46,9 @@ namespace Tests.EditMode
                 Utils.SetPrivateField(levelData, "details", details);
             return levelData;
         }
-        
-        public static DetailData CreateDetailData(string name = "test_detail", int count = 1, List<PointData> points = null)
+
+        public static DetailData CreateDetailData(string name = "test_detail", int count = 1,
+            List<PointData> points = null)
         {
             var detailData = ScriptableObject.CreateInstance<DetailData>();
             detailData.name = name;
@@ -59,10 +61,7 @@ namespace Tests.EditMode
         public static PointData CreatePointData(List<ParentConstraint> constraints = null)
         {
             var pointData = new PointData();
-            if (constraints != null)
-            {
-                pointData.constraints = constraints;
-            }
+            if (constraints != null) pointData.constraints = constraints;
 
             return pointData;
         }

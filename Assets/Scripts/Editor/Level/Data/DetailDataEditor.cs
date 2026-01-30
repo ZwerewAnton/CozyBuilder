@@ -9,8 +9,8 @@ namespace _1_LEVEL_REWORK.New.Data.Editor
     [CanEditMultipleObjects]
     public class DetailDataEditor : UnityEditor.Editor
     {
-        private readonly List<bool> _showPoints = new();
         private readonly List<List<bool>> _showConstraints = new();
+        private readonly List<bool> _showPoints = new();
 
         public override void OnInspectorGUI()
         {
@@ -25,7 +25,7 @@ namespace _1_LEVEL_REWORK.New.Data.Editor
 
             serializedObject.ApplyModifiedProperties();
         }
-        
+
         private static void DrawParameters(DetailData detail)
         {
             EditorGUILayout.LabelField("Detail", EditorStyles.boldLabel);
@@ -33,16 +33,17 @@ namespace _1_LEVEL_REWORK.New.Data.Editor
 
             EditorGUILayout.LabelField("Id", detail.Id);
             detail.name = EditorGUILayout.TextField("Name", detail.name);
-            detail.Prefab = (DetailPrefab)EditorGUILayout.ObjectField("Prefab", detail.Prefab, typeof(DetailPrefab), false);
+            detail.Prefab =
+                (DetailPrefab)EditorGUILayout.ObjectField("Prefab", detail.Prefab, typeof(DetailPrefab), false);
             detail.Icon = (Sprite)EditorGUILayout.ObjectField("Icon", detail.Icon, typeof(Sprite), false);
             detail.Count = EditorGUILayout.IntField("Count", detail.Count);
         }
-        
+
         private void DrawPoints(DetailData detail)
         {
             EditorGUILayout.Space(10);
             EditorGUILayout.LabelField("Points", EditorStyles.boldLabel);
-            
+
             var points = detail.points;
             EnsureListSize(_showPoints, points.Count, true);
             EnsureNestedListSize(_showConstraints, points.Count);
@@ -57,7 +58,7 @@ namespace _1_LEVEL_REWORK.New.Data.Editor
 
             if (GUILayout.Button("Add Point"))
                 points.Add(new PointData());
-            
+
             if (GUILayout.Button("Remove Point"))
                 if (points.Count > 0)
                     points.RemoveAt(points.Count - 1);
@@ -89,25 +90,25 @@ namespace _1_LEVEL_REWORK.New.Data.Editor
                 if (showConstrains[j])
                 {
                     EditorGUI.indentLevel++;
-                    
+
                     DrawConstraint(constraint);
-                    
+
                     EditorGUI.indentLevel--;
                 }
             }
 
             EditorGUILayout.BeginHorizontal();
             GUILayout.Space(EditorGUI.indentLevel * 30);
-            
+
             if (GUILayout.Button("Add Constraint"))
                 constraints.Add(new ParentConstraint());
             if (GUILayout.Button("Remove Constraint"))
                 if (constraints.Count > 0)
                     constraints.RemoveAt(constraints.Count - 1);
-            
+
             EditorGUILayout.EndHorizontal();
         }
-        
+
         private static void DrawConstraint(ParentConstraint constraint)
         {
             constraint.ParentDetail = (DetailData)EditorGUILayout.ObjectField(
@@ -164,17 +165,17 @@ namespace _1_LEVEL_REWORK.New.Data.Editor
 
         private static void EnsureListSize(List<bool> list, int size, bool defaultValue)
         {
-            while (list.Count < size) 
+            while (list.Count < size)
                 list.Add(defaultValue);
-            while (list.Count > size) 
+            while (list.Count > size)
                 list.RemoveAt(list.Count - 1);
         }
 
         private static void EnsureNestedListSize(List<List<bool>> list, int size)
         {
-            while (list.Count < size) 
+            while (list.Count < size)
                 list.Add(new List<bool>());
-            while (list.Count > size) 
+            while (list.Count > size)
                 list.RemoveAt(list.Count - 1);
         }
     }

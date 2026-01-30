@@ -16,28 +16,28 @@ namespace Tests.PlayMode
     public class DetailViewMoverTests : ZenjectIntegrationTestFixture
     {
         private IDetailViewMoverInputProvider _inputProvider;
-        
+
         [SetUp]
         public void SetUp()
         {
             PreInstall();
-            
+
             _inputProvider = Substitute.For<IDetailViewMoverInputProvider>();
             var configs = ScriptableObject.CreateInstance<ApplicationConfigs>();
             configs.gameplay = new GameplayConfig();
             var moverPrefab = AssetDatabase.LoadAssetAtPath<DetailViewMover>(
                 "Assets/Tests/PlayMode/Prefabs/DetailViewMover.prefab");
 
-            
+
             Container.Bind<IDetailViewMoverInputProvider>().FromInstance(_inputProvider);
             Container.Bind<ApplicationConfigs>().FromInstance(configs).AsSingle().NonLazy();
             var mover = Container.InstantiatePrefabForComponent<DetailViewMover>(moverPrefab.gameObject);
             Container.Bind<DetailViewMover>().FromInstance(mover).AsSingle().NonLazy();
-            
+
             PostInstall();
         }
-        
-        
+
+
         [UnityTest]
         public IEnumerator WhenStopMove_AndDetailPositionIsOnPoint_ThenInvokePositivePlacementEnded()
         {
@@ -56,15 +56,15 @@ namespace Tests.PlayMode
             _inputProvider.IsInputActive().Returns(true);
             mover.StartMove(new Mesh(), material, ListOf(point));
             yield return null;
-            
+
             // Act.
             mover.StopMove();
             yield return null;
-            
+
             // Assert.
             result.Success.Should().BeTrue();
         }
-        
+
         [UnityTest]
         public IEnumerator WhenStopMove_AndDetailPositionIsNotOnPoint_ThenInvokeNegativePlacementEnded()
         {
@@ -84,11 +84,11 @@ namespace Tests.PlayMode
             _inputProvider.IsInputActive().Returns(true);
             mover.StartMove(new Mesh(), material, ListOf(point));
             yield return null;
-            
+
             // Act.
             mover.StopMove();
             yield return null;
-            
+
             // Assert.
             result.Success.Should().BeFalse();
         }

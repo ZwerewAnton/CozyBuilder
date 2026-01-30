@@ -10,7 +10,7 @@ namespace Level
         [SerializeField] private List<LevelData> levels;
 
         public List<LevelData> Levels => levels;
-        
+
         public bool TryGetLevel(string levelName, out LevelData level)
         {
             level = null;

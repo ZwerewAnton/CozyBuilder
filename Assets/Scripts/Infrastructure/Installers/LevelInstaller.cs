@@ -26,7 +26,7 @@ namespace Infrastructure.Installers
         [SerializeField] private LevelMenu levelMenu;
         [SerializeField] private CanvasRaycasterHandler canvasRaycasterHandler;
         [SerializeField] private ParticlePlayer particlePlayer;
-        
+
         public override void InstallBindings()
         {
             BindCanvasRaycasterHandler();
@@ -133,27 +133,27 @@ namespace Infrastructure.Installers
                 .NonLazy();
 #endif
         }
-        
+
         private void BindOrbitCameraMovement()
         {
             Container.Bind<OrbitCameraMovement>().AsSingle().NonLazy();
         }
-        
+
         private void BindDetailPrefabSpawner()
         {
             Container.Bind<DetailPrefabSpawner>().FromInstance(detailPrefabSpawner).AsSingle().NonLazy();
         }
-        
+
         private void BindDetailViewMover()
         {
             Container.Bind<DetailViewMover>().FromInstance(detailViewMover).AsSingle().NonLazy();
         }
-        
+
         private void BindLevelState()
         {
             Container.Bind<LevelState>().AsSingle().NonLazy();
         }
-        
+
         private void BindLevelService()
         {
             Container.BindInterfacesAndSelfTo<LevelService>().AsSingle();

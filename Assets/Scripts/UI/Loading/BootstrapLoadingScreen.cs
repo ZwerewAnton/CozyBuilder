@@ -1,4 +1,6 @@
 ﻿namespace UI.Loading
 {
-    public class BootstrapLoadingScreen : LoadingScreenBase {}
+    public class BootstrapLoadingScreen : LoadingScreenBase
+    {
+    }
 }

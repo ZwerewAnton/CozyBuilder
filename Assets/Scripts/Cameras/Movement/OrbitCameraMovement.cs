@@ -9,19 +9,15 @@ namespace Cameras.Movement
 {
     public class OrbitCameraMovement
     {
-        public event Action CameraMoved;
         private readonly CameraConfigs _configs;
         private readonly ICameraInputProvider _input;
+        private float _currentDistance;
+        private float _currentHeightOffset;
+        private float _currentZoomOffset;
 
         private Vector2 _eulerAngles;
-        private Vector2 _smoothedDelta;
-        private float _currentDistance;
-        private float _currentZoomOffset;
-        private float _currentHeightOffset;
         private Vector3 _previousCalculatePosition;
-        
-        public float DesiredZoomOffset { get; private set; }
-        public float DesiredHeightOffset { get; private set; }
+        private Vector2 _smoothedDelta;
 
         [Inject]
         private OrbitCameraMovement(ApplicationConfigs configs, ICameraInputProvider inputProvider)
@@ -30,6 +26,10 @@ namespace Cameras.Movement
             _input = inputProvider;
             InitializeParameters();
         }
+
+        public float DesiredZoomOffset { get; private set; }
+        public float DesiredHeightOffset { get; private set; }
+        public event Action CameraMoved;
 
         public CameraMovementResult CalculateMovement()
         {
@@ -55,7 +55,7 @@ namespace Cameras.Movement
             );
             var offset = _configs.targetOffset;
             offset.y += _currentHeightOffset;
-            
+
             var zoomDelta = _input.ZoomDelta;
             if (Mathf.Abs(zoomDelta) > 0.0001f)
             {
@@ -71,7 +71,7 @@ namespace Cameras.Movement
             }
 
             _currentZoomOffset = Mathf.Lerp(
-                _currentZoomOffset, DesiredZoomOffset, 
+                _currentZoomOffset, DesiredZoomOffset,
                 Time.deltaTime * _configs.zoomSmooth
             );
             _currentDistance = _configs.distance + _currentZoomOffset;
@@ -79,11 +79,11 @@ namespace Cameras.Movement
             var rotation = Quaternion.Euler(_eulerAngles.x, _eulerAngles.y, 0);
             var negativeDistance = new Vector3(0, 0, -_currentDistance);
             var position = rotation * negativeDistance + offset;
-            
+
             if (Vector3.Distance(position, _previousCalculatePosition) > Mathf.Epsilon)
                 CameraMoved?.Invoke();
             _previousCalculatePosition = position;
-            
+
             return new CameraMovementResult(position, rotation);
         }
 

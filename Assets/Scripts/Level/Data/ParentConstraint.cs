@@ -18,7 +18,10 @@ namespace _1_LEVEL_REWORK.New.Data
 
         public List<int> ParentPointIndexes => parentPointIndexes;
 
-        public bool ContainsIndex(int index) => parentPointIndexes.Contains(index);
+        public bool ContainsIndex(int index)
+        {
+            return parentPointIndexes.Contains(index);
+        }
 
         public void AddIndex(int index)
         {

@@ -10,11 +10,10 @@ namespace Input.TouchRegistry
 {
     public class TouchRegistry : IDisposable, ITouchPointerLock
     {
-        public event Action<int> TouchCanceled;
+        private readonly HashSet<int> _lockedTouches = new();
 
         private readonly UIRaycasterHelper _raycasterHelper;
         private readonly Dictionary<int, bool> _touchBeganOverUI = new();
-        private readonly HashSet<int> _lockedTouches = new();
 
         [Inject]
         public TouchRegistry(UIRaycasterHelper raycasterHelper)
@@ -25,35 +24,10 @@ namespace Input.TouchRegistry
             Touch.onFingerUp += OnFingerUp;
         }
 
-        public bool IsTouchPressed(int touchId)
+        public void Dispose()
         {
-            var touches = Touch.activeTouches;
-            
-            var index = touches.IndexOf(touch => touch.touchId == touchId);
-            return index >= 0 && touches[index].inProgress;
-        }
-
-        public Vector2 GetTouchPosition(int touchId)
-        {
-            var touches = Touch.activeTouches;
-            
-            var index = touches.IndexOf(touch => touch.touchId == touchId);
-            return index >= 0 ? touches[index].screenPosition : Vector2.zero;
-        }
-        
-        public List<Touch> GetAvailableTouches()
-        {
-            var result = new List<Touch>(Touch.activeTouches.Count);
-
-            foreach (var touch in Touch.activeTouches)
-            {
-                var isLocked = _lockedTouches.Contains(touch.touchId);
-                _touchBeganOverUI.TryGetValue(touch.touchId, out var isBeganOverUI);
-                if (!isLocked && !isBeganOverUI)
-                    result.Add(touch);
-            }
-
-            return result;
+            Touch.onFingerDown -= OnFingerDown;
+            Touch.onFingerUp -= OnFingerUp;
         }
 
         public bool IsTouchLocked(int touchId)
@@ -71,10 +45,37 @@ namespace Input.TouchRegistry
             _lockedTouches.Remove(touchId);
         }
 
-        public void Dispose()
+        public event Action<int> TouchCanceled;
+
+        public bool IsTouchPressed(int touchId)
         {
-            Touch.onFingerDown -= OnFingerDown;
-            Touch.onFingerUp -= OnFingerUp;
+            var touches = Touch.activeTouches;
+
+            var index = touches.IndexOf(touch => touch.touchId == touchId);
+            return index >= 0 && touches[index].inProgress;
+        }
+
+        public Vector2 GetTouchPosition(int touchId)
+        {
+            var touches = Touch.activeTouches;
+
+            var index = touches.IndexOf(touch => touch.touchId == touchId);
+            return index >= 0 ? touches[index].screenPosition : Vector2.zero;
+        }
+
+        public List<Touch> GetAvailableTouches()
+        {
+            var result = new List<Touch>(Touch.activeTouches.Count);
+
+            foreach (var touch in Touch.activeTouches)
+            {
+                var isLocked = _lockedTouches.Contains(touch.touchId);
+                _touchBeganOverUI.TryGetValue(touch.touchId, out var isBeganOverUI);
+                if (!isLocked && !isBeganOverUI)
+                    result.Add(touch);
+            }
+
+            return result;
         }
 
         private void OnFingerDown(Finger finger)
@@ -99,10 +100,7 @@ namespace Input.TouchRegistry
         private void RemoveTouchEntry(Finger finger)
         {
             var touchId = finger.currentTouch.touchId;
-            if(_touchBeganOverUI.ContainsKey(touchId))
-            {
-                _touchBeganOverUI.Remove(touchId);
-            }
+            if (_touchBeganOverUI.ContainsKey(touchId)) _touchBeganOverUI.Remove(touchId);
         }
     }
 }

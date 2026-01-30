@@ -20,7 +20,7 @@ namespace Infrastructure.Installers
         [SerializeField] private SfxPlayer sfxPlayer;
         [SerializeField] private LoadingScreenProvider loadingScreenProvider;
         [SerializeField] private LevelsRepository levelsRepository;
-        
+
         public override void InstallBindings()
         {
             BindSceneLocator();
@@ -45,19 +45,20 @@ namespace Infrastructure.Installers
 
         private void BindLoadingScreenProvider()
         {
-            Container.Bind<LoadingScreenProvider>().FromComponentInNewPrefab(loadingScreenProvider).AsSingle().NonLazy();
+            Container.Bind<LoadingScreenProvider>().FromComponentInNewPrefab(loadingScreenProvider).AsSingle()
+                .NonLazy();
         }
 
         private void BindApplicationConfigs()
         {
             Container.Bind<ApplicationConfigs>().FromInstance(applicationConfigs).AsSingle().NonLazy();
         }
-        
+
         private void BindSceneLoader()
         {
             Container.Bind<SceneLoader>().AsSingle().WhenInjectedInto<SceneSwitcher>().NonLazy();
         }
-        
+
         private void BindSceneSwitcher()
         {
             Container.BindInterfacesAndSelfTo<SceneSwitcher>().AsSingle();
@@ -97,7 +98,7 @@ namespace Infrastructure.Installers
         {
             Container.BindInterfacesAndSelfTo<InputHandler>().AsSingle().NonLazy();
         }
-        
+
         private void BindLevelsRepository()
         {
             Container.Bind<ILevelsRepository>().FromInstance(levelsRepository).AsSingle().NonLazy();

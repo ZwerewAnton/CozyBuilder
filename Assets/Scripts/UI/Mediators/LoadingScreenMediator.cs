@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using Infrastructure.SceneManagement;
 using UI.Loading;
@@ -10,12 +11,10 @@ namespace UI.Mediators
     {
         private LoadingScreenProvider _loadingScreenProvider;
         private SceneSwitcher _sceneSwitcher;
-        
-        [Inject]
-        private void Construct(SceneSwitcher sceneSwitcher, LoadingScreenProvider loadingScreenProvider)
+
+        public void Dispose()
         {
-            _sceneSwitcher = sceneSwitcher;
-            _loadingScreenProvider = loadingScreenProvider;
+            _sceneSwitcher.SceneLoadingUpdated -= _loadingScreenProvider.GetDefault().SetProgress;
         }
 
         public void Initialize()
@@ -23,24 +22,26 @@ namespace UI.Mediators
             _sceneSwitcher.SceneLoadingUpdated += _loadingScreenProvider.GetDefault().SetProgress;
         }
 
-        public void Dispose()
+        public async UniTask ShowAsync(CancellationToken token = default)
         {
-            _sceneSwitcher.SceneLoadingUpdated -= _loadingScreenProvider.GetDefault().SetProgress;
+            await _loadingScreenProvider.Get().ShowLoadingScreenAsync(token);
         }
-        
+
+        public async UniTask HideAsync(CancellationToken token = default)
+        {
+            await _loadingScreenProvider.Get().HideLoadingScreenAsync(token);
+        }
+
+        [Inject]
+        private void Construct(SceneSwitcher sceneSwitcher, LoadingScreenProvider loadingScreenProvider)
+        {
+            _sceneSwitcher = sceneSwitcher;
+            _loadingScreenProvider = loadingScreenProvider;
+        }
+
         public void ShowLoadingScreenImmediately()
         {
             _loadingScreenProvider.Get().ShowLoadingScreenImmediately();
-        }
-
-        public async UniTask ShowAsync()
-        {
-            await _loadingScreenProvider.Get().ShowLoadingScreenAsync();
-        }
-
-        public async UniTask HideAsync()
-        {
-            await _loadingScreenProvider.Get().HideLoadingScreenAsync();
         }
     }
 }

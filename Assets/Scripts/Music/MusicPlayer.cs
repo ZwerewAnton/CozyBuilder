@@ -1,5 +1,5 @@
 using Configs;
-using DG.Tweening;
+using PrimeTween;
 using Settings;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -13,12 +13,12 @@ namespace Music
         [SerializeField] private AudioMixer audioMixer;
         [SerializeField] private AudioClip menuMusicClip;
         [SerializeField] private AudioClip gameMusicClip;
+        private AudioSource _audioSource;
+        private ApplicationConfigs _configs;
+        private Tween _fadeTween;
 
         private SettingsService _settingsService;
-        private ApplicationConfigs _configs;
-        private AudioSource _audioSource;
         private float _volume;
-        private Tween _fadeTween;
 
         private float Volume
         {
@@ -30,19 +30,11 @@ namespace Music
             }
         }
 
-        [Inject]
-        private void Construct(SettingsService settingsService, ApplicationConfigs configs)
-        {
-            _configs = configs;
-            _settingsService = settingsService;
-            _settingsService.MusicChanged += ApplyMusicState;
-        }
-    
         private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
         }
-    
+
         private void Start()
         {
             Volume = _settingsService.IsMusicOn ? _configs.audioOnValue : _configs.audioOffValue;
@@ -53,6 +45,14 @@ namespace Music
         private void OnDestroy()
         {
             _settingsService.MusicChanged -= ApplyMusicState;
+        }
+
+        [Inject]
+        private void Construct(SettingsService settingsService, ApplicationConfigs configs)
+        {
+            _configs = configs;
+            _settingsService = settingsService;
+            _settingsService.MusicChanged += ApplyMusicState;
         }
 
         public void Play(MusicType type)
@@ -69,51 +69,55 @@ namespace Music
                     _audioSource.Stop();
                     return;
             }
-            
+
             if (_settingsService.IsMusicOn)
                 FadeIn();
         }
-        
+
         public void Stop()
         {
             FadeOut();
         }
-        
+
         private void FadeIn()
         {
-            _fadeTween?.Kill();
-            if(!_audioSource.isPlaying) 
+            _fadeTween.Stop();
+
+            if (!_audioSource.isPlaying)
                 _audioSource.Play();
-            
-            _fadeTween = DOTween
-                .To(() => Volume, x => Volume = x, _configs.audioOnValue, _configs.musicFadeTime)
-                .OnComplete(() =>_fadeTween = null);
+
+            _fadeTween = Tween.Custom(
+                Volume,
+                _configs.audioOnValue,
+                _configs.musicFadeTime,
+                x => Volume = x
+            ).OnComplete(() => _fadeTween = default);
         }
-        
+
         private void FadeOut()
         {
-            _fadeTween?.Kill();
-            _fadeTween = DOTween
-                .To(() => Volume, x => Volume = x, _configs.audioOffValue, _configs.musicFadeTime)
-                .OnComplete(() =>
-                {
-                    _audioSource.Stop();
-                    _fadeTween = null;
-                });
+            _fadeTween.Stop();
+
+            _fadeTween = Tween.Custom(
+                Volume,
+                _configs.audioOffValue,
+                _configs.musicFadeTime,
+                x => Volume = x
+            ).OnComplete(() =>
+            {
+                _audioSource.Stop();
+                _fadeTween = default;
+            });
         }
 
         private void ApplyMusicState(bool isOn)
         {
             if (isOn)
-            {
                 FadeIn();
-            }
             else
-            {
                 FadeOut();
-            }
         }
-        
+
         private void SetMusicMixerVolume(float volume)
         {
             audioMixer.SetFloat(PropertiesStorage.MusicVolumeMixerProperty, volume);

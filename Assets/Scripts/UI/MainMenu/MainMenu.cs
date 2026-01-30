@@ -15,16 +15,22 @@ namespace UI.MainMenu
 {
     public class MainMenu : MonoBehaviour
     {
-        private SceneSwitcher _sceneSwitcher;
-        private MainMenuMediator _mainMenuMediator;
         private GameState _gameState;
+        private MainMenuMediator _mainMenuMediator;
         private MusicPlayer _musicPlayer;
         private ILevelsRepository _repository;
         private ISaveLoadService _saveLoadService;
+        private SceneSwitcher _sceneSwitcher;
+
+        private void Start()
+        {
+            SetPanelsVisibility();
+            SetScrollControllerContent();
+        }
 
         [Inject]
         private void Construct(
-            MainMenuMediator mainMenuMediator, 
+            MainMenuMediator mainMenuMediator,
             GameState gameState,
             MusicPlayer musicPlayer,
             ILevelsRepository repository,
@@ -38,19 +44,13 @@ namespace UI.MainMenu
             _saveLoadService = saveLoadService;
             _sceneSwitcher = sceneSwitcher;
         }
-        
-        private void Start()
-        {
-            SetPanelsVisibility();
-            SetScrollControllerContent();
-        }
-    
+
         public void FirstTap()
         {
             _mainMenuMediator.HideTapToPlayPanel();
             _musicPlayer.Play(MusicType.MainMenu);
         }
-    
+
         public void Play()
         {
             var targetModel = _mainMenuMediator.GetScrollTargetItem();
@@ -107,7 +107,7 @@ namespace UI.MainMenu
         {
             var items = new List<LevelItemModel>();
             var saveData = _saveLoadService.ProgressData.progressLevelsSaveData;
-            
+
             foreach (var levelData in _repository.Levels)
             {
                 var progress = saveData.Find(data => data.levelName == levelData.LevelName);

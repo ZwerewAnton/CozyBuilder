@@ -8,13 +8,14 @@ namespace UI.MainMenu
         protected override void Awake()
         {
             base.Awake();
-            
+
             gameObject.SetActive(false);
         }
 
         public void SetButtonVisibility(float cameraDesiredHeight, float cameraDesiredZoom)
         {
-            var isVisible = !(Mathf.Approximately(cameraDesiredHeight, 0f) && Mathf.Approximately(cameraDesiredZoom, 0f));
+            var isVisible =
+                !(Mathf.Approximately(cameraDesiredHeight, 0f) && Mathf.Approximately(cameraDesiredZoom, 0f));
             gameObject.SetActive(isVisible);
         }
     }

@@ -8,10 +8,10 @@ namespace UI.Raycast
 {
     public class UIRaycasterHelper
     {
-        private readonly GraphicRaycaster _raycaster;
         private static readonly PointerEventData EventData = new(EventSystem.current);
         private static readonly List<RaycastResult> Results = new();
-        
+        private readonly GraphicRaycaster _raycaster;
+
         [Inject]
         private UIRaycasterHelper(CanvasRaycasterHandler raycasterHandler)
         {
