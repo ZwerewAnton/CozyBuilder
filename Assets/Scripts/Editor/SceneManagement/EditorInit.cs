@@ -5,7 +5,6 @@ using Utils.BootstrapLoading;
 
 namespace Editor.SceneManagement
 {
-#if !UNITY_INCLUDE_TESTS
     [InitializeOnLoad]
     public class EditorInit
     {
@@ -22,19 +21,25 @@ namespace Editor.SceneManagement
             {
                 var scenePath = AssetDatabase.GUIDToAssetPath(guids[0]);
                 BootScene = AssetDatabase.LoadAssetAtPath<SceneAsset>(scenePath);
+                EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
                 EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
             }
         }
-
+  
         private static void OnPlayModeStateChanged(PlayModeStateChange state)
         {
             if (state == PlayModeStateChange.ExitingEditMode)
             {
                 var activeScene = EditorSceneManager.GetActiveScene();
+                if (activeScene.name.StartsWith("InitTestScene"))
+                {
+                    EditorSceneManager.playModeStartScene = null;
+                    return;
+                }
+                
                 EditorPrefs.SetString(SceneConfigEditor.StartScenePrefsKey, activeScene.name);
                 EditorSceneManager.playModeStartScene = BootScene;
             }
         }
     }
-#endif
 }
