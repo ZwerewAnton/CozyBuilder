@@ -1,5 +1,9 @@
 # Cozy Builder
 
+[![Tests](https://img.shields.io/github/actions/workflow/status/ZwerewAnton/CozyBuilder/tests.yml?branch=master&label=Tests)](
+https://github.com/ZwerewAnton/CozyBuilder/actions/workflows/tests.yml
+) ![Unity](https://img.shields.io/badge/Unity-2022.3_LTS-black?logo=unity)
+
 A cozy building game developed in Unity, focused on relaxed gameplay, simple progression, and stylized visuals.
 
 ![Gameplay Preview](https://raw.githubusercontent.com/ZwerewAnton/Media/refs/heads/master/CozyBuilder/preview.gif)
