@@ -1,8 +1,7 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using Configs;
 using Cysharp.Threading.Tasks;
-using DG.Tweening;
+using PrimeTween;
 using UnityEngine;
 using Zenject;
 
@@ -11,9 +10,14 @@ namespace UI.Loading
     public abstract class LoadingScreenBase : MonoBehaviour
     {
         [SerializeField] protected CanvasGroup canvasGroup;
-    
+
         private ApplicationConfigs _configs;
         private bool _isOn;
+
+        protected virtual void Awake()
+        {
+            Initialize();
+        }
 
         [Inject]
         private void Construct(ApplicationConfigs configs)
@@ -21,26 +25,18 @@ namespace UI.Loading
             _configs = configs;
         }
 
-        protected virtual void Awake()
-        {
-            Initialize();
-        }
-
-        protected virtual void OnDestroy()
-        {
-            canvasGroup.DOKill();
-        }
-
         protected virtual void Initialize()
         {
             SetProgress(0f);
         }
 
-        public virtual void SetProgress(float value) { }
+        public virtual void SetProgress(float value)
+        {
+        }
 
         public void ShowLoadingScreenImmediately()
         {
-            if (_isOn) 
+            if (_isOn)
                 return;
 
             _isOn = true;
@@ -51,39 +47,20 @@ namespace UI.Loading
 
         public async UniTask ShowLoadingScreenAsync(CancellationToken token = default)
         {
-            if (_isOn) 
+            if (_isOn)
                 return;
 
             _isOn = true;
             gameObject.SetActive(true);
             SetProgress(0f);
 
-            var tween = FadeLoadingScreen(0f, 1f);
-
-            try
-            {
-                await tween.ToUniTask(TweenCancelBehaviour.CompleteAndCancelAwait, token);
-            }
-            catch (OperationCanceledException)
-            {
-                tween.Kill();
-                throw;
-            }
+            await FadeLoadingScreen(0f, 1f, token);
         }
 
         public async UniTask HideLoadingScreenAsync(CancellationToken token = default)
         {
-            var tween = FadeLoadingScreen(1f, 0f, HideLoadingScreen);
-
-            try
-            {
-                await tween.ToUniTask(TweenCancelBehaviour.CompleteAndCancelAwait, token);
-            }
-            catch (OperationCanceledException)
-            {
-                tween.Kill();
-                throw;
-            }
+            await FadeLoadingScreen(1f, 0f, token);
+            HideLoadingScreen();
         }
 
         protected virtual void HideLoadingScreen()
@@ -92,13 +69,15 @@ namespace UI.Loading
             _isOn = false;
         }
 
-        protected virtual Tween FadeLoadingScreen(float startValue, float targetValue, Action completed = null)
+        protected virtual UniTask FadeLoadingScreen(float startValue, float targetValue,
+            CancellationToken token = default)
         {
             canvasGroup.alpha = startValue;
             var duration = _configs.loadingScreenFadeTime;
-            return canvasGroup.DOFade(targetValue, duration)
-                .SetEase(Ease.Linear)
-                .OnComplete(() => completed?.Invoke());
+
+            return Tween.Alpha(canvasGroup, targetValue, duration, Ease.Linear)
+                .ToYieldInstruction()
+                .WithCancellation(token);
         }
     }
 }

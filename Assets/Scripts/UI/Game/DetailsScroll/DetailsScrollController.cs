@@ -9,19 +9,20 @@ namespace UI.Game.DetailsScroll
 {
     public class DetailsScrollController : ScrollControllerBase<DetailItemModel, DetailItemView>
     {
-        [Header("Canvas")]
-        [SerializeField] private Canvas canvas;
-        [Header("Drag Settings")]
-        [SerializeField] private float dragThreshold = 30f;
+        [Header("Canvas")] [SerializeField] private Canvas canvas;
 
-        public event Action<DragOutInfo> DragOutStarted;
+        [Header("Drag Settings")] [SerializeField]
+        private float dragThreshold = 30f;
 
-        private float _scaledDragThreshold;
-        private bool _isDragOutStarted;
         private int _activePointerId = -1;
-        private Vector2 _startDragPos;
         private int _draggedItemIndex = -1;
         private bool _isDraggedItemInactive;
+        private bool _isDragOutStarted;
+
+        private float _scaledDragThreshold;
+        private Vector2 _startDragPos;
+
+        public event Action<DragOutInfo> DragOutStarted;
 
         public override void Initialize(List<DetailItemModel> newModels)
         {
@@ -33,11 +34,11 @@ namespace UI.Game.DetailsScroll
         {
             if (_isDragOutStarted || _activePointerId != -1)
                 return;
-            
+
             if (eventData.pointerId >= 0)
                 if (eventData.button != PointerEventData.InputButton.Left)
                     return;
-            
+
             base.OnBeginDrag(eventData);
 
             _activePointerId = eventData.pointerId;
@@ -45,9 +46,9 @@ namespace UI.Game.DetailsScroll
 
             var draggedItem = GetItemUnderPointer(eventData);
 
-            if (draggedItem == null) 
+            if (draggedItem == null)
                 return;
-            
+
             _draggedItemIndex = draggedItem.ItemIndex;
             _isDraggedItemInactive = Models[_draggedItemIndex].IsInactive;
         }
@@ -56,7 +57,7 @@ namespace UI.Game.DetailsScroll
         {
             if (eventData.pointerId != _activePointerId)
                 return;
-            
+
             if (_isDraggedItemInactive || _draggedItemIndex < 0)
                 return;
 
@@ -78,7 +79,7 @@ namespace UI.Game.DetailsScroll
         {
             if (eventData.pointerId != _activePointerId)
                 return;
-            
+
             base.OnEndDrag(eventData);
 
             _activePointerId = -1;
@@ -97,7 +98,7 @@ namespace UI.Game.DetailsScroll
             var model = Models.Find(itemModel => itemModel.ID == detailId);
             if (model == null)
                 return;
-            
+
             model.IsDragOut = isDragOut;
 
             MarkToUpdate();
@@ -111,9 +112,9 @@ namespace UI.Game.DetailsScroll
             _isDragOutStarted = true;
 
             var pointerId = GetPointerId(eventData);
-            
+
             DragOutStarted?.Invoke(new DragOutInfo(Models[_draggedItemIndex].ID, pointerId));
-            
+
             ExecuteEvents.Execute(scrollRect.gameObject, eventData, ExecuteEvents.endDragHandler);
             scrollRect.velocity = Vector2.zero;
         }
@@ -123,12 +124,14 @@ namespace UI.Game.DetailsScroll
             foreach (var item in ActiveItems)
             {
                 var rect = item.RectTransform;
-                if (RectTransformUtility.RectangleContainsScreenPoint(rect, eventData.position, eventData.pressEventCamera))
+                if (RectTransformUtility.RectangleContainsScreenPoint(rect, eventData.position,
+                        eventData.pressEventCamera))
                     return item;
             }
+
             return null;
         }
-        
+
         private int GetPointerId(PointerEventData eventData)
         {
             return (eventData as ExtendedPointerEventData)?.touchId ?? eventData.pointerId;

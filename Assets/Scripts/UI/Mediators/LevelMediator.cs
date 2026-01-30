@@ -17,24 +17,11 @@ namespace UI.Mediators
         [SerializeField] private ActionButton backButton;
         [SerializeField] private ActionButton homeButton;
         [SerializeField] private ResetCameraButton cameraResetButton;
-
-        private SfxPlayer _sfxPlayer;
         private LevelMenu _levelMenu;
         private LevelService _levelService;
         private OrbitCameraMovement _orbitCameraMovement;
 
-        [Inject]
-        private void Construct(
-            LevelMenu levelMenu, 
-            LevelService levelService, 
-            OrbitCameraMovement orbitCameraMovement,
-            SfxPlayer sfxPlayer)
-        {
-            _sfxPlayer = sfxPlayer;
-            _levelMenu = levelMenu;
-            _levelService = levelService;
-            _orbitCameraMovement = orbitCameraMovement;
-        }
+        private SfxPlayer _sfxPlayer;
 
         private void OnEnable()
         {
@@ -54,22 +41,35 @@ namespace UI.Mediators
             _levelService.LevelCompleted -= OnLevelCompleted;
         }
 
+        [Inject]
+        private void Construct(
+            LevelMenu levelMenu,
+            LevelService levelService,
+            OrbitCameraMovement orbitCameraMovement,
+            SfxPlayer sfxPlayer)
+        {
+            _sfxPlayer = sfxPlayer;
+            _levelMenu = levelMenu;
+            _levelService = levelService;
+            _orbitCameraMovement = orbitCameraMovement;
+        }
+
         public event Action<DragOutInfo> DetailItemDragOutStarted
         {
             add => detailsScrollController.DragOutStarted += value;
             remove => detailsScrollController.DragOutStarted -= value;
         }
-        
+
         public void InitializeDetailsScroll(List<DetailItemModel> models)
         {
             detailsScrollController.Initialize(models);
-        }        
-        
+        }
+
         public void MarkItemDragOutState(string detailId, bool isDragOut)
         {
             detailsScrollController.MarkItemDragOutState(detailId, isDragOut);
         }
-        
+
         public void UpdateScrollController(List<DetailItemModel> models)
         {
             detailsScrollController.UpdateModels(models);

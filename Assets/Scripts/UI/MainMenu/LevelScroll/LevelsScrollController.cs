@@ -7,21 +7,36 @@ namespace UI.MainMenu.LevelScroll
 {
     public class LevelsScrollController : ScrollControllerBase<LevelItemModel, LevelItemView>
     {
-        [Header("Snap")]
-        [SerializeField, Range(0f, 20f)] protected float snapSpeed = 10f;
+        [Header("Snap")] [SerializeField] [Range(0f, 20f)]
+        protected float snapSpeed = 10f;
+
         [SerializeField] protected bool enableSnap = true;
-        [SerializeField] protected  float snapThreshold = 0.5f;
+        [SerializeField] protected float snapThreshold = 0.5f;
 
-        [Header("Animation")]
-        [SerializeField, Range(0.5f, 1.5f)] protected float MaxScale = 1f;
-        [SerializeField, Range(0.5f, 1.0f)] protected float MinScale = 0.8f;
+        [Header("Animation")] [SerializeField] [Range(0.5f, 1.5f)]
+        protected float MaxScale = 1f;
 
-        private TargetItemData _targetItemData;
+        [SerializeField] [Range(0.5f, 1.0f)] protected float MinScale = 0.8f;
         private float _lastDragDirection;
         private bool _shouldSnap;
 
+        private TargetItemData _targetItemData;
+
+        #region Initialization
+
+        protected override void SetContentSize()
+        {
+            var cellSize = ItemSize + itemSpacing;
+            var size = cellSize * Models.Count - itemSpacing + BorderSpacing * 2 - ItemSize;
+            content.sizeDelta = scrollRect.horizontal
+                ? new Vector2(size, content.sizeDelta.y)
+                : new Vector2(content.sizeDelta.x, size);
+        }
+
+        #endregion
+
         #region Unity Events
-        
+
         protected void LateUpdate()
         {
             if (enableSnap)
@@ -49,20 +64,7 @@ namespace UI.MainMenu.LevelScroll
         }
 
         #endregion
-        
-        #region Initialization
-        
-        protected override void SetContentSize()
-        {
-            var cellSize = ItemSize + itemSpacing;
-            var size = (cellSize * Models.Count - itemSpacing) + BorderSpacing * 2 - ItemSize;
-            content.sizeDelta = scrollRect.horizontal 
-                ? new Vector2(size, content.sizeDelta.y) 
-                : new Vector2(content.sizeDelta.x, size);
-        }
-        
-        #endregion
-        
+
         #region Content Management
 
         public LevelItemModel GetTargetItemModel()
@@ -73,15 +75,12 @@ namespace UI.MainMenu.LevelScroll
         public void MoveToItem(string levelName)
         {
             var itemIndex = Models.FindIndex(model => model.levelName == levelName);
-            if (itemIndex < 0)
-            {
-                return;
-            }
+            if (itemIndex < 0) return;
             var targetX = (ItemSize + itemSpacing) * itemIndex;
             content.anchoredPosition = new Vector2(-targetX, content.anchoredPosition.y);
             _targetItemData = new TargetItemData(GetAnchoredPosition(itemIndex), itemIndex);
         }
-        
+
         protected override void UpdateVisibleItems()
         {
             base.UpdateVisibleItems();
@@ -113,9 +112,9 @@ namespace UI.MainMenu.LevelScroll
         }
 
         #endregion
-        
+
         #region Snap and Animation
-        
+
         private void AnimateItemScaling()
         {
             var center = -content.anchoredPosition.x;
@@ -164,8 +163,8 @@ namespace UI.MainMenu.LevelScroll
                     Mathf.Approximately(_lastDragDirection, 0f) ||
                     (_lastDragDirection > 0 && distance >= 0f) ||
                     (_lastDragDirection < 0 && distance <= 0f);
-                
-                
+
+
                 var absDist = Mathf.Abs(distance);
                 if (absDist < closestDist)
                 {
@@ -181,10 +180,10 @@ namespace UI.MainMenu.LevelScroll
                     closestByDirection.ItemIndex = item.ItemIndex;
                 }
             }
-            
+
             return closestByDirectionDist < float.MaxValue ? closestByDirection : closest;
         }
-        
+
         #endregion
     }
 }

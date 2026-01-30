@@ -18,13 +18,6 @@ namespace UI.Mediators
         private SettingsService _settingsService;
         private SfxPlayer _sfxPlayer;
 
-        [Inject]
-        private void Construct(SettingsService settingsService, SfxPlayer sfxPlayer)
-        {
-            _settingsService = settingsService;
-            _sfxPlayer = sfxPlayer;
-        }
-
         private void Awake()
         {
             BindToggleButton(musicButton, ToggleMusic, UpdateMusicButtonState);
@@ -37,7 +30,7 @@ namespace UI.Mediators
         {
             musicButton.Initialize();
             soundButton.Initialize();
-            
+
             UpdateMusicButtonState();
             UpdateSoundButtonState();
 
@@ -55,8 +48,18 @@ namespace UI.Mediators
             _settingsService.MusicChanged -= musicButton.SetState;
             _settingsService.SoundChanged -= soundButton.SetState;
         }
-        
-        public void ToggleMenu() => dropdownMenu.ToggleMenu();
+
+        [Inject]
+        private void Construct(SettingsService settingsService, SfxPlayer sfxPlayer)
+        {
+            _settingsService = settingsService;
+            _sfxPlayer = sfxPlayer;
+        }
+
+        public void ToggleMenu()
+        {
+            dropdownMenu.ToggleMenu();
+        }
 
         private void BindToggleButton(ToggleButton button, Action toggleAction, Action updateAction)
         {
@@ -72,14 +75,34 @@ namespace UI.Mediators
             button.Clicked -= updateAction;
         }
 
-        private void UpdateMusicButtonState() => musicButton.SetState(_settingsService.IsMusicOn);
-        private void UpdateSoundButtonState() => soundButton.SetState(_settingsService.IsSoundOn);
+        private void UpdateMusicButtonState()
+        {
+            musicButton.SetState(_settingsService.IsMusicOn);
+        }
 
-        private void ToggleMusic() => _settingsService.ToggleMusic();
-        private void ToggleSound() => _settingsService.ToggleSound();
+        private void UpdateSoundButtonState()
+        {
+            soundButton.SetState(_settingsService.IsSoundOn);
+        }
 
-        private void PlaySettingButtonClip() => _sfxPlayer.PlayDefaultButtonClip();
-        
-        private void PlayMenuButtonClip() => _sfxPlayer.PlayDropdownMenuButtonClip();
+        private void ToggleMusic()
+        {
+            _settingsService.ToggleMusic();
+        }
+
+        private void ToggleSound()
+        {
+            _settingsService.ToggleSound();
+        }
+
+        private void PlaySettingButtonClip()
+        {
+            _sfxPlayer.PlayDefaultButtonClip();
+        }
+
+        private void PlayMenuButtonClip()
+        {
+            _sfxPlayer.PlayDropdownMenuButtonClip();
+        }
     }
 }

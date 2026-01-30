@@ -16,18 +16,15 @@ namespace Gameplay
 {
     public class LevelService : IDisposable
     {
-        public event Action LevelInitialized;
-        public event Action LevelUpdated;
-        public event Action LevelCompleted;
-        
-        private readonly ISaveLoadService _saveLoadService;
-        private readonly ILevelsRepository _repository;
-        private readonly LevelState _levelState;
         private readonly GameState _gameState;
-        private LevelData _levelData;
+        private readonly LevelState _levelState;
+        private readonly ILevelsRepository _repository;
+
+        private readonly ISaveLoadService _saveLoadService;
         private CancellationTokenSource _cts;
-        private Dictionary<string, DetailInstanceDto> _dtos = new();
-        
+        private readonly Dictionary<string, DetailInstanceDto> _dtos = new();
+        private LevelData _levelData;
+
         [Inject]
         private LevelService(
             ILevelsRepository repository,
@@ -41,20 +38,30 @@ namespace Gameplay
             _repository = repository;
         }
 
+        public void Dispose()
+        {
+            _cts?.Cancel();
+            _cts?.Dispose();
+        }
+
+        public event Action LevelInitialized;
+        public event Action LevelUpdated;
+        public event Action LevelCompleted;
+
         public async UniTask InitializeLevel()
         {
             _cts = new CancellationTokenSource();
-        
+
             var result = _repository.TryGetLevel(_gameState.SelectedLevelName, out _levelData);
-            
+
             if (!result)
                 return;
-        
+
             var saveData = await _saveLoadService.LoadLevelDataAsync(_levelData.LevelName, _cts.Token);
-        
+
             InitializeLevelState(saveData);
             FillDetailsDtoList();
-            
+
             LevelInitialized?.Invoke();
             CheckLevelComplete();
         }
@@ -68,7 +75,7 @@ namespace Gameplay
                 LevelUpdated?.Invoke();
                 CheckLevelComplete();
             }
-            
+
             return isSuccess;
         }
 
@@ -88,16 +95,12 @@ namespace Gameplay
             float installedDetails = 0;
             var details = _levelState.Details;
             foreach (var (_, detail) in details)
+            foreach (var point in detail.Points)
             {
-                foreach (var point in detail.Points)
-                {
-                    if (point.IsInstalled)
-                    {
-                        installedDetails++;
-                    }
-                    allDetails++;
-                }
+                if (point.IsInstalled) installedDetails++;
+                allDetails++;
             }
+
             return Mathf.RoundToInt(installedDetails / allDetails * 100);
         }
 
@@ -122,7 +125,6 @@ namespace Gameplay
                     Points = new List<PointInstanceDto>()
                 };
                 foreach (var pointInstance in detailInstance.Points)
-                {
                     detailDto.Points.Add(new PointInstanceDto
                     {
                         IsInstalled = pointInstance.IsInstalled,
@@ -130,7 +132,6 @@ namespace Gameplay
                         Rotation = pointInstance.Rotation,
                         IsAvailable = _levelState.IsPointReady(pointInstance)
                     });
-                }
                 _dtos.Add(id, detailDto);
             }
         }
@@ -160,19 +161,13 @@ namespace Gameplay
             {
                 if (detailInstance.IsGround || detailInstance.RemainingCount == 0)
                     continue;
-                
+
                 isCompleted = false;
                 break;
             }
 
             if (isCompleted)
                 LevelCompleted?.Invoke();
-        }
-        
-        public void Dispose()
-        {
-            _cts?.Cancel();
-            _cts?.Dispose();
         }
     }
 }

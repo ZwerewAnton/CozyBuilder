@@ -12,7 +12,7 @@ namespace Gameplay
         {
             spawnInfoList.ForEach(SpawnPrefab);
         }
-        
+
         public void SpawnPrefab(DetailPrefabSpawnInfo spawnInfo)
         {
             Instantiate(spawnInfo.Prefab, spawnInfo.Position, spawnInfo.Rotation, rootObject);

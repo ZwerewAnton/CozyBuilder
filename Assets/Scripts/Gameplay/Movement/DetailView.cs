@@ -5,15 +5,15 @@ namespace _1_LEVEL_REWORK.New.Instances
     [RequireComponent(typeof(MeshRenderer), typeof(MeshFilter))]
     public class DetailView : MonoBehaviour
     {
-        protected MeshRenderer MeshRenderer;
         protected MeshFilter MeshFilter;
+        protected MeshRenderer MeshRenderer;
 
         protected void Awake()
         {
             MeshRenderer = GetComponent<MeshRenderer>();
             MeshFilter = GetComponent<MeshFilter>();
         }
-        
+
         public void Show(Mesh mesh)
         {
             MeshFilter.mesh = mesh;

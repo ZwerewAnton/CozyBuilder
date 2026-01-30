@@ -11,7 +11,7 @@ namespace Cameras
             var depthPosition = new Vector3(position.x, position.y, depth);
             return sceneCamera.ScreenToWorldPoint(depthPosition);
         }
-        
+
         public Vector3 WorldToScreenPoint(Vector3 position)
         {
             return sceneCamera.WorldToScreenPoint(position);

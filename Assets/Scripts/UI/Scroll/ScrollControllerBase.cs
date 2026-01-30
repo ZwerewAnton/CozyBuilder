@@ -1,31 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace UI.Scroll
 {
-    public abstract class ScrollControllerBase<TModel, TItem> : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+    public abstract class ScrollControllerBase<TModel, TItem> : MonoBehaviour, IBeginDragHandler, IDragHandler,
+        IEndDragHandler
         where TItem : ScrollItemView<TModel>
     {
         [SerializeField] protected ScrollRect scrollRect;
         [SerializeField] protected RectTransform content;
         [SerializeField] protected GameObject itemPrefab;
 
-        [Header("Items")]
-        [Range(0f, 500f)] [SerializeField] protected float itemSpacing = 50f;
+        [Header("Items")] [Range(0f, 500f)] [SerializeField]
+        protected float itemSpacing = 50f;
+
         [Range(0f, 500f)] [SerializeField] protected float borderSpacing = 50f;
         [Range(0f, 500f)] [SerializeField] protected int additionalPoolItemsCount = 2;
-
-        protected readonly List<TModel> Models = new();
         protected readonly List<TItem> ActiveItems = new();
 
+        protected readonly List<TModel> Models = new();
+
         private bool _markToUpdate;
+        protected float BorderSpacing;
+        protected bool Initialized;
         protected float ItemSize;
         protected int VisibleItemCount;
-        protected bool Initialized;
-        protected float BorderSpacing;
 
         #region Unity Events
 
@@ -51,12 +52,18 @@ namespace UI.Scroll
             ClearPool();
         }
 
-        public virtual void OnBeginDrag(PointerEventData eventData) {}
-        
-        public virtual void OnEndDrag(PointerEventData eventData) {}
-        
-        public virtual void OnDrag(PointerEventData eventData) {}
-        
+        public virtual void OnBeginDrag(PointerEventData eventData)
+        {
+        }
+
+        public virtual void OnEndDrag(PointerEventData eventData)
+        {
+        }
+
+        public virtual void OnDrag(PointerEventData eventData)
+        {
+        }
+
         #endregion
 
         #region Initialization
@@ -85,12 +92,12 @@ namespace UI.Scroll
             CreatePool();
             UpdateVisibleItems();
         }
-        
+
         protected virtual void SetContentSize()
         {
             var size = (ItemSize + itemSpacing) * Models.Count - itemSpacing + BorderSpacing * 2;
-            content.sizeDelta = scrollRect.horizontal 
-                ? new Vector2(size, content.sizeDelta.y) 
+            content.sizeDelta = scrollRect.horizontal
+                ? new Vector2(size, content.sizeDelta.y)
                 : new Vector2(content.sizeDelta.x, size);
         }
 
@@ -115,36 +122,37 @@ namespace UI.Scroll
         {
             foreach (var item in ActiveItems)
             {
-                if (item == null) 
+                if (item == null)
                     continue;
-                
+
                 item.Clicked -= OnItemClicked;
                 Destroy(item.gameObject);
             }
+
             ActiveItems.Clear();
         }
 
         #endregion
 
         #region Content Management
-        
+
         public virtual void UpdateModels(List<TModel> models)
         {
             Models.Clear();
             Models.AddRange(models);
-            
+
             MarkToUpdate();
         }
 
         protected virtual void UpdateScroll()
         {
-            if (!_markToUpdate) 
+            if (!_markToUpdate)
                 return;
-            
+
             UpdateVisibleItems();
             _markToUpdate = false;
         }
-        
+
         protected virtual void OnScrollChanged(Vector2 _)
         {
             UpdateVisibleItems();
@@ -154,7 +162,7 @@ namespace UI.Scroll
         {
             if (!Initialized)
                 return;
-            
+
             var offset = GetItemsOffset();
             var cellSize = ItemSize + itemSpacing;
             var firstVisibleIndex = Mathf.FloorToInt(offset / cellSize);
@@ -179,10 +187,12 @@ namespace UI.Scroll
             }
         }
 
-        protected virtual void OnItemClicked(int itemIndex) {}
+        protected virtual void OnItemClicked(int itemIndex)
+        {
+        }
 
         protected virtual float GetItemSize(RectTransform rect)
-        { 
+        {
             return scrollRect.horizontal
                 ? rect.rect.width
                 : rect.rect.height;
@@ -195,7 +205,10 @@ namespace UI.Scroll
                 : scrollRect.viewport.rect.height;
         }
 
-        protected virtual float GetBorderSpacing() => borderSpacing;
+        protected virtual float GetBorderSpacing()
+        {
+            return borderSpacing;
+        }
 
         protected virtual Vector2 GetAnchoredPosition(int index)
         {
@@ -222,7 +235,7 @@ namespace UI.Scroll
         {
             _markToUpdate = true;
         }
-        
+
         #endregion
     }
 }

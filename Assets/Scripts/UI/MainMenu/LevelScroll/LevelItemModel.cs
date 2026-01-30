@@ -1,8 +1,9 @@
+using System;
 using UnityEngine;
 
 namespace UI.MainMenu.LevelScroll
 {
-    [System.Serializable]
+    [Serializable]
     public class LevelItemModel
     {
         public Sprite levelIcon;

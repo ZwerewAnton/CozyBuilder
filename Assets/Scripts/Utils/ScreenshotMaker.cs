@@ -26,7 +26,7 @@ namespace Utils
 
             var rt = new RenderTexture(width, height, 0, RenderTextureFormat.ARGB32);
             cam.targetTexture = rt;
-        
+
             var clearFlags = cam.clearFlags;
             var backgroundColor = cam.backgroundColor;
             if (ensureTransparentBackground)
@@ -34,6 +34,7 @@ namespace Utils
                 cam.clearFlags = CameraClearFlags.SolidColor;
                 cam.backgroundColor = new Color();
             }
+
             cam.Render();
 
             if (ensureTransparentBackground)
@@ -44,17 +45,14 @@ namespace Utils
 
             var currentRT = RenderTexture.active;
             RenderTexture.active = cam.targetTexture;
-        
+
             var screenshot = new Texture2D(width, height, TextureFormat.ARGB32, false);
             screenshot.ReadPixels(new Rect(0, 0, width, height), 0, 0, false);
 
-            if (QualitySettings.activeColorSpace == ColorSpace.Linear) 
+            if (QualitySettings.activeColorSpace == ColorSpace.Linear)
             {
                 var pixels = screenshot.GetPixels();
-                for (var p = 0; p < pixels.Length; p++)
-                {
-                    pixels[p] = pixels[p].gamma;
-                }
+                for (var p = 0; p < pixels.Length; p++) pixels[p] = pixels[p].gamma;
                 screenshot.SetPixels(pixels);
             }
 
@@ -63,18 +61,18 @@ namespace Utils
             Directory.CreateDirectory(dir);
             var png = screenshot.EncodeToPNG();
             File.WriteAllBytes(path, png);
-        
+
             cam.targetTexture = null;
             RenderTexture.active = currentRT;
             Debug.Log("Screenshot saved to:\n" + path);
         }
 
-        private static string GetSafePath(string path) 
+        private static string GetSafePath(string path)
         {
             return string.Join("_", path.Split(Path.GetInvalidPathChars()));
         }
 
-        private static string GetSafeFilename(string filename) 
+        private static string GetSafeFilename(string filename)
         {
             return string.Join("_", filename.Split(Path.GetInvalidFileNameChars()));
         }

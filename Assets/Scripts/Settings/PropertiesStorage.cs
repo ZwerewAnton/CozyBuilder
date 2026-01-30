@@ -13,17 +13,17 @@ namespace Settings
         {
             return MusicPlayerPrefsKey;
         }
-        
+
         public static string GetSoundKey()
         {
             return SoundPlayerPrefsKey;
         }
-        
+
         public static string GetMusicVolumeMixerParameter()
         {
             return MusicVolumeMixerProperty;
         }
-        
+
         public static string GetSoundVolumeMixerParameter()
         {
             return SoundVolumeMixerProperty;

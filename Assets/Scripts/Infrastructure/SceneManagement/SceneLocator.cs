@@ -9,12 +9,12 @@ namespace Infrastructure.SceneManagement
         public void UpdateCurrentScene()
         {
             var name = SceneManager.GetActiveScene().name;
-            
+
             CurrentScene = name switch
             {
                 "Boot" => SceneType.Boot,
-                "MainMenu"  => SceneType.MainMenu,
-                "Level"     => SceneType.Level,
+                "MainMenu" => SceneType.MainMenu,
+                "Level" => SceneType.Level,
                 _ => SceneType.MainMenu
             };
         }

@@ -5,18 +5,17 @@ using UnityEngine.UI;
 
 namespace UI.Game.DetailsScroll
 {
-    public class DetailItemView: ScrollItemView<DetailItemModel>
+    public class DetailItemView : ScrollItemView<DetailItemModel>
     {
-        [SerializeField] private TMP_Text countText;
-        [SerializeField] private Image detailImage;
-        
         private static readonly Color DefaultColor = new(1, 1, 1, 1f);
         private static readonly Color InActiveColor = new(1, 1, 1, 0.6f);
+        [SerializeField] private TMP_Text countText;
+        [SerializeField] private Image detailImage;
 
         public override void SetData(int itemIndex, DetailItemModel model)
         {
             base.SetData(itemIndex, model);
-            
+
             detailImage.sprite = model.Icon;
             detailImage.color = model.IsInactive ? InActiveColor : DefaultColor;
             detailImage.preserveAspect = true;

@@ -10,27 +10,15 @@ namespace UI.Mediators
     {
         private LoadingScreenProvider _loadingScreenProvider;
         private SceneSwitcher _sceneSwitcher;
-        
-        [Inject]
-        private void Construct(SceneSwitcher sceneSwitcher, LoadingScreenProvider loadingScreenProvider)
-        {
-            _sceneSwitcher = sceneSwitcher;
-            _loadingScreenProvider = loadingScreenProvider;
-        }
-
-        public void Initialize()
-        {
-            _sceneSwitcher.SceneLoadingUpdated += _loadingScreenProvider.GetDefault().SetProgress;
-        }
 
         public void Dispose()
         {
             _sceneSwitcher.SceneLoadingUpdated -= _loadingScreenProvider.GetDefault().SetProgress;
         }
-        
-        public void ShowLoadingScreenImmediately()
+
+        public void Initialize()
         {
-            _loadingScreenProvider.Get().ShowLoadingScreenImmediately();
+            _sceneSwitcher.SceneLoadingUpdated += _loadingScreenProvider.GetDefault().SetProgress;
         }
 
         public async UniTask ShowAsync()
@@ -41,6 +29,18 @@ namespace UI.Mediators
         public async UniTask HideAsync()
         {
             await _loadingScreenProvider.Get().HideLoadingScreenAsync();
+        }
+
+        [Inject]
+        private void Construct(SceneSwitcher sceneSwitcher, LoadingScreenProvider loadingScreenProvider)
+        {
+            _sceneSwitcher = sceneSwitcher;
+            _loadingScreenProvider = loadingScreenProvider;
+        }
+
+        public void ShowLoadingScreenImmediately()
+        {
+            _loadingScreenProvider.Get().ShowLoadingScreenImmediately();
         }
     }
 }

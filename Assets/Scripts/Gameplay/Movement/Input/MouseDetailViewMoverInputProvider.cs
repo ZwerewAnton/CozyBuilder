@@ -10,21 +10,23 @@ namespace Gameplay.Movement.Input
 {
     public class MouseDetailViewMoverInputProvider : IDetailViewMoverInputProvider, IDisposable
     {
-        public event Action InputCanceled;
-        
-        private float _depth;
-        private readonly InputHandler _inputHandler;
         private readonly CameraHandler _cameraHandler;
+        private readonly InputHandler _inputHandler;
         private readonly Vector2 _screenOffset;
 
+        private float _depth;
+
         [Inject]
-        private MouseDetailViewMoverInputProvider(InputHandler inputHandler, CameraHandler cameraHandler, ApplicationConfigs configs)
+        private MouseDetailViewMoverInputProvider(InputHandler inputHandler, CameraHandler cameraHandler,
+            ApplicationConfigs configs)
         {
             _inputHandler = inputHandler;
             _inputHandler.DetailActions.Tap.canceled += OnTapCanceled;
             _cameraHandler = cameraHandler;
             _screenOffset = configs.gameplay.screenOffset;
         }
+
+        public event Action InputCanceled;
 
         public bool IsInputActive()
         {
@@ -41,18 +43,20 @@ namespace Gameplay.Movement.Input
             return GetCursorWorldPoint();
         }
 
+        public void BindPointer(int pointerId)
+        {
+        }
+
         public void Dispose()
         {
             _inputHandler.DetailActions.Tap.canceled -= OnTapCanceled;
         }
 
-        public void BindPointer(int pointerId) {}
-
         private void OnTapCanceled(InputAction.CallbackContext callbackContext)
         {
             InputCanceled?.Invoke();
         }
-        
+
         private Vector3 GetCursorWorldPoint()
         {
             var input = _inputHandler.DetailActions.Cursor.ReadValue<Vector2>();

@@ -16,7 +16,7 @@ namespace UI.Loading
         {
             _sceneLocator = sceneLocator;
         }
-        
+
         public LoadingScreenBase Get()
         {
             var sceneType = _sceneLocator.CurrentScene;

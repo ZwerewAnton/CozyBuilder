@@ -15,39 +15,39 @@ namespace _1_LEVEL_REWORK.New.Data
         [SerializeField] private Material material;
         [SerializeField] private Sprite icon;
         public List<PointData> points = new();
-        
+
         public string Id => id;
-        
+
         public int Count
         {
             get => count;
             set => count = value;
         }
-        
+
         public DetailPrefab Prefab
         {
             get => prefab;
             set => prefab = value;
         }
-        
+
         public Mesh Mesh
         {
             get => mesh;
             set => mesh = value;
         }
-        
+
         public Material Material
         {
             get => material;
             set => material = value;
         }
-        
+
         public Sprite Icon
         {
             get => icon;
             set => icon = value;
         }
-        
+
 #if UNITY_EDITOR
         private void OnValidate()
         {

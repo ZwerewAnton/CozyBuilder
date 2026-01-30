@@ -1,7 +1,6 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Serialization;
 
 namespace UI.Scroll
 {
@@ -10,18 +9,19 @@ namespace UI.Scroll
     {
         [SerializeField] private RectTransform rectTransform;
         public int ItemIndex { get; set; }
-        public event Action<int> Clicked;
 
         public RectTransform RectTransform => rectTransform;
+
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            Clicked?.Invoke(ItemIndex);
+        }
+
+        public event Action<int> Clicked;
 
         public virtual void SetData(int itemIndex, TModel model)
         {
             ItemIndex = itemIndex;
-        }
-        
-        public void OnPointerClick(PointerEventData eventData)
-        {
-            Clicked?.Invoke(ItemIndex);
         }
     }
 }

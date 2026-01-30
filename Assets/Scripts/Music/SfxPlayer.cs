@@ -2,7 +2,6 @@
 using Settings;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.Serialization;
 using Zenject;
 
 namespace Music
@@ -17,19 +16,11 @@ namespace Music
         [SerializeField] private AudioClip defaultButtonClip;
         [SerializeField] private AudioClip installDetailClip;
         [SerializeField] private AudioClip completeLevelClip;
-        
-        private SettingsService _settingsService;
-        private ApplicationConfigs _configs;
         private AudioSource _audioSource;
+        private ApplicationConfigs _configs;
 
-        [Inject]
-        private void Construct(SettingsService settingsService, ApplicationConfigs configs)
-        {
-            _configs = configs;
-            _settingsService = settingsService;
-            _settingsService.SoundChanged += ApplySoundState;
-        }
-        
+        private SettingsService _settingsService;
+
         private void Awake()
         {
             _audioSource = GetComponent<AudioSource>();
@@ -45,26 +36,34 @@ namespace Music
             _settingsService.SoundChanged -= ApplySoundState;
         }
 
+        [Inject]
+        private void Construct(SettingsService settingsService, ApplicationConfigs configs)
+        {
+            _configs = configs;
+            _settingsService = settingsService;
+            _settingsService.SoundChanged += ApplySoundState;
+        }
+
         public void PlayTapToPlayClip()
         {
             _audioSource.PlayOneShot(tapToPlayClip);
         }
-        
+
         public void PlayStartGameClip()
         {
             _audioSource.PlayOneShot(playClip);
         }
-        
+
         public void PlayDropdownMenuButtonClip()
         {
             _audioSource.PlayOneShot(dropdownMenuButtonClip);
         }
-        
+
         public void PlayDefaultButtonClip()
         {
             _audioSource.PlayOneShot(defaultButtonClip);
         }
-        
+
         public void PlayCompleteLevelClip()
         {
             _audioSource.PlayOneShot(completeLevelClip);
@@ -79,7 +78,7 @@ namespace Music
         {
             SetMusicMixerVolume(isOn ? _configs.audioOnValue : _configs.audioOffValue);
         }
-        
+
         private void SetMusicMixerVolume(float volume)
         {
             audioMixer.SetFloat(PropertiesStorage.SoundVolumeMixerProperty, volume);

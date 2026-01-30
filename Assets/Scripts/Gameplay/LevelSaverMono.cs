@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using Gameplay.Dto;
 using SaveSystem;
@@ -12,15 +11,8 @@ namespace Gameplay
 {
     public class LevelSaverMono : MonoBehaviour
     {
-        private ISaveLoadService _saveLoadService;
         private LevelService _levelService;
-
-        [Inject]
-        private void Construct(ISaveLoadService saveLoadService, LevelService levelService)
-        {
-            _saveLoadService = saveLoadService;
-            _levelService = levelService;
-        }
+        private ISaveLoadService _saveLoadService;
 
         private void OnEnable()
         {
@@ -31,22 +23,26 @@ namespace Gameplay
         {
             _levelService.LevelCompleted -= SaveProgress;
         }
-        
+
         private void OnApplicationPause(bool pause)
         {
-            if (pause)
-            {
-                SaveProgress();
-            }
+            if (pause) SaveProgress();
         }
-        
+
+        [Inject]
+        private void Construct(ISaveLoadService saveLoadService, LevelService levelService)
+        {
+            _saveLoadService = saveLoadService;
+            _levelService = levelService;
+        }
+
         public void SaveProgress()
         {
             var levelName = _levelService.GetLevelName();
             var progress = _levelService.GetLevelProgress();
             var details = _levelService.GetDetailsInfo();
             var data = CreateLevelSaveData(details);
-            
+
             SaveLevelDataAsync(levelName, progress, data).Forget();
         }
 
@@ -83,7 +79,7 @@ namespace Gameplay
                     };
                     detailData.points.Add(pointData);
                 }
-                
+
                 levelSaveData.details.Add(detailData);
             }
 

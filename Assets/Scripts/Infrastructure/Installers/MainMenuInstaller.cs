@@ -8,7 +8,7 @@ namespace Infrastructure.Installers
     {
         [SerializeField] private SettingsMediator settingsMediator;
         [SerializeField] private MainMenuMediator mainMenuMediator;
-        
+
         public override void InstallBindings()
         {
             BindMainMenuMediator();

@@ -23,12 +23,6 @@ namespace UI.Mediators
 
         private SfxPlayer _sfxPlayer;
 
-        [Inject]
-        private void Construct(SfxPlayer sfxPlayer)
-        {
-            _sfxPlayer = sfxPlayer;
-        }
-
         private void OnEnable()
         {
             tapToPlayPanel.Clicked += mainMenu.FirstTap;
@@ -47,6 +41,12 @@ namespace UI.Mediators
             playButton.Clicked -= mainMenu.Play;
             deleteButton.Clicked -= ShowDeleteDialog;
             deleteDialog.Completed -= OnDeleteDialogCompleted;
+        }
+
+        [Inject]
+        private void Construct(SfxPlayer sfxPlayer)
+        {
+            _sfxPlayer = sfxPlayer;
         }
 
         public void InitializeLevelScroll(List<LevelItemModel> models)
@@ -75,7 +75,7 @@ namespace UI.Mediators
             miniHousePanel.Show();
             menuPanel.Hide();
         }
-        
+
         public void HideTapToPlayPanel()
         {
             tapToPlayPanel.Hide();

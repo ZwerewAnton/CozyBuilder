@@ -13,20 +13,20 @@ namespace Utils.BootstrapLoading
         [SerializeField] private Bootstrap bootstrap;
         private SceneSwitcher _sceneSwitcher;
 
-        [Inject]
-        private void Construct(SceneSwitcher sceneSwitcher)
-        {
-            _sceneSwitcher = sceneSwitcher;
-        }
-        
         private void Awake()
         {
             bootstrap.LoadingCompleted += LoadEditedScene;
         }
-        
+
         private void OnDestroy()
         {
             bootstrap.LoadingCompleted -= LoadEditedScene;
+        }
+
+        [Inject]
+        private void Construct(SceneSwitcher sceneSwitcher)
+        {
+            _sceneSwitcher = sceneSwitcher;
         }
 
         private void LoadEditedScene()
@@ -42,11 +42,12 @@ namespace Utils.BootstrapLoading
                 case SceneConfigEditor.BootSceneName:
                     return;
             }
+
             var sceneType = (SceneType)Enum.Parse(typeof(SceneType), startScene);
             LoadSceneAsync(sceneType).Forget();
 #endif
         }
-        
+
         private async UniTask LoadSceneAsync(SceneType sceneType)
         {
             try

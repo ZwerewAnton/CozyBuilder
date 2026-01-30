@@ -9,20 +9,19 @@ namespace _1_LEVEL_REWORK.New.Instances
     public class DetailInstance
     {
         private readonly DetailData _data;
-        private bool _isGround;
 
-        public bool IsGround => _isGround;
-
-        public List<PointInstance> Points { get; }
-        public int RemainingCount { get; set; }
-        
         public DetailInstance(DetailData data, bool isGround = false)
         {
             _data = data;
             RemainingCount = data.Count;
             Points = new List<PointInstance>();
-            _isGround = isGround;
+            IsGround = isGround;
         }
+
+        public bool IsGround { get; }
+
+        public List<PointInstance> Points { get; }
+        public int RemainingCount { get; set; }
 
         public Sprite GetDetailIcon()
         {
@@ -46,10 +45,7 @@ namespace _1_LEVEL_REWORK.New.Instances
 
         public bool TryInstall(int pointIndex)
         {
-            if (RemainingCount <= 0 || pointIndex < 0 || pointIndex >= Points.Count)
-            {
-                return false;
-            }
+            if (RemainingCount <= 0 || pointIndex < 0 || pointIndex >= Points.Count) return false;
 
             RemainingCount--;
             Points[pointIndex].Install();
