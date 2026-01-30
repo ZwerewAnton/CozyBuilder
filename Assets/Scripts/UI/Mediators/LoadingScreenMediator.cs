@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using Infrastructure.SceneManagement;
 using UI.Loading;
@@ -21,14 +22,14 @@ namespace UI.Mediators
             _sceneSwitcher.SceneLoadingUpdated += _loadingScreenProvider.GetDefault().SetProgress;
         }
 
-        public async UniTask ShowAsync()
+        public async UniTask ShowAsync(CancellationToken token = default)
         {
-            await _loadingScreenProvider.Get().ShowLoadingScreenAsync();
+            await _loadingScreenProvider.Get().ShowLoadingScreenAsync(token);
         }
 
-        public async UniTask HideAsync()
+        public async UniTask HideAsync(CancellationToken token = default)
         {
-            await _loadingScreenProvider.Get().HideLoadingScreenAsync();
+            await _loadingScreenProvider.Get().HideLoadingScreenAsync(token);
         }
 
         [Inject]

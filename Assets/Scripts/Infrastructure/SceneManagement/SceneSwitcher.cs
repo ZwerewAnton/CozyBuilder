@@ -43,9 +43,9 @@ namespace Infrastructure.SceneManagement
 
             try
             {
-                await _loadingView.ShowAsync();
+                await _loadingView.ShowAsync(_cts.Token);
                 await _sceneLoader.LoadSceneAsync(sceneType, _cts.Token);
-                await _loadingView.HideAsync();
+                await _loadingView.HideAsync(_cts.Token);
             }
             catch (OperationCanceledException)
             {
