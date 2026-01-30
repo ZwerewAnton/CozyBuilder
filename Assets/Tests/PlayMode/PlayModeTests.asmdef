@@ -15,7 +15,8 @@
     "precompiledReferences": [
         "nunit.framework.dll",
         "FluentAssertions.dll",
-        "NSubstitute.dll"
+        "NSubstitute.dll",
+        "Castle.Core.dll"
     ],
     "autoReferenced": false,
     "defineConstraints": [
