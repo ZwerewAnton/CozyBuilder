@@ -38,7 +38,7 @@ The game is fully playable and currently published on Google Play.
 
 - **Extenject** — dependency injection
 - **UniTask** — async/await support optimized for Unity
-- **DOTween** — animations and tweening
+- **PrimeTween** — animations and tweening
 
 ## Testing
 
